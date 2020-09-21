@@ -1,4 +1,4 @@
-# Library Management System
+# Bookhive (Library Management System)
 PHP application to demonstrate OOP concepts.
 
 ## Key Features:
