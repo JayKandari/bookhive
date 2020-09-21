@@ -15,7 +15,6 @@ $config = array(
     'urls' => array(
         'baseUrl' => 'book-hive.local' //cange according to your configuration
     ),
-    //Internal paths for website 
     'paths' => array(
         "resources" => $_SERVER["DOCUMENT_ROOT"]."/resources",
         "images" => $_SERVER["DOCUMENT_ROOT"]."/asset/images",
