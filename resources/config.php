@@ -1,6 +1,6 @@
 <?php
 // Getting credentials from json file
-$creds = json_decode(file_get_contents("dbcred.json"), true); 
+$creds = json_decode(file_get_contents("/dbcred.json"), true); 
 
 $config = array(
     'site-name' => 'Book Hive',
@@ -13,7 +13,7 @@ $config = array(
     ),
     //URL of the site you can add URLs for Log, Error etc.
     'urls' => array(
-        'baseUrl' => 'book-hive.local' //cange according to your configuration
+        'baseUrl' => $creds['baseurl'] //cange according to your configuration
     ),
     'paths' => array(
         "resources" => $_SERVER["DOCUMENT_ROOT"]."/resources",
