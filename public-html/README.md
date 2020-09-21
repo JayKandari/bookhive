@@ -1,1 +1,1 @@
-Any files which are publically availabe like `index.html` should go here
+Any files which are publicly availabe like `index.html` should go here
