@@ -6,7 +6,6 @@ PHP application to demonstrate OOP concepts.
 - Register as a Customer
 - Order a book
 ## Structure of repository
-
 * asset
   - css: all the `CSS`/`SASS` files
   - js: all the `javascript` files
@@ -15,8 +14,6 @@ PHP application to demonstrate OOP concepts.
 * resources
   - src: all the php files which contains `class definitions`.
   - template: all the template files for layout e.g `header`, `sidebar` etc.
-  
- You can also get information on what each directory contains by the README.md presents in each directory.
 ## Contributors:
 - Aastha (@shriaas2898)
 - Alphons (@AJV009)
