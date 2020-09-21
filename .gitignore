@@ -1,1 +1,5 @@
 resources/dbcreds.json
+test.php
+composer.phar
+/vendor/
+dbcreds.json
