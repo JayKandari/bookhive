@@ -11,7 +11,7 @@
       public $pdo;
       public function __construct()
       {
-         $this->pdo= new PDO('mysql:host=localhost;port=3307;dbname=bookhive', 'anjali', 'ctc');
+         $this->pdo= new PDO('mysql:host=localhost;port=3307;dbname=bookhive', 'userid', 'password');
       }
       public function disp_book($recent)
       {
