@@ -41,7 +41,9 @@ After install run the following command in the root. (this will install any depe
 ```bash
 $ composer install
 ```
-
+##SCSS to CSS
+whenever you want to change the CSS of Homepage.php you need to do changes in "style.scss" then compile this .scss file into style.css, as we 
+are adding style.css file in php.
 ## TODO:
 ### Web Pages
 - [ ] Home
