@@ -1,9 +1,9 @@
 <?php
 
 // PHP Error Hide
-// error_reporting(0);
+ error_reporting(0);
 
-// PHP Error Show
+// Uncomment below lines to PHP Show Error 
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -23,11 +23,12 @@ $config = array(
     'urls' => array(
         'baseUrl' => $creds['baseurl'] //cange according to your configuration
     ),
+    // Paths of all the required folders
     'paths' => array(
-        "resources" => $_SERVER["DOCUMENT_ROOT"] . "/resources",
-        "images" => $_SERVER["DOCUMENT_ROOT"] . "/asset/images",
-        "css" => $_SERVER["DOCUMENT_ROOT"] . "/asset/css",
-        "js" => $_SERVER["DOCUMENT_ROOT"] . "/asset/js"
+        "resources" => "/resources",
+        "images" =>  "/asset/images",
+        "css" =>  "/asset/css",
+        "js" => "/asset/js"
 
     )
 );
