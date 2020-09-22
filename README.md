@@ -16,7 +16,13 @@ PHP application to demonstrate OOP concepts.
   - template: all the template files for layout e.g `header`, `sidebar` etc.
 
 ## Setup
-Place a file named `dbcred.json` in the root fo the project, with the following info
+### 1. Clone the project into the PHP site root
+```bash
+$ git clone https://github.com/JayKandari/bookhive
+$ cd bookhive
+```
+
+### 2. Place a file named `dbcred.json` in the root fo the project, with the following info
 ```json
 {
   "type":"DB_Type",
@@ -27,6 +33,13 @@ Place a file named `dbcred.json` in the root fo the project, with the following 
   "port":"DB_Port_num",
   "baseurl":"Site_BaseUrl"
 }
+```
+
+### 3. Install composer. You may use the guide here [DigitalOcean Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart)
+
+After install run the following command in the root. (this will install any dependencies or load autoload)
+```bash
+$ composer install
 ```
 
 ## TODO:
