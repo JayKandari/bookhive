@@ -1,10 +1,7 @@
 {
     "autoload": {
-        "psr-4": {
-            "Redirect\\":"template"
-        },
         "classmap": [
-            "resources/src"
+            "resources"
         ] 
     }
 }
