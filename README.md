@@ -34,6 +34,7 @@ $ cd bookhive
   "baseurl":"Site_BaseUrl"
 }
 ```
+
 ### 3. Install composer. You may use the guide here [DigitalOcean Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart)
 
 After install run the following command in the root. (this will install any dependencies or load autoload)

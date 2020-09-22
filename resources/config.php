@@ -1,4 +1,5 @@
 <?php
+
 // PHP Error Hide
 // error_reporting(0);
 
@@ -7,8 +8,6 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-// Local site name
-$sitename = 'bookhive.io';
 // Getting credentials from json file
 $creds = json_decode(file_get_contents("dbcred.json"), true);
 $config = array(
