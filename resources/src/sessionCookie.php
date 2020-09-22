@@ -1,6 +1,6 @@
 <?php
 namespace Session;
-require 'vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 use Redirect\Redirect;
 class SessionCookie
 {
