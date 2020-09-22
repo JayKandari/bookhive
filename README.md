@@ -15,6 +15,20 @@ PHP application to demonstrate OOP concepts.
   - src: all the php files which contains `class definitions`.
   - template: all the template files for layout e.g `header`, `sidebar` etc.
 
+## Setup
+Place a file named `dbcred.json` in the root fo the project, with the following info
+```json
+{
+  "type":"DB_Type",
+  "dbname":"DB_Name",
+  "username":"DB_Username",
+  "pass":"DB_Password",
+  "host":"DB_Hostname",
+  "port":"DB_Port_num",
+  "baseurl":"Site_BaseUrl"
+}
+```
+
 ## TODO:
 ### Web Pages
 - [ ] Home
