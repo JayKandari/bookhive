@@ -24,7 +24,20 @@ $ git clone https://github.com/JayKandari/bookhive
 * Setup virtual host for the project. You can refer to [this](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-16-04) to setup vhost for apache in linux.
 * In the `.conf` file specify `DocumentRoot path/to/folder/bookhive/public-html`. **Note:** `path/to/folder/` the path which contains clone of the project.
 
-### 3. Place a file named `dbcred.json` in the  resource directory, with the following info
+### 3. Create a database
+- Create a database in phpmyadmin named `bookhive` to store all the book details.
+- Open the newly created database and import the `bookhive.sql` file provided with the repo. (this file contains all the table structures and soo on)
+
+### 4. Install composer. 
+You can refer [this](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart) to setup composer.
+
+After install run the following command in the project directory. (this will install any dependencies or load autoload)
+```bash
+$ composer install
+```
+
+### 5. Create config file
+Place a file named `dbcred.json` in the resources directory, with the following info
 
 ```json
 {
@@ -38,26 +51,20 @@ $ git clone https://github.com/JayKandari/bookhive
 }
 ```
 
-### 4. Install composer. You may use the guide here [DigitalOcean Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart)
-
-After install run the following command in the project directory. (this will install any dependencies or load autoload)
-```bash
-$ composer install
-```
 ## SCSS to CSS
 whenever you want to change the CSS of Homepage.php you need to do changes in "style.scss" then compile this .scss file into style.css, as we 
 are adding style.css file in php.
 ## TODO:
 ### Web Pages
-- [ ] Home
-- [ ] Book display
-- [ ] Register
-- [ ] User home
-- [ ] Profile settings
-- [ ] Admin controls
+- [X] Home
+- [X] Book display
+- [X] Register
+- [X] User home
+- [X] Profile settings
+- [X] Admin controls
 ### Core packages
-- [ ] DBMS Management
-- [ ] Session-Cookie Management
+- [X] DBMS Management
+- [X] Session-Cookie Management
 
 ## Contributors:
 - [Aastha](https://github.com/shriaas2898) (@shriaas2898)
