@@ -16,13 +16,16 @@ PHP application to demonstrate OOP concepts.
   - template: all the template files for layout e.g `header`, `sidebar` etc.
 
 ## Setup
-### 1. Clone the project into the PHP site root
+### 1. Clone the project where you want to setup the site.
 ```bash
 $ git clone https://github.com/JayKandari/bookhive
-$ cd bookhive
 ```
+### 2. Setup Virtual Host
+* Setup virtual host for the project. You can refer to [this](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-16-04) to setup vhost for apache in linux.
+* In the `.conf` file specify `DocumentRoot path/to/folder/bookhive/public-html`. **Note:** `path/to/folder/` the path which contains clone of the project.
 
-### 2. Place a file named `dbcred.json` in the root fo the project, with the following info
+### 3. Place a file named `dbcred.json` in the  resource directory, with the following info
+
 ```json
 {
   "type":"DB_Type",
@@ -35,13 +38,13 @@ $ cd bookhive
 }
 ```
 
-### 3. Install composer. You may use the guide here [DigitalOcean Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart)
+### 4. Install composer. You may use the guide here [DigitalOcean Install Composer](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart)
 
-After install run the following command in the root. (this will install any dependencies or load autoload)
+After install run the following command in the project directory. (this will install any dependencies or load autoload)
 ```bash
 $ composer install
 ```
-##SCSS to CSS
+## SCSS to CSS
 whenever you want to change the CSS of Homepage.php you need to do changes in "style.scss" then compile this .scss file into style.css, as we 
 are adding style.css file in php.
 ## TODO:

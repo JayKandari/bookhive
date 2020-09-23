@@ -2,7 +2,7 @@
 
 namespace PDO_CONN;
 
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use PDO;
 use Config\ProjectConfig;

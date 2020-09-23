@@ -1,6 +1,6 @@
 <?php
 namespace Session;
-require $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
 use Redirect\Redirect;
 use PDO_CONN\Connection;
 class SessionCookie
