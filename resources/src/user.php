@@ -1,5 +1,7 @@
 <?php 
 namespace db;
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 use PDO;
 class user
 {
@@ -22,26 +24,26 @@ class user
     /*Admin check*/
     function admin($id)
     {
-        $sql = "SELECT rid FROM user WHERE uname='". $id."'";
+        $sql = "SELECT type FROM user WHERE uname='". $id."'";
         $stmt=$this->pdo->query($sql);
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["rid"];
+        return $row["type"];
     }
 
     /*SIGN-UP*/
-    function sign_up($name,$email, $upd,$rid)
+    function sign_up($name,$email, $upd,$type)
     {
         
-        $stmt2 = $this->pdo->query('SELECT * FROM user where uname="'. $name.'"');
+        $stmt2 = $this->pdo->query('SELECT * FROM user where email="'. $email.'"');
         $hashedpassword = sha1($upd);
-        $rid=0;
+        $type="user";
         if ($row=$stmt2->fetch(PDO::FETCH_ASSOC))
         {
-            echo "<p id='e'><br>User Id Already Exists!<br><p>";
+            echo "<p id='e'><br>Email Id Already Exists!<br><p>";
         }
         else
         {
-            $sql = 'INSERT INTO user (uname,email,pass,rid) VALUES ("'.$name.'", "'.$email.'","'.$hashedpassword.'","'.$rid.'")';
+            $sql = 'INSERT INTO user (uname,email,pass,type) VALUES ("'.$name.'", "'.$email.'","'.$hashedpassword.'","'.$type.'")';
             if ($this->pdo->query($sql) === FALSE) 
             {
                 echo "<br >Error <br>";

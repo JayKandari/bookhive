@@ -1,5 +1,5 @@
 <?php session_start();
-include "resources/src/books.php";
+include "../resources/src/books.php";
 use db\book as book;
 ?>
 <html>
@@ -11,7 +11,7 @@ use db\book as book;
 
 <body>
     <?php
-    $k = new book();
+    $k = new book;
     $row = $k->disp_book("no");
     $c = count($row);
     for ($x = 0; $x < $c; $x++) {

@@ -1,7 +1,18 @@
 <?php
 session_start();
-include "resources/src/user.php";
+include "../resources/src/user.php";
 use db\user as user;
+if (isset($_SESSION['uid']))
+{
+	if ($_SESSION["admin"] == "admin")
+	{
+		header("LOCATION: admindash.php");
+	}
+	else
+	{
+		header("LOCATION: userdash.php");
+	}
+}
 ?>
 <html>
 <head>
@@ -63,7 +74,7 @@ use db\user as user;
 					setcookie ("uid", $_POST['uid'], time()+ (10 * 365 * 24 * 60 * 60));
 					setcookie ("admin", $_POST['admin'], time()+ (10 * 365 * 24 * 60 * 60));
 				}
-				if ($_SESSION["admin"] == "1")
+				if ($_SESSION["admin"] == "admin")
 				{
 					header("LOCATION: admindash.php");
 				}

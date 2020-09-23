@@ -1,3 +1,14 @@
+<?php 
+    session_start();
+    if (isset($_SESSION['uid']))
+{
+	if ($_SESSION["admin"] == "user")
+	{
+		header("LOCATION: userdash.php");
+	}
+}
+           
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 

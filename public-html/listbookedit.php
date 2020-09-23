@@ -1,9 +1,9 @@
 <?php 
   session_start();
 
-  include "resources/src/books.php";
+  include "../resources/src/books.php";
     use db\book as book;
-  if ($_SESSION["admin"]=="1")
+  if ($_SESSION["admin"]=="admin")
   {
 ?>
 <!DOCTYPE html>

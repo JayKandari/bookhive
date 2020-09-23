@@ -1,10 +1,10 @@
 <?php 
 session_start();
-include "resources/src/user.php";
+include "../resources/src/user.php";
 use db\user as user;
 if (isset($_SESSION['uid']))
 {
-	if ($_SESSION["admin"] == "1")
+	if ($_SESSION["admin"] == "admin")
 	{
 		header("LOCATION: admindash.php");
 	}
@@ -13,6 +13,8 @@ if (isset($_SESSION['uid']))
 		header("LOCATION: userdash.php");
 	}
 }
+else
+{
 ?>
 <html>
 <head>
@@ -58,3 +60,4 @@ if (isset($_SESSION['uid']))
  </div>
 </body>
 </html>
+	<?php } ?>

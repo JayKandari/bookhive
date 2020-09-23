@@ -1,5 +1,8 @@
 <?php 
-   namespace db;
+namespace db;
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+   
    use PDO;
    class book
    {
@@ -31,7 +34,7 @@
             $count=1;
             while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
             {
-               if ($count<=10)
+               if ($count<=2)
                {
                   
                   array_push($op,array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['ipath'],'author'=>$row['author'],'added_on'=>$row['added_on'],'category'=>$row['category'],'available'=>$row['available']));
