@@ -1,3 +1,14 @@
+<?php session_start();
+include "../resources/src/books.php";
+use db\book as book;
+if(isset($_SESSION["logged_in"]))
+{
+	if ($_SESSION["admin"]=="user")
+	{
+		header("LOCATION: userdash.php");
+	}
+}
+?>
 <html>
 
 <head>
@@ -7,35 +18,9 @@
 <?php include 'admindash.php'; ?>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Add Book</h1>
-        </div>
-        <div class="main">
-            <form action="" method="POST">
-                <span>
-                    <input type="text" placeholder="Book Name" name="bname">
-                </span><br>
-                <span>
-                    <input type="text" placeholder="Book Department" name="bdept">
-                </span><br>
-                <span>
-                    <input type="text" placeholder="Book Author" name="bauthor">
-                </span><br>
-                <span>
-                    <input type="text" placeholder="Book Year" name="byear">
-                </span><br>
-                <span>
-                    <input type="text" placeholder="Book Quantity" name="bquantity">
-                </span><br>
-                <span>
-                    <input type="file" placeholder="Book Coverphoto" name="bcover">
-                </span><br>
-                <button name="submit">Add Book</button>
-
-            </form>
-        </div>
-    </div>
+<?php $k = new book;
+    $row = $k->add();
+?>
 </body>
 
 </html>

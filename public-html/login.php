@@ -1,7 +1,19 @@
 <?php
 session_start();
-include "resources/src/user.php";
+include "../resources/src/user.php";
 use db\user as user;
+if(isset($_SESSION["logged_in"]))
+{
+	if ($_SESSION["admin"]=="admin")
+	{
+		header("LOCATION: admindash.php");
+	}
+	else
+	{
+		header("LOCATION: userdash.php");
+	}
+}
+
 ?>
 <html>
 <head>
@@ -31,7 +43,7 @@ use db\user as user;
 			?>
  			<span>
  				<i class="fa fa-user"></i>
- 				<input type="text" placeholder="Username" name="uname" required>
+ 				<input type="text" placeholder="Email" name="email" required>
  			</span><br>
  			<span>
  				<i class="fa fa-lock"></i>
@@ -41,39 +53,41 @@ use db\user as user;
 
  		</form>
 		 <?php
-		 if (isset($_POST["login_btn"]))
-		 {
-
-			 $k=new user();
-			$row=$k->login($_POST['uname'],$_POST['upass']);
-			var_dump($row);
-			if ($row === false)
+			if (isset($_POST["login_btn"]))
 			{
-				$_SESSION["error"]="Incorrect password.";
-				header("LOCATION: login.php");
-			}
-			else
-			{
-				$_SESSION["uid"]=$_POST['uname'];
-				$_SESSION["admin"]=$k->admin($_SESSION["uid"]);
-				$_SESSION["success"]="Login success";
-				$_SESSION["logged_in"]="pass";
-				if (!empty($_POST['remember']))
+				ini_set("display_errors", 1);
+   				error_reporting(E_ALL);
+				$k=new user();
+				$row=$k->login($_POST['email'],$_POST['upass']);
+				var_dump($row);
+				if ($row === false)
 				{
-					setcookie ("uid", $_POST['uid'], time()+ (10 * 365 * 24 * 60 * 60));
-					setcookie ("admin", $_POST['admin'], time()+ (10 * 365 * 24 * 60 * 60));
-				}
-				if ($_SESSION["admin"] == "1")
-				{
-					header("LOCATION: admindash.php");
+					$_SESSION["error"]="Incorrect password.";
+					header("LOCATION: login.php");
 				}
 				else
 				{
-					header("LOCATION: userdash.php");
-				}
+					$_SESSION["uname"]=$row['uname'];
+					$_SESSION["email"]=$_POST['email'];
+					$_SESSION["admin"]=$k->admin($_SESSION["email"]);
+					$_SESSION["uno"]=$k->uno($_SESSION["email"]);
+					$_SESSION["success"]="Login success";
+					$_SESSION["logged_in"]="pass";
+					if (!empty($_POST['remember']))
+					{
+						setcookie ("email", $_POST['email'], time()+ (10 * 365 * 24 * 60 * 60));
+					}
+					if ($_SESSION["admin"] == "admin")
+					{
+						header("LOCATION: admindash.php");
+					}
+					else
+					{
+						header("LOCATION: userdash.php");
+					}
 
-			}
-		 } 
+				}
+			} 
 		 ?>
  	</div>
  </div>
