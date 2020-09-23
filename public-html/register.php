@@ -2,9 +2,9 @@
 session_start();
 include "../resources/src/user.php";
 use db\user as user;
-if (isset($_SESSION['uid']))
+if(isset($_SESSION["logged_in"]))
 {
-	if ($_SESSION["admin"] == "admin")
+	if ($_SESSION["admin"]=="admin")
 	{
 		header("LOCATION: admindash.php");
 	}
@@ -13,8 +13,6 @@ if (isset($_SESSION['uid']))
 		header("LOCATION: userdash.php");
 	}
 }
-else
-{
 ?>
 <html>
 <head>
@@ -42,10 +40,6 @@ else
  				<i class="fa fa-lock"></i>
  				<input type="password" placeholder="password" name="rpass" required>
 			 </span><br>
-			 <span>
-			 <i class="fas fa-key"></i>
-             <input type="password" placeholder="Confirm password" name="rcpass" >
- 			</span><br>
  				<button name="sign_up">Register</button>
 
  		</form>
@@ -60,4 +54,3 @@ else
  </div>
 </body>
 </html>
-	<?php } ?>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION["logged_in"]))
+{
+	if ($_SESSION["admin"]=="user")
+	{
+		header("LOCATION: userdash.php");
+	}
+}?>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">

@@ -1,11 +1,4 @@
-<?php 
-  session_start();
 
-  include "../resources/src/books.php";
-    use db\book as book;
-  if ($_SESSION["admin"]=="admin")
-  {
-?>
 <!DOCTYPE html>
 <html>
   <title>Edit Book</title>
@@ -28,14 +21,15 @@
     <th colspan="2">Operations</th>
   </tr>
   <?php
-    $k=new book();
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL);
+    include "../resources/src/books.php";
+    use db\book as book; 
+    $k=new book;
     $k->edit();
   ?>
   </table>
 
 </body>
 </html>
-  <?php }
-  else{
-    header("LOCATION: userdash.php");
-  } ?>
+ 

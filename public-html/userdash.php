@@ -1,12 +1,15 @@
 <?php 
 session_start();
-if (isset($_SESSION['uid']))
+include "../resources/src/books.php";
+use db\book as book;
+if(isset($_SESSION["logged_in"]))
 {
-	if ($_SESSION["admin"] == "admin")
+	if ($_SESSION["admin"]=="admin")
 	{
 		header("LOCATION: admindash.php");
 	}
-}?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -59,7 +62,10 @@ if (isset($_SESSION['uid']))
             });
         });
     </script>
-
+    <?php 
+        $k = new book;
+        $row = $k->book_info($_SESSION["uno"]);
+    ?>
 </body>
 
 </html>
