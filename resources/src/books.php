@@ -1,12 +1,5 @@
 <?php 
    namespace db;
-   /*require_once($_SERVER["DOCUMENT_ROOT"].'/../vendor/autoload.php');
-   use Config\ProjectConfig;
-   $ob=new ProjectConfig;
-   
-   TODO edit() add()*/
-   ini_set("display_errors", 1);
-   error_reporting(E_ALL);
    use PDO;
    class book
    {
