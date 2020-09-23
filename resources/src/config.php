@@ -5,7 +5,7 @@ class ProjectConfig
     public $config;
     public function __construct()
     {
-        $creds = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/dbcreds.json'), true);
+        $creds = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"]."/../resources/dbcreds.json"), true);
         $this->config = array(
                 'site-name' => 'Book Hive',
                 'db' => array(
@@ -21,7 +21,7 @@ class ProjectConfig
                 ),
                 // Paths of all the required folders
                 'paths' => array(
-                    "resources" => "/resources",
+                    "resources" => "/../resources",
                     "images" =>  "/asset/images",
                     "css" =>  "/asset/css",
                     "js" => "/asset/js"
@@ -30,6 +30,7 @@ class ProjectConfig
     }
     public function dispConfig()
     {
+        
         var_dump($this->config);
     }
     public function disableError()

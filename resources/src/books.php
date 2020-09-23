@@ -1,5 +1,7 @@
 <?php 
    namespace db;
+   require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
+
    use PDO;
    class book
    {
