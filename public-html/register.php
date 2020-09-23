@@ -18,7 +18,7 @@ if (isset($_SESSION['uid']))
 <head>
 	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" type="text/css" href="../asset/css/login.css">
 </head>
 <?php include 'homepage.php'; ?>
 

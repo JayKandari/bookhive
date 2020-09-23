@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
-
     <input type="checkbox" id="check">
     <!--header area start-->
     <header>
@@ -28,9 +26,9 @@
             <i class="fa fa-bars nav_btn"></i>
         </div>
         <div class="mobile_nav_items">
-            <a href="homepage.php"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
             <a href="#"><i class="fas fa-search"></i><span>Search Books</span></a>
-            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
+            <a href="logout"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
         </div>
     </div>
     <!--mobile navigation bar end-->
@@ -40,9 +38,9 @@
             <img src="../asset/images/OIP.jpg" class="profile_image" alt="">
             <h4></h4>
         </div>
-        <a href="homepage.php"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
             <a href="#"><i class="fas fa-search"></i><span>Search Books</span></a>
-            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
     </div>
     <!--sidebar end-->
     <script type="text/javascript">

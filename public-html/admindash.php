@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 </head>
-<body>
 
+<body>
     <input type="checkbox" id="check">
     <!--header area start-->
     <header>
@@ -29,15 +29,13 @@
             <i class="fa fa-bars nav_btn"></i>
         </div>
         <div class="mobile_nav_items">
-            <a href="homepage.php"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
             <a href="addbook.php"><i class="fas fa-plus"></i><span>Add Book</span></a>
             <a href="listbookedit.php"><i class="fas fa-edit"></i><span>Edit Book info</span></a>
-            <a href="#"><i class="fas fa-user-edit"></i><span>Edit User</span></a>
+            <a href="edituserlist.php"><i class="fas fa-user-edit"></i><span>Edit User</span></a>
             <a href="#"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>Personal Info</span></a>
-            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
-
-
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
         </div>
     </div>
     <!--mobile navigation bar end-->
@@ -47,23 +45,15 @@
             <img src="../asset/images/OIP.jpg" class="profile_image" alt="">
             <h4></h4>
         </div>
-        <a href="homepage.php"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="addbook.php"><i class="fas fa-plus"></i><span>Add Book</span></a>
         <a href="listbookedit.php"><i class="fas fa-edit"></i><span>Edit Book info</span></a>
         <a href="edituserlist.php"><i class="fas fa-user-edit"></i><span>Edit User</span></a>
         <a href="#"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
         <a href="#"><i class="fas fa-info-circle"></i><span>Personal Info</span></a>
-        <a href="#"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
-        <a href="#"><i class="fas fa-phone-alt"></i><span>Contact</span></a> -->
-
-
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
     </div>
     <!--sidebar end-->
-
-    <div class="content">
-
-    </div>
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('.nav_btn').click(function() {
