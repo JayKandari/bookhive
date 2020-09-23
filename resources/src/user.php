@@ -1,14 +1,14 @@
 <?php 
 namespace db;
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
+use PDO_CONN\Connection;
 use PDO;
 class user
 {
     public $pdo;
     public function __construct()
     {
-        $this->pdo= new PDO('mysql:host=localhost;port=3307;dbname=bookhive', 'anjali', 'ctc');
+        $conn = new Connection;
+        $this->pdo= $conn->connObj;
     }
     /*LOGIN*/
     function login($email, $upd)
