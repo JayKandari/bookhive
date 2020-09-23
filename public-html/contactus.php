@@ -4,8 +4,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../asset/css/aboutus.css">
-    <!-- <link rel="stylesheet" type="text/css" href="contactus.css"> -->
 </head>
 <?php include 'homepage.php'; ?>
 <body>
@@ -17,9 +15,6 @@
             <i class="fas fa-map-pin"></i> Nyati Tech Park, 203, 2nd Floor, "B" Wing, Kalyani Nagar - Wadgaon Sheri Rd, Pune, 411014
             <p>Website:<a href="https://www.qed42.com/" target="_blank">www.qed42.com</a></p>
             <p><i class="fas fa-at"></i>:<a href="https://www.qed42.com/" target="_blank">careers@qed42.com</a><br></p>
-
-
-
         </div>
     </div>
 

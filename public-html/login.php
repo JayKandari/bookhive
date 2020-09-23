@@ -7,7 +7,6 @@ use db\user as user;
 <head>
 	<title>login</title>
 	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
 </head>
 <body>
 <?php include 'homepage.php'; ?>

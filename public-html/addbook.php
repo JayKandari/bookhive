@@ -3,9 +3,9 @@
 <head>
     <title>BookADD</title>
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../asset/images/login.css">
 </head>
 <?php include 'admindash.php'; ?>
+
 <body>
     <div class="container">
         <div class="header">
