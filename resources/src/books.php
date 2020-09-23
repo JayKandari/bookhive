@@ -2,20 +2,19 @@
    namespace db;
 
    require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
-
-
-   /*require_once($_SERVER["DOCUMENT_ROOT"].'/../vendor/autoload.php');
    use Config\ProjectConfig;
-   $ob=new ProjectConfig;
-   
-   TODO edit() add()*/
+   use PDO_CONN\Connection;
+   // TODO edit() add()
    use PDO;
    class book
    {
       public $pdo;
+      public $ob;
       public function __construct()
       {
-         $this->pdo= new PDO('mysql:host=localhost;port=3307;dbname=bookhive', 'anjali', 'ctc');
+         $conn = new Connection;
+         $this->pdo= $conn->connObj;
+         $this->ob=new ProjectConfig;
       }
       public function disp_book($recent)
       {
@@ -125,9 +124,9 @@
           </div>';
           if (isset($_POST["submit"]))
          {
-            $dest_path=$ob->config["paths"]["images"].$_FILES['bcover']['name'];
+            $dest_path=$this->ob->config["paths"]["images"] ."/".$_FILES['bcover']['name'];
             $sql='INSERT into Book (title,author,category,added_on,qty,available,ipath) values ("'.$_POST["title"].'","'.$_POST["author"].'","'.$_POST["category"].'","'.$_POST["added_on"].'","'.$_POST["qty"].'","'.$_POST["qty"].'","'.$dest_path.'")';
-            if(move_uploaded_file($_FILES['bcover']['tmp_name'],$ob->config["paths"]["images"]))
+            if(move_uploaded_file($_FILES['bcover']['tmp_name'],$this->ob->config["paths"]["images"] ."/"))
             {
                if ($this->pdo->query($sql) === FALSE) 
                {
