@@ -1,17 +1,17 @@
 <?php 
    namespace db;
+
    require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
 
+
+   /*require_once($_SERVER["DOCUMENT_ROOT"].'/../vendor/autoload.php');
+   use Config\ProjectConfig;
+   $ob=new ProjectConfig;
+   
+   TODO edit() add()*/
    use PDO;
    class book
    {
-      public $id;
-      public $title;
-      public $author;
-      public $category;
-      public $myDate;
-      public $qty;
-      public $available;
       public $pdo;
       public function __construct()
       {
@@ -19,27 +19,18 @@
       }
       public function disp_book($recent)
       {
-         $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc');
-         $op=array();
          if($recent == 'no')
          {
-            while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
-            {
-               array_push($op,array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['ipath'],'author'=>$row['author'],'added_on'=>$row['added_on'],'category'=>$row['category'],'available'=>$row['available']));
-            }
+            $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc');
          }
          else
          {
-            $count=1;
-            while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
-            {
-               if ($count<=10)
-               {
-                  
-                  array_push($op,array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['ipath'],'author'=>$row['author'],'added_on'=>$row['added_on'],'category'=>$row['category'],'available'=>$row['available']));
-                  $count=$count+1;
-               }    
-            }
+            $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc limit 4');
+         }
+         $op=array();
+         while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
+         {
+            array_push($op,array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['ipath'],'author'=>$row['author'],'added_on'=>$row['added_on'],'category'=>$row['category'],'available'=>$row['available']));
          }
          return $op;
       }
@@ -101,24 +92,107 @@
             header("LOCATION: admindash.php");
          }
       }
-      public function issue($bid)
+      public function add()
       {
-         $sql1 = "SELECT qty FROM Book WHERE id='". $bid."'";
+         echo '<div class="container">
+            <div class="header">
+               <h1>Add Book</h1>
+            </div>
+            <div class="main">
+               <form action="" method="POST" enctype="multipart/form-data">
+                  <span>
+                        <input type="text" placeholder="Book Name" name="title" required>
+                  </span><br>
+                  <span>
+                        <input type="text" placeholder="Book Department" name="category" required>
+                  </span><br>
+                  <span>
+                        <input type="text" placeholder="Book Author" name="author" required>
+                  </span><br>
+                  <span>
+                        <input type="text" placeholder="Book Year" name="added_on" required>
+                  </span><br>
+                  <span>
+                        <input type="text" placeholder="Book Quantity" name="qty" required>
+                  </span><br>
+                  <span>
+                        <input type="file" placeholder="Book Coverphoto" name="bcover" required>
+                  </span><br>
+                  <button name="submit">Add Book</button>
+   
+               </form>
+            </div>
+          </div>';
+          if (isset($_POST["submit"]))
+         {
+            $dest_path=$ob->config["paths"]["images"].$_FILES['bcover']['name'];
+            $sql='INSERT into Book (title,author,category,added_on,qty,available,ipath) values ("'.$_POST["title"].'","'.$_POST["author"].'","'.$_POST["category"].'","'.$_POST["added_on"].'","'.$_POST["qty"].'","'.$_POST["qty"].'","'.$dest_path.'")';
+            if(move_uploaded_file($_FILES['bcover']['tmp_name'],$ob->config["paths"]["images"]))
+            {
+               if ($this->pdo->query($sql) === FALSE) 
+               {
+                  echo "<br >Error <br>";
+               }
+               else
+               {
+                     echo "<p>New book added successfully.!<p>";
+               }
+            }
+         }
+      }
+      public function issue($bid,$id)
+      {
+         $sql1 = "SELECT available FROM Book WHERE Book.id='". $bid."'";
          $stmt1=$this->pdo->query($sql1);
          $row1=$stmt1->fetch(PDO::FETCH_ASSOC);
-         $q=number_format($row1["qty"]);
-         $q=$q-1;
-         $a=1;
-         if ($q<=0)
-         {
-            $a=0;
+         if ((int)$row1["available"]>0)
+         { 
+            $q=((int)$row1["available"])-1;
+            $sql='UPDATE Book SET available=? where Book.id=?';
+            $stmt = $this->pdo->prepare($sql);
+            if ($stmt->execute([$q,$bid]) === TRUE )
+            {
+               echo "here";
+               $sql2='INSERT into book_user (bid,id,issued_on) values ("'.$bid.'","'.$id.'","'.date('y-m-d').'")';
+               if ($this->pdo->query($sql2) === TRUE )
+               {
+                 // header("LOCATION: userdash.php");
+                 echo "Issued";
+               }
+            }
          }
-         $sql='UPDATE Book SET qty=?,available=? where id=?';
-         $stmt = $this->pdo->prepare($sql);
-         if ($stmt->execute([$q,$a]) === TRUE )
+         else
          {
-            header("LOCATION: homepagecontent.php");
+            echo "Sorry the book isn't available";
          }
+      }
+      public function book_info($id)
+      {
+         $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="'.$id.'"');
+         echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
+         while($row2=$stmt2->fetch(PDO::FETCH_ASSOC))
+         {
+            if ((date("d")-(int)substr($row2["issued_on"],8))>7)
+            {
+               $s="Returned";
+            }
+            else
+            {
+               $s="Issued";
+            }
+            $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="'.$row2["bid"].'"');
+            
+            while($row1=$stmt1->fetch(PDO::FETCH_ASSOC))
+            {  
+               echo '<tr>';
+               echo '<td>'.$row1["title"].'</td>';
+               echo '<td>'.$row2["issued_on"].'</td>';
+               echo '<td>'.$s.'</td>';
+               echo '</tr>';
+            }
+            
+         }
+         echo "</table>";
       }
    }
 ?>

@@ -1,47 +1,56 @@
 <?php 
 namespace db;
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 use PDO;
 class user
 {
     public $pdo;
-    public $id;
     public function __construct()
     {
         $this->pdo= new PDO('mysql:host=localhost;port=3307;dbname=bookhive', 'anjali', 'ctc');
     }
     /*LOGIN*/
-    function login($uname, $upd)
+    function login($email, $upd)
     {
-        $sql = "SELECT uname FROM user WHERE uname = :uname and pass = :upd ";
+        $sql = "SELECT uname FROM user WHERE email = :email and pass = :upd ";
         $stmt=$this->pdo->prepare($sql);
-        $stmt->execute(array(':uname'=>$uname,':upd'=>sha1($upd)));
+        $stmt->execute(array(':email'=>$email,':upd'=>sha1($upd)));
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
-
-    /*Admin check*/
-    function admin($id)
+    /*userno*/
+    function uno($email)
     {
-        $sql = "SELECT rid FROM user WHERE uname='". $id."'";
+        $sql = "SELECT id FROM user WHERE email='". $email."'";
         $stmt=$this->pdo->query($sql);
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["rid"];
+        return $row["id"];
+    }
+
+    /*Admin check*/
+    function admin($email)
+    {
+        $sql = "SELECT type FROM user WHERE email='". $email."'";
+        $stmt=$this->pdo->query($sql);
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $row["type"];
     }
 
     /*SIGN-UP*/
-    function sign_up($name,$email, $upd,$rid)
+    function sign_up($name,$email, $upd,$type)
     {
         
-        $stmt2 = $this->pdo->query('SELECT * FROM user where uname="'. $name.'"');
+        $stmt2 = $this->pdo->query('SELECT * FROM user where email="'. $email.'"');
         $hashedpassword = sha1($upd);
-        $rid=0;
+        $type="user";
         if ($row=$stmt2->fetch(PDO::FETCH_ASSOC))
         {
-            echo "<p id='e'><br>User Id Already Exists!<br><p>";
+            echo "<p id='e'><br>Email Id Already Exists!<br><p>";
         }
         else
         {
-            $sql = 'INSERT INTO user (uname,email,pass,rid) VALUES ("'.$name.'", "'.$email.'","'.$hashedpassword.'","'.$rid.'")';
+            $sql = 'INSERT INTO user (uname,email,pass,type) VALUES ("'.$name.'", "'.$email.'","'.$hashedpassword.'","'.$type.'")';
             if ($this->pdo->query($sql) === FALSE) 
             {
                 echo "<br >Error <br>";
@@ -54,5 +63,52 @@ class user
         }
     }
 
-    /* TODO User and book check*/
+    /* edit user info*/
+    function user_info()
+    {
+        $stmt2 = $this->pdo->query('SELECT * FROM user');
+        while ($row=$stmt2->fetch(PDO::FETCH_ASSOC))
+        {
+            echo '<form method="post">';
+            echo '<tr>';
+            echo '<td><input type="text" name="uno" value="'.$row['id'].'" readonly></input></td>';
+            echo '<td><input type="text" name="uname" value="'.$row['uname'].'"></input></td>';
+            echo '<td><input type="password" name="pass" placeholder="Password"></input></td>';
+            echo '<td><input type="text" name="email" value="'.$row['email'].'"></input></td>';
+            echo '<td><input type="text" name="type" value="'.$row['type'].'" readonly></td>';
+            echo '<td><input type="radio" name="admin" value="admin">YES  </input>';
+            echo '<input type="radio" name="admin" value="user">  NO</input></td>';
+            echo '<td><button name="update_button"> Update Information</button></td>';
+            echo "</tr>"; 
+            echo '</form>';
+        }
+        if (isset($_POST["update_button"]))
+        {
+            if (!isset($_POST["admin"]))
+            {
+                $_POST["admin"]=$_POST["type"];
+            }
+            if (empty($_POST["pass"]))
+            {
+                $sql='UPDATE user SET uname=?,email=?,type=? where id=?';
+                $stmt = $this->pdo->prepare($sql);
+                if ($stmt->execute([$_POST["uname"],$_POST["email"],$_POST["admin"],$_POST["uno"]]) === TRUE )
+                {
+                   echo "Please refresh!";
+                    //header("LOCATION: edituserlist.php");
+                }
+
+            }
+            else
+            {
+                $sql='UPDATE user SET uname=?,email=?,pass=?,type=? where id=?';
+                $stmt = $this->pdo->prepare($sql);
+                if ($stmt->execute([$_POST["uname"],$_POST["email"],sha1($_POST["pass"]),$_POST["admin"],$_POST["uno"]]) === TRUE )
+                {
+                    echo "Please refresh!";
+                    //header("LOCATION: edituserlist.php");
+                }
+            }
+        }
+    }
 }

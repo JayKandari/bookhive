@@ -1,3 +1,13 @@
+<?php 
+    session_start();   
+    if(isset($_SESSION["logged_in"]))
+    {
+        if ($_SESSION["admin"]=="user")
+        {
+            header("LOCATION: userdash.php");
+        }
+    }       
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -33,8 +43,7 @@
             <a href="addbook.php"><i class="fas fa-plus"></i><span>Add Book</span></a>
             <a href="listbookedit.php"><i class="fas fa-edit"></i><span>Edit Book info</span></a>
             <a href="edituserlist.php"><i class="fas fa-user-edit"></i><span>Edit User</span></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
-            <a href="#"><i class="fas fa-info-circle"></i><span>Personal Info</span></a>
+            <a href="ad_issued.php"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
             <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
         </div>
     </div>
@@ -49,8 +58,7 @@
         <a href="addbook.php"><i class="fas fa-plus"></i><span>Add Book</span></a>
         <a href="listbookedit.php"><i class="fas fa-edit"></i><span>Edit Book info</span></a>
         <a href="edituserlist.php"><i class="fas fa-user-edit"></i><span>Edit User</span></a>
-        <a href="#"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
-        <a href="#"><i class="fas fa-info-circle"></i><span>Personal Info</span></a>
+        <a href="ad_issued.php"><i class="fas fa-shopping-cart"></i><span>Book Issued</span></a>
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
     </div>
     <!--sidebar end-->
@@ -61,7 +69,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
