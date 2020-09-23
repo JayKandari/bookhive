@@ -17,7 +17,7 @@ class ProjectConfig
                 ),
                 //URL of the site you can add URLs for Log, Error etc.
                 'urls' => array(
-                    'baseUrl' => $creds['baseurl'] //cange according to your configuration
+                    'baseUrl' => $creds['baseurl'] //change according to your configuration
                 ),
                 // Paths of all the required folders
                 'paths' => array(
