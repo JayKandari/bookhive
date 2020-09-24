@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 </head>
 <?php include 'homepage.php'; ?>
+
 <body>
 
     <div class="card">

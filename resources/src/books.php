@@ -1,99 +1,88 @@
-<?php 
-   namespace db;
+<?php
 
-   require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
-   use Config\ProjectConfig;
-   use PDO_CONN\Connection;
-   // TODO edit() add()
-   use PDO;
-   class book
+namespace db;
+
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use Config\ProjectConfig;
+use PDO_CONN\Connection;
+// TODO edit() add()
+use PDO;
+
+class book
+{
+   public $pdo;
+   public $ob;
+   public function __construct()
    {
-      public $pdo;
-      public $ob;
-      public function __construct()
-      {
-         $conn = new Connection;
-         $this->pdo= $conn->connObj;
-         $this->ob=new ProjectConfig;
+      $conn = new Connection;
+      $this->pdo = $conn->connObj;
+      $this->ob = new ProjectConfig;
+   }
+   public function disp_book($recent)
+   {
+      if ($recent == 'no') {
+         $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc');
+      } else {
+         $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc limit 4');
       }
-      public function disp_book($recent)
-      {
-         if($recent == 'no')
-         {
-            $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc');
-         }
-         else
-         {
-            $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc limit 4');
-         }
-         $op=array();
-         while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
-         {
-            array_push($op,array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['ipath'],'author'=>$row['author'],'added_on'=>$row['added_on'],'category'=>$row['category'],'available'=>$row['available']));
-         }
-         return $op;
+      $op = array();
+      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+         array_push($op, array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['ipath'], 'author' => $row['author'], 'added_on' => $row['added_on'], 'category' => $row['category'], 'available' => $row['available']));
       }
-      public function search ($name)
-      {
-         $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%'.$name.'%"');
-         $op=array();
-         $row=0;
-         if ($stmt2->fetch(PDO::FETCH_ASSOC))
-         {
-            while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
-            {
-               array_push($op[$row],(array('id'=>$row['id'],'title'=>$row['title'],'path'=>$row['path'],'author'=>$row['author'],'added_on'=>$row['added_on'])));
-               $row=$row+1;
-            }
+      return $op;
+   }
+   public function search($name)
+   {
+      $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%' . $name . '%"');
+      $op = array();
+      $row = 0;
+      if ($stmt2->fetch(PDO::FETCH_ASSOC)) {
+         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+            array_push($op[$row], (array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['path'], 'author' => $row['author'], 'added_on' => $row['added_on'])));
+            $row = $row + 1;
          }
-         else
-         {
-            echo "Sorry ! No books found!";
-         }
-         return $op;
+      } else {
+         echo "Sorry ! No books found!";
       }
-      public function edit()
-      {
-         $stmt2 = $this->pdo->query('SELECT * FROM Book');
-         while($row=$stmt2->fetch(PDO::FETCH_ASSOC))
-         {
-            echo '<form method="post">';
-            echo "<tr>";
-            echo '<td><input type="number" name="id" value="'.$row['id'].'" readonly></input></td>';
-            echo '<td><input type="text" name="title" value="'.$row['title'].'"></input></td>';
-            echo '<td><input type="text" name="author" value="'.$row['author'].'"></input></td>';
-            echo '<td><input type="text" name="category" value="'.$row['category'].'"></input></td>';
-            echo '<td><input type="date" name="added_on" value="'.$row['added_on'].'"></input></td>';
-            echo '<td><input type="number" name="qty" value="'.$row['qty'].'"></input></td>';
-            echo '<td><input type="number" name="available" value="'.$row['available'].'"></input></td>';
-            echo '<td><input type="text" name="ipath" value="'.$row['ipath'].'"></input></td>';
-            echo '<td><button name="update_button" class="iconbtnedit"><i class="fas fa-edit"></i></button></td>';
-            echo '<td><button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button></td>';
-            echo "</tr>"; 
-            echo '</form>';    
-         }
-         if (isset($_POST["update_button"]))
-         {
-            $sql='UPDATE Book SET title=?,author=?,category=?,added_on=?,qty=?,available=?,ipath=? where id=?';
-            $stmt = $this->pdo->prepare($sql);
-            if ($stmt->execute([$_POST["title"],$_POST["author"],$_POST["category"],$_POST["added_on"],$_POST["qty"],$_POST["available"],$_POST["ipath"],$_POST["id"]]) === TRUE )
-            {
-               header("LOCATION: listbookedit.php");
-            }
-            else
-            {
-               echo "<p id='e'>Information edit unsuccessful. Try Again !<p>";
-            }
-         }
-         if (isset($_POST["delete_button"]))
-         {
-            $stmt2 = $this->pdo->query('DELETE FROM Book where id='. $_POST["id"]);
-            header("LOCATION: admindash.php");
+      return $op;
+   }
+   public function edit()
+   {
+      $stmt2 = $this->pdo->query('SELECT * FROM Book');
+      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+         echo '<form method="post">';
+         echo "<tr>";
+         echo '<td><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
+         echo '<td><input type="text" name="title" value="' . $row['title'] . '"></input></td>';
+         echo '<td><input type="text" name="author" value="' . $row['author'] . '"></input></td>';
+         echo '<td><input type="text" name="category" value="' . $row['category'] . '"></input></td>';
+         echo '<td><input type="date" name="added_on" value="' . $row['added_on'] . '"></input></td>';
+         echo '<td><input type="number" name="qty" value="' . $row['qty'] . '"></input></td>';
+         echo '<td><input type="number" name="available" value="' . $row['available'] . '"></input></td>';
+         echo '<td><input type="text" name="ipath" value="' . $row['ipath'] . '"></input></td>';
+         echo '<td><button name="update_button" class="iconbtnedit"><i class="fas fa-edit"></i></button></td>';
+         echo '<td><button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button></td>';
+         echo "</tr>";
+         echo '</form>';
+      }
+      if (isset($_POST["update_button"])) {
+         $sql = 'UPDATE Book SET title=?,author=?,category=?,added_on=?,qty=?,available=?,ipath=? where id=?';
+         $stmt = $this->pdo->prepare($sql);
+         if ($stmt->execute([$_POST["title"], $_POST["author"], $_POST["category"], $_POST["added_on"], $_POST["qty"], $_POST["available"], $_POST["ipath"], $_POST["id"]]) === TRUE) {
+            header("LOCATION: listbookedit.php");
+         } else {
+            echo "<p id='e'>Information edit unsuccessful. Try Again !<p>";
          }
       }
-      public function add()
-      {
-         echo '<div class="container">
+      if (isset($_POST["delete_button"])) {
+         $stmt2 = $this->pdo->query('DELETE FROM Book where id=' . $_POST["id"]);
+         header("LOCATION: admindash.php");
+      }
+   }
+   public function add()
+   {
+      echo '<div class="container">
             <div class="header">
                <h1>Add Book</h1>
             </div>
@@ -122,23 +111,18 @@
                </form>
             </div>
           </div>';
-          if (isset($_POST["submit"]))
-         {
-            $dest_path=$this->ob->config["paths"]["images"] ."/".$_FILES['bcover']['name'];
-            $sql='INSERT into Book (title,author,category,added_on,qty,available,ipath) values ("'.$_POST["title"].'","'.$_POST["author"].'","'.$_POST["category"].'","'.$_POST["added_on"].'","'.$_POST["qty"].'","'.$_POST["qty"].'","'.$dest_path.'")';
-            if(move_uploaded_file($_FILES['bcover']['tmp_name'],$this->ob->config["paths"]["images"] ."/"))
-            {
-               if ($this->pdo->query($sql) === FALSE) 
-               {
-                  echo "<br >Error <br>";
-               }
-               else
-               {
-                     echo "<p>New book added successfully.!<p>";
-               }
+      if (isset($_POST["submit"])) {
+         $dest_path = $this->ob->config["paths"]["images"] . "/" . $_FILES['bcover']['name'];
+         $sql = 'INSERT into Book (title,author,category,added_on,qty,available,ipath) values ("' . $_POST["title"] . '","' . $_POST["author"] . '","' . $_POST["category"] . '","' . $_POST["added_on"] . '","' . $_POST["qty"] . '","' . $_POST["qty"] . '","' . $dest_path . '")';
+         if (move_uploaded_file($_FILES['bcover']['tmp_name'], $this->ob->config["paths"]["images"] . "/")) {
+            if ($this->pdo->query($sql) === FALSE) {
+               echo "<br >Error <br>";
+            } else {
+               echo "<p>New book added successfully.!<p>";
             }
          }
       }
+
       public function issue($bid,$id)
       {
          $stmt2 = $this->pdo->query('SELECT returned FROM book_user where id="'.$id.'" and bid="'.$bid.'"');
@@ -197,10 +181,9 @@
                }
                echo '</tr>';
             }
-            
          }
-         echo "</table>";
       }
+
       public function issue_check($uno)
       {
          $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="'.$uno.'"');
@@ -225,4 +208,6 @@
          }
 
       }
+
    }
+}
