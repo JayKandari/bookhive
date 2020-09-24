@@ -63,6 +63,8 @@ if(isset($_SESSION["logged_in"]))
 				if ($row === false) {
 					$_SESSION["error"] = "Incorrect password.";
 					header("LOCATION: login.php");
+
+
 				}
 				else
 				{
@@ -77,6 +79,7 @@ if(isset($_SESSION["logged_in"]))
 					if (!empty($_POST['remember']))
 					{
 						setcookie ("email", $_POST['email'], time()+ (10 * 365 * 24 * 60 * 60));
+
 					}
 					if ($_SESSION["admin"] == "admin") {
 						header("LOCATION: admindash.php");

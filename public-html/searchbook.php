@@ -40,18 +40,22 @@ use PDO_CONN\Connection;
     </div>
     <?php
 
-    if (isset($_POST["submit_search"])) {
-        // Fetch search result from DB
-        $conn = new Connection();
-        $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
-        if ($_POST["author"] != "") {
-            $query = $query . " AND author like '%" . $_POST["author"] . "%'";
-        }
-        if ($_POST["category"] != "") {
-            $query = $query . " AND category like '%" . $_POST["category"] . "%'";
-        }
-        $result = $conn->exeQuery($query);
-        if ($result) {
+        
+        if (isset($_POST["submit_search"])) {
+            // Fetch search result from DB
+            $conn = new Connection();
+
+            $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
+            if ($_POST["author"] != "") {
+                $query = $query . " AND author like '%" . $_POST["author"] . "%'";
+            }
+            if ($_POST["category"] != "") {
+                $query = $query . " AND category like '%" . $_POST["category"] . "%'";
+            }
+            $result = $conn->exeQuery($query);
+            if ($result) {  
+
+
     ?>
             <table legend="2px">
                 <tbody>
