@@ -2,10 +2,13 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\user;
+use db\user as user;
+use db\book as book;
+if(isset($_SESSION["logged_in"]))
+{
+	if ($_SESSION["admin"]=="admin")
+	{
 
-if (isset($_SESSION["logged_in"])) {
-	if ($_SESSION["admin"] == "admin") {
 		header("LOCATION: admindash.php");
 	} else {
 		header("LOCATION: userdash.php");
@@ -60,15 +63,20 @@ if (isset($_SESSION["logged_in"])) {
 				if ($row === false) {
 					$_SESSION["error"] = "Incorrect password.";
 					header("LOCATION: login.php");
-				} else {
-					$_SESSION["uname"] = $row['uname'];
-					$_SESSION["email"] = $_POST['email'];
-					$_SESSION["admin"] = $k->admin($_SESSION["email"]);
-					$_SESSION["uno"] = $k->uno($_SESSION["email"]);
-					$_SESSION["success"] = "Login success";
-					$_SESSION["logged_in"] = "pass";
-					if (!empty($_POST['remember'])) {
-						setcookie("email", $_POST['email'], time() + (10 * 365 * 24 * 60 * 60));
+				}
+				else
+				{
+					$_SESSION["uname"]=$row['uname'];
+					$_SESSION["email"]=$_POST['email'];
+					$_SESSION["admin"]=$k->admin($_SESSION["email"]);
+					$_SESSION["uno"]=$k->uno($_SESSION["email"]);
+					$ob=new book;
+					$ob->issue_check($_SESSION["uno"]);
+					$_SESSION["success"]="Login success";
+					$_SESSION["logged_in"]="pass";
+					if (!empty($_POST['remember']))
+					{
+						setcookie ("email", $_POST['email'], time()+ (10 * 365 * 24 * 60 * 60));
 					}
 					if ($_SESSION["admin"] == "admin") {
 						header("LOCATION: admindash.php");
