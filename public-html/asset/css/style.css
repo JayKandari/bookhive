@@ -7,7 +7,7 @@ body {
 header {
   z-index: 1;
   position: fixed;
-  background: #22242A;
+  background: #22242a;
   padding: 20px;
   width: calc(100% - 0%);
   top: 0;
@@ -23,7 +23,7 @@ header {
 }
 
 .left_area span {
-  color: #19B3D3;
+  color: #19b3d3;
 }
 
 .sidebar {
@@ -49,14 +49,14 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .sidebar .profile_info .profile_image {
@@ -80,15 +80,15 @@ header {
   text-decoration: none;
   padding-left: 40px;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  -webkit-transition-property: #19B3D3;
-  transition-property: #19B3D3;
+  -webkit-transition-property: #19b3d3;
+  transition-property: #19b3d3;
 }
 
 .sidebar a:hover {
-  background: #19B3D3;
+  background: #19b3d3;
 }
 
 .sidebar i {
@@ -105,12 +105,12 @@ label #sidebar_btn {
   margin: 5px 0;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  -webkit-transition-property: #19B3D3;
-  transition-property: #19B3D3;
+  -webkit-transition-property: #19b3d3;
+  transition-property: #19b3d3;
 }
 
 label #sidebar_btn:hover {
-  color: #19B3D3;
+  color: #19b3d3;
 }
 
 #check:checked ~ .sidebar {
@@ -177,11 +177,11 @@ label #sidebar_btn:hover {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     padding: 10px 20px;
   }
   .nav_bar .mobile_profile_image {
@@ -199,10 +199,10 @@ label #sidebar_btn:hover {
     transition-property: color;
   }
   .nav_bar .nav_btn:hover {
-    color: #19B3D3;
+    color: #19b3d3;
   }
   .mobile_nav_items {
-    background: #2F323A;
+    background: #2f323a;
     display: none;
   }
   .mobile_nav_items a {
@@ -213,14 +213,14 @@ label #sidebar_btn:hover {
     line-height: 60px;
     text-decoration: none;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    -webkit-transition-property: #19B3D3;
-    transition-property: #19B3D3;
+    -webkit-transition-property: #19b3d3;
+    transition-property: #19b3d3;
   }
   .mobile_nav_items a:hover {
-    background: #19B3D3;
+    background: #19b3d3;
   }
   .mobile_nav_items i {
     padding-right: 10px;

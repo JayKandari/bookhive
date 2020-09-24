@@ -1,12 +1,10 @@
-<?php 
-    session_start();   
-    if(isset($_SESSION["logged_in"]))
-    {
-        if ($_SESSION["admin"]=="user")
-        {
-            header("LOCATION: userdash.php");
-        }
-    }       
+<?php
+session_start();
+if (isset($_SESSION["logged_in"])) {
+    if ($_SESSION["admin"] == "user") {
+        header("LOCATION: userdash.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -52,7 +50,7 @@
     <div class="sidebar">
         <div class="profile_info">
             <img src="../asset/images/OIP.jpg" class="profile_image" alt="">
-            <h4></h4>
+            <h4><?php echo $_SESSION["uname"]?></h4>
         </div>
         <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="addbook.php"><i class="fas fa-plus"></i><span>Add Book</span></a>

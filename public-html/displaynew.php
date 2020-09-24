@@ -1,6 +1,7 @@
 <?php session_start();
-include "../resources/src/books.php";
-use db\book as book;
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use db\book;
 ?>
 <html>
 <title>New Collection</title>
@@ -10,8 +11,9 @@ use db\book as book;
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 </head>
 <?php include 'homepage.php'; ?>
+
 <body>
-<?php
+    <?php
     $k = new book;
     $row = $k->disp_book("yes");
     $c = count($row);
@@ -22,23 +24,19 @@ use db\book as book;
         echo '<h4><b>' . $row[$x]["title"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["author"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["category"] . '</b></h4>';
-        if (isset($_SESSION["logged_in"])) 
-        {
+        if (isset($_SESSION["logged_in"])) {
             echo '<form method="post">';
             echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';
             echo '<button name="issue">ISSUE BOOK </button>';
             echo '</form>';
-        }
-        else
-        {
+        } else {
             echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
         }
         echo '</div>';
         echo '</div>';
     }
-    if (isset($_POST["issue"]))
-    {
-        $k->issue($_POST["bid"],$_SESSION["uno"]);
+    if (isset($_POST["issue"])) {
+        $k->issue($_POST["bid"], $_SESSION["uno"]);
     }
 
     ?>

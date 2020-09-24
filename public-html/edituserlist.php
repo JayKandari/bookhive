@@ -1,20 +1,23 @@
-<?php 
+<?php
 session_start();
-include "../resources/src/user.php";
-    use db\user as user;
-if(isset($_SESSION["logged_in"]))
-{
-	if ($_SESSION["admin"]=="user")
-	{
-		header("LOCATION: userdash.php");
-	}
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use db\user;
+
+if (isset($_SESSION["logged_in"])) {
+  if ($_SESSION["admin"] == "user") {
+    header("LOCATION: userdash.php");
+  }
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
+
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
 <?php include 'admindash.php'; ?>
+
 <body>
   <table>
     <tr>
@@ -27,10 +30,11 @@ if(isset($_SESSION["logged_in"]))
       <th>Edit Operation</th>
     </tr>
     <?php
-      $k=new user;
-      $k->user_info();
+    $k = new user;
+    $k->user_info();
     ?>
   </table>
-    
+
 </body>
+
 </html>
