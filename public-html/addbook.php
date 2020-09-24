@@ -1,7 +1,7 @@
 <?php session_start();
-include "../resources/src/books.php";
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\book as book;
+use db\book;
 
 if (isset($_SESSION["logged_in"])) {
 	if ($_SESSION["admin"] == "user") {

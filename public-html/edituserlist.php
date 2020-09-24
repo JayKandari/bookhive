@@ -1,8 +1,8 @@
 <?php
 session_start();
-include "../resources/src/user.php";
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\user as user;
+use db\user;
 
 if (isset($_SESSION["logged_in"])) {
   if ($_SESSION["admin"] == "user") {

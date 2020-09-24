@@ -7,7 +7,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use Config\ProjectConfig;
 use PDO_CONN\Connection;
 // TODO edit() add()
-use PDO;
+// use PDO;
 
 class book
 {
@@ -27,7 +27,7 @@ class book
          $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc limit 4');
       }
       $op = array();
-      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row = $stmt2->fetch(  )) {
          array_push($op, array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['ipath'], 'author' => $row['author'], 'added_on' => $row['added_on'], 'category' => $row['category'], 'available' => $row['available']));
       }
       return $op;
@@ -37,8 +37,8 @@ class book
       $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%' . $name . '%"');
       $op = array();
       $row = 0;
-      if ($stmt2->fetch(PDO::FETCH_ASSOC)) {
-         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      if ($stmt2->fetch(  )) {
+         while ($row = $stmt2->fetch(  )) {
             array_push($op[$row], (array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['path'], 'author' => $row['author'], 'added_on' => $row['added_on'])));
             $row = $row + 1;
          }
@@ -50,7 +50,7 @@ class book
    public function edit()
    {
       $stmt2 = $this->pdo->query('SELECT * FROM Book');
-      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row = $stmt2->fetch(  )) {
          echo '<form method="post">';
          echo "<tr>";
          echo '<td><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
@@ -127,7 +127,7 @@ class book
    {
       $sql1 = "SELECT available FROM Book WHERE Book.id='" . $bid . "'";
       $stmt1 = $this->pdo->query($sql1);
-      $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+      $row1 = $stmt1->fetch(  );
       if ((int)$row1["available"] > 0) {
          $q = ((int)$row1["available"]) - 1;
          $sql = 'UPDATE Book SET available=? where Book.id=?';
@@ -148,7 +148,7 @@ class book
    {
       $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
       echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
-      while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row2 = $stmt2->fetch(  )) {
          if ((date("d") - (int)substr($row2["issued_on"], 8)) > 7) {
             $s = "Returned";
          } else {
@@ -156,7 +156,7 @@ class book
          }
          $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="' . $row2["bid"] . '"');
 
-         while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+         while ($row1 = $stmt1->fetch(  )) {
             echo '<tr>';
             echo '<td>' . $row1["title"] . '</td>';
             echo '<td>' . $row2["issued_on"] . '</td>';

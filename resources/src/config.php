@@ -33,7 +33,6 @@ class ProjectConfig
     }
     public function dispConfig()
     {
-
         var_dump($this->config);
     }
     public function disableError()

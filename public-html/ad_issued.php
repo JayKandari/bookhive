@@ -9,9 +9,9 @@
 
 <body>
   <?php
-  include "../resources/src/books.php";
+  require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-  use db\book as book;
+  use db\book;
 
   ini_set("display_errors", 1);
   error_reporting(E_ALL);
