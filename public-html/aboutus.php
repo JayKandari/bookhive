@@ -1,9 +1,11 @@
 <html>
 <title>About us</title>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <?php include 'homepage.php'; ?>
+
 <body>
     <div class="card">
         <img src="../asset/images/aastha.jpg" alt="Avatar" style="width:100%">
@@ -19,7 +21,7 @@
             <p>Drupal Frontend Intern</p>
         </div>
     </div>
-   
+
     <div class="card">
         <img src="../asset/images/a.jpg" alt="Avatar" style="width:100%">
         <div class="container">
@@ -34,7 +36,7 @@
             <p>Drupal Frontend Intern</p>
         </div>
     </div>
-   
+
 </body>
 
 </html>

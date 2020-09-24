@@ -2,6 +2,6 @@
     "autoload": {
         "classmap": [
             "resources"
-        ] 
+        ]
     }
 }
