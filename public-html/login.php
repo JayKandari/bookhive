@@ -2,6 +2,7 @@
 session_start();
 include "../resources/src/user.php";
 use db\user as user;
+use db\book as book;
 if(isset($_SESSION["logged_in"]))
 {
 	if ($_SESSION["admin"]=="admin")
@@ -71,6 +72,8 @@ if(isset($_SESSION["logged_in"]))
 					$_SESSION["email"]=$_POST['email'];
 					$_SESSION["admin"]=$k->admin($_SESSION["email"]);
 					$_SESSION["uno"]=$k->uno($_SESSION["email"]);
+					$ob=new book;
+					$ob->issue_check($_SESSION["uno"]);
 					$_SESSION["success"]="Login success";
 					$_SESSION["logged_in"]="pass";
 					if (!empty($_POST['remember']))

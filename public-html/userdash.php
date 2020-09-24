@@ -48,7 +48,7 @@ if(isset($_SESSION["logged_in"]))
     <div class="sidebar">
         <div class="profile_info">
             <img src="../asset/images/OIP.jpg" class="profile_image" alt="">
-            <h4></h4>
+            <h4><?php echo $_SESSION["uname"]?></h4>
         </div>
         <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
             <a href="#"><i class="fas fa-search"></i><span>Search Books</span></a>

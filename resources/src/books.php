@@ -141,28 +141,38 @@
       }
       public function issue($bid,$id)
       {
-         $sql1 = "SELECT available FROM Book WHERE Book.id='". $bid."'";
-         $stmt1=$this->pdo->query($sql1);
-         $row1=$stmt1->fetch(PDO::FETCH_ASSOC);
-         if ((int)$row1["available"]>0)
-         { 
-            $q=((int)$row1["available"])-1;
-            $sql='UPDATE Book SET available=? where Book.id=?';
-            $stmt = $this->pdo->prepare($sql);
-            if ($stmt->execute([$q,$bid]) === TRUE )
+         $stmt2 = $this->pdo->query('SELECT returned FROM book_user where id="'.$id.'" and bid="'.$bid.'"');
+         if ($row2=$stmt2->fetch(PDO::FETCH_ASSOC))
+         {
+            if ($row2["returned"]=="0")
             {
-               echo "here";
-               $sql2='INSERT into book_user (bid,id,issued_on) values ("'.$bid.'","'.$id.'","'.date('y-m-d').'")';
-               if ($this->pdo->query($sql2) === TRUE )
-               {
-                 // header("LOCATION: userdash.php");
-                 echo "Issued";
-               }
+               echo "Book already issued to you!";
             }
          }
          else
          {
-            echo "Sorry the book isn't available";
+            $sql1 = "SELECT available FROM Book WHERE Book.id='". $bid."'";
+            $stmt1=$this->pdo->query($sql1);
+            $row1=$stmt1->fetch(PDO::FETCH_ASSOC);
+            if ((int)$row1["available"]>0)
+            { 
+               $q=((int)$row1["available"])-1;
+               $sql='UPDATE Book SET available=? where Book.id=?';
+               $stmt = $this->pdo->prepare($sql);
+               if ($stmt->execute([$q,$bid]) === TRUE )
+               {
+                  $sql2='INSERT into book_user (bid,id,issued_on) values ("'.$bid.'","'.$id.'","'.date('y-m-d').'")';
+                  if ($this->pdo->query($sql2) === TRUE )
+                  {
+                  // header("LOCATION: userdash.php");
+                  echo "Issued";
+                  }
+               }
+            }
+            else
+            {
+               echo "Sorry the book isn't available";
+            }
          }
       }
       public function book_info($id)
@@ -171,26 +181,48 @@
          echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
          while($row2=$stmt2->fetch(PDO::FETCH_ASSOC))
          {
-            if ((date("d")-(int)substr($row2["issued_on"],8))>7)
-            {
-               $s="Returned";
-            }
-            else
-            {
-               $s="Issued";
-            }
             $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="'.$row2["bid"].'"');
-            
             while($row1=$stmt1->fetch(PDO::FETCH_ASSOC))
             {  
                echo '<tr>';
                echo '<td>'.$row1["title"].'</td>';
                echo '<td>'.$row2["issued_on"].'</td>';
-               echo '<td>'.$s.'</td>';
+               if ($row2["returned"]=="1")
+               {
+                  echo '<td>Returned</td>';
+               }
+               else
+               {
+                  echo '<td>Issued</td>';
+               }
                echo '</tr>';
             }
             
          }
          echo "</table>";
+      }
+      public function issue_check($uno)
+      {
+         $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="'.$uno.'"');
+         while($row2=$stmt2->fetch(PDO::FETCH_ASSOC))
+         {
+            if ((date("d")-(int)substr($row2["issued_on"],8))>7)
+            {
+               $sql1 = 'SELECT available FROM Book WHERE Book.id="'.$row2["bid"].'"';
+               $stmt1=$this->pdo->query($sql1);
+               $row1=$stmt1->fetch(PDO::FETCH_ASSOC);
+               $q=((int)$row1["available"])+1;
+               $sql='UPDATE Book SET available=? where Book.id=?';
+               $stmt = $this->pdo->prepare($sql);
+               if ($stmt->execute([$q,$row2["bid"]]) === TRUE )
+               {
+                  $sql3='UPDATE book_user SET returned=? where bid=? and id=?';
+                  $stmt3 = $this->pdo->prepare($sql3);
+                  $stmt3->execute(["1",$row2["bid"],$uno]);
+               }
+                  
+            }
+         }
+
       }
    }
