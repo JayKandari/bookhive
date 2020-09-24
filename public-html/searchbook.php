@@ -55,6 +55,7 @@ use PDO_CONN\Connection;
             $result = $conn->exeQuery($query);
             if ($result) {  
 
+
     ?>
             <table legend="2px">
                 <tbody>
