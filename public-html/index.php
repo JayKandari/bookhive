@@ -3,6 +3,10 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL);
 include "../resources/src/books.php";
 use db\book as book;
+
+use Config\ProjectConfig;
+$config = new ProjectConfig();
+
 ?>
 <html>
 <title>Index Page</title>
@@ -16,15 +20,15 @@ use db\book as book;
     $k = new book;
     $row = $k->disp_book("no");
     $c = count($row);
-    for ($x = 0; $x < $c; $x++) 
+    for ($x = 0; $x < $c; $x++)
     {
         echo '<div class="card">';
-        echo '<img src="' . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
+        echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
         echo '<div class="container">';
         echo '<h4><b>' . $row[$x]["title"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["author"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["category"] . '</b></h4>';
-        if (isset($_SESSION["logged_in"])) 
+        if (isset($_SESSION["logged_in"]))
         {
             echo '<form method="post">';
             echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';

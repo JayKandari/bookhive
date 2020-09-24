@@ -1,5 +1,8 @@
-<?php 
+<?php
 namespace db;
+
+require $_SERVER['DOCUMENT_ROOT'].'/../vendor/autoload.php';
+
 use PDO_CONN\Connection;
 use PDO;
 class user
@@ -40,7 +43,7 @@ class user
     /*SIGN-UP*/
     function sign_up($name,$email, $upd,$type)
     {
-        
+
         $stmt2 = $this->pdo->query('SELECT * FROM user where email="'. $email.'"');
         $hashedpassword = sha1($upd);
         $type="user";
@@ -51,7 +54,7 @@ class user
         else
         {
             $sql = 'INSERT INTO user (uname,email,pass,type) VALUES ("'.$name.'", "'.$email.'","'.$hashedpassword.'","'.$type.'")';
-            if ($this->pdo->query($sql) === FALSE) 
+            if ($this->pdo->query($sql) === FALSE)
             {
                 echo "<br >Error <br>";
             }
@@ -59,7 +62,7 @@ class user
             {
                 echo "<p id='g'>New account created successfully. Please login !<p>";
             }
-        
+
         }
     }
 
@@ -79,7 +82,7 @@ class user
             echo '<td><input type="radio" name="admin" value="admin">YES  </input>';
             echo '<input type="radio" name="admin" value="user">  NO</input></td>';
             echo '<td><button name="update_button"> Update Information</button></td>';
-            echo "</tr>"; 
+            echo "</tr>";
             echo '</form>';
         }
         if (isset($_POST["update_button"]))

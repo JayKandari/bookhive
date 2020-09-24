@@ -13,7 +13,8 @@ class ProjectConfig
                 'dbname' => $creds["dbname"],
                 'username' => $creds["username"],
                 'password' => $creds["pass"],
-                'host' => $creds["host"] . ":" . $creds["port"]
+                'host' => $creds["host"],
+                'port' => $creds["port"],
                 ),
                 //URL of the site you can add URLs for Log, Error etc.
                 'urls' => array(
@@ -26,11 +27,11 @@ class ProjectConfig
                     "css" =>  "/asset/css",
                     "js" => "/asset/js"
                 )
-        );   
+        );
     }
     public function dispConfig()
     {
-        
+
         var_dump($this->config);
     }
     public function disableError()

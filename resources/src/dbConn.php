@@ -20,7 +20,7 @@ class Connection
         $config = new ProjectConfig();
         $config->enableError();
         $dbcreds = $config->config["db"];
-        $dsn = $dbcreds['type'] . ":host=" . $dbcreds['host'] . ";dbname=" . $dbcreds['dbname'];
+        $dsn = $dbcreds['type'] . ":host=" . $dbcreds['host'] . ";port=". $dbcreds['port'] . ";dbname=" . $dbcreds['dbname'];
         $this->connObj = new PDO($dsn, $dbcreds['username'], $dbcreds['password'], $options);
     }
     public function exeQuery($stmt, $params=NULL)

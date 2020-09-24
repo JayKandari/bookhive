@@ -33,7 +33,7 @@ CREATE TABLE `Book` (
   `title` varchar(80) NOT NULL,
   `author` varchar(40) NOT NULL,
   `category` varchar(30) NOT NULL,
-  `added_on` date NOT NULL DEFAULT current_timestamp(),
+  `added_on` date NOT NULL,
   `qty` int(11) NOT NULL,
   `available` int(11) NOT NULL,
   `ipath` varchar(255) NOT NULL
@@ -84,7 +84,7 @@ CREATE TABLE `user` (
   `uname` varchar(40) NOT NULL COMMENT 'Name of user',
   `email` varchar(50) NOT NULL COMMENT 'Email of user',
   `pass` varchar(40) NOT NULL COMMENT 'Password of user',
-  `type` text NOT NULL DEFAULT 'user' COMMENT 'Role ID of user'
+  `type` text NOT NULL COMMENT 'Role ID of user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
