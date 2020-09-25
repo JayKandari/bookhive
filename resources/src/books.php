@@ -129,6 +129,24 @@ class book
       if ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
          if ($row2["returned"] == "0") {
             echo "Book already issued to you!";
+         } else {
+            $sql1 = "SELECT available FROM Book WHERE Book.id='" . $bid . "'";
+            $stmt1 = $this->pdo->query($sql1);
+            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+            if ((int)$row1["available"] > 0) {
+               $q = ((int)$row1["available"]) - 1;
+               $sql = 'UPDATE Book SET available=? where Book.id=?';
+               $stmt = $this->pdo->prepare($sql);
+               if ($stmt->execute([$q, $bid]) === TRUE) {
+                  $sql2 = 'INSERT into book_user (bid,id,issued_on) values ("' . $bid . '","' . $id . '","' . date('y-m-d') . '")';
+                  if ($this->pdo->query($sql2) === TRUE) {
+                     // header("LOCATION: userdash.php");
+                     echo "Issued";
+                  }
+               }
+            } else {
+               echo "Sorry the book isn't available";
+            }
          }
       } else {
          $sql1 = "SELECT available FROM Book WHERE Book.id='" . $bid . "'";
@@ -150,13 +168,11 @@ class book
          }
       }
    }
-   public function book_info($id,$c)
+   public function book_info($id, $c)
    {
-      if ($c == "ad")
-      {
+      if ($c == "ad") {
          $stmt2 = $this->pdo->query('SELECT * FROM book_user ');
-      }
-      else{
+      } else {
          $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
       }
       echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";

@@ -6,6 +6,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use src\book;
 
 use src\ProjectConfig;
+use src\SessionCookie;
+
+$session = new SessionCookie;
+$session->includeAccess();
 
 $config = new ProjectConfig();
 
@@ -16,19 +20,6 @@ $config = new ProjectConfig();
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<?php
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "admin") {
-        include 'admindash.php';
-    } else {
-        include 'userdash.php';
-    }
-} else {
-    include 'homepage.php';
-}
-
-
-?>
 
 <body>
     <?php

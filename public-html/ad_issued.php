@@ -13,6 +13,13 @@
 
   use src\book;
 
+use src\ProjectConfig;
+use src\SessionCookie;
+
+$session = new SessionCookie;
+$conf = new ProjectConfig();
+$session->admincheck();
+
   ini_set("display_errors", 1);
   error_reporting(E_ALL);
   $k = new book;

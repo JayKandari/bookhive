@@ -1,3 +1,9 @@
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+use src\SessionCookie;
+
+$session = new SessionCookie;
+$session->includeAccess();?>
 <html>
 <title>Contact us</title>
 
@@ -5,19 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 </head>
-<?php 
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "admin") {
-        include 'admindash.php';
-    }
-    else{
-        include 'userdash.php';
-    }
-}
-else{
-    include 'homepage.php'; 
-} 
-?>
 
 <body>
 
