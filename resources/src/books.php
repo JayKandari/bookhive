@@ -150,9 +150,15 @@ class book
          }
       }
    }
-   public function book_info($id)
+   public function book_info($id,$c)
    {
-      $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
+      if ($c == "ad")
+      {
+         $stmt2 = $this->pdo->query('SELECT * FROM book_user ');
+      }
+      else{
+         $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
+      }
       echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
       while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
          $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="' . $row2["bid"] . '"');

@@ -6,8 +6,8 @@ use src\user;
 use src\book;
 use src\SessionCookie;
 
-$session = new SessionCookie;
-$session->headAccess();
+//$session = new SessionCookie;
+//$session->headAccess();
 
 ?>
 <html>
@@ -53,15 +53,14 @@ $session->headAccess();
 				error_reporting(E_ALL);
 				$k = new user();
 				$row = $k->login($_POST['email'], $_POST['upass']);
-				var_dump($row);
 				if ($row === false) {
 					$_SESSION["error"] = "Incorrect password.";
 					header("LOCATION: login.php");
 				} else {
 					$_SESSION["uname"] = $row['uname'];
 					$_SESSION["email"] = $_POST['email'];
-					$_SESSION["admin"] = $k->admin($_SESSION["email"]);
-					$_SESSION["uno"] = $k->uno($_SESSION["email"]);
+					$_SESSION["admin"] = $row["type"];
+					$_SESSION["uno"] = $row["id"];
 					$ob = new book;
 					$ob->issue_check($_SESSION["uno"]);
 					$_SESSION["success"] = "Login success";

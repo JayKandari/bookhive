@@ -9,8 +9,8 @@ $conf = new ProjectConfig();
 use src\book;
 use src\SessionCookie;
 
-$session = new SessionCookie;
-$session->headAccess();
+//$session = new SessionCookie;
+//$session->headAccess();
 
 if (isset($_SESSION["logged_in"])) {
     if ($_SESSION["admin"] == "admin") {
@@ -85,7 +85,7 @@ if (isset($_SESSION["logged_in"])) {
     </script>
     <?php
     $k = new book;
-    $row = $k->book_info($_SESSION["uno"]);
+    $row = $k->book_info($_SESSION["uno"],"nope");
     ?>
 </body>
 

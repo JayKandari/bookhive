@@ -16,7 +16,7 @@
   ini_set("display_errors", 1);
   error_reporting(E_ALL);
   $k = new book;
-  $row = $k->book_info($_SESSION["uno"]);
+  $row = $k->book_info($_SESSION["uno"],"ad");
   ?>
 
 </body>
