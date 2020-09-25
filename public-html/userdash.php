@@ -3,12 +3,11 @@ session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use db\book;
+use Session\SessionCookie;
 
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "admin") {
-        header("LOCATION: admindash.php");
-    }
-}
+$session = new SessionCookie;
+$session->headAccess();
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -50,7 +49,7 @@ if (isset($_SESSION["logged_in"])) {
     <div class="sidebar">
         <div class="profile_info">
             <img src="../asset/images/OIP.jpg" class="profile_image" alt="">
-            <h4><?php echo $_SESSION["uname"]?></h4>
+            <h4><?php echo $_SESSION["uname"] ?></h4>
         </div>
         <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="#"><i class="fas fa-search"></i><span>Search Books</span></a>

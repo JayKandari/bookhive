@@ -1,6 +1,10 @@
 <?php
-session_start();
-session_unset();
-session_destroy();
-setcookie("uid", $_POST['uid'], time() - (10 * 365 * 24 * 60 * 60));
-header("LOCATION: homepage.php");
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use Session\SessionCookie;
+use Redirect\Redirect;
+
+$session = new SessionCookie;
+$redirect = new Redirect;
+$session->sessionClear();
+$redirect->phploc("homepage.php");

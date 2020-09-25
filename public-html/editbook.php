@@ -1,10 +1,11 @@
 <?php
-session_start();
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "user") {
-        header("LOCATION: userdash.php");
-    }
-} ?>
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use Session\SessionCookie;
+
+$session = new SessionCookie;
+$session->adminCheck();
+?>
 <html>
 
 <head>
