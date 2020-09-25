@@ -49,14 +49,14 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .sidebar .profile_info .profile_image {
@@ -80,14 +80,14 @@ header {
   text-decoration: none;
   padding-left: 40px;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-transition-property: #19b3d3;
   transition-property: #19b3d3;
 }
 
-.sidebar a:hover {
+.sidebar a:hover, a:checked {
   background: #19b3d3;
 }
 
@@ -177,11 +177,11 @@ label #sidebar_btn:hover {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 10px 20px;
   }
   .nav_bar .mobile_profile_image {
@@ -213,11 +213,12 @@ label #sidebar_btn:hover {
     line-height: 60px;
     text-decoration: none;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+            box-sizing: border-box;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     -webkit-transition-property: #19b3d3;
     transition-property: #19b3d3;
+    font-size: 24px;
   }
   .mobile_nav_items a:hover {
     background: #19b3d3;
@@ -236,7 +237,7 @@ label #sidebar_btn:hover {
 
 .card {
   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   -webkit-transition: 0.3s;
   transition: 0.3s;
   width: 30%;
@@ -248,11 +249,23 @@ label #sidebar_btn:hover {
 
 .card:hover {
   -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  padding: 2px 16px;
+/* Style the counter cards */
+@media screen and (max-width: 780px) {
+  .card {
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    width: 70%;
+    margin-bottom: 3%;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-right: 0%;
+    font-size: 24px;
+  }
 }
 
 table {
@@ -263,8 +276,7 @@ table {
   margin-top: 5%;
 }
 
-th,
-td {
+th, td {
   text-align: left;
   padding: 8px;
 }
@@ -274,7 +286,7 @@ tr:nth-child(even) {
 }
 
 th {
-  background-color: #4caf50;
+  background-color: #4CAF50;
   color: white;
 }
 
@@ -284,32 +296,24 @@ tr:hover {
 
 .iconbtnedit {
   background-color: DodgerBlue;
-  /* Blue background */
   border: none;
-  /* Remove borders */
   color: white;
-  /* White text */
   padding: 12px 16px;
-  /* Some padding */
   font-size: 16px;
-  /* Set a font size */
   cursor: pointer;
-  /* Mouse pointer on hover */
+  height: 50px;
+  width: 50px;
 }
 
 .iconbtndelete {
   background-color: crimson;
-  /* Blue background */
   border: none;
-  /* Remove borders */
   color: white;
-  /* White text */
   padding: 12px 16px;
-  /* Some padding */
   font-size: 16px;
-  /* Set a font size */
   cursor: pointer;
-  /* Mouse pointer on hover */
+  height: 50px;
+  width: 50px;
 }
 
 /* Darker background on mouse-over */
@@ -323,16 +327,11 @@ tr:hover {
 
 body {
   font-family: sans-serif;
-  /* color: white; */
 }
 
 .container {
   width: 380px;
   margin: 7% auto;
-  border-radius: 25px;
-  /* background-color: rgba(0,0,0,0.1);  */
-  -webkit-box-shadow: 0 0 17px #333;
-  box-shadow: 0 0 17px #333;
 }
 
 .header {
@@ -350,17 +349,15 @@ body {
   text-align: center;
 }
 
-.main input,
-button {
+.main input, button {
   width: 300px;
   height: 40px;
   border: none;
   outline: none;
   padding-left: 40px;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 15px;
-  color: #333;
   margin-bottom: 40px;
 }
 
@@ -373,14 +370,10 @@ button {
 }
 
 .main button:hover {
-  -webkit-box-shadow: 2px 2px 5px #555;
-  box-shadow: 2px 2px 5px #555;
   background-color: #7799d4;
 }
 
 .main input:hover {
-  -webkit-box-shadow: 2px 2px 5px #555;
-  box-shadow: 2px 2px 5px #555;
   background-color: #ddd;
 }
 
@@ -447,14 +440,14 @@ header {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .sidebar .profile_info .profile_image {
@@ -478,14 +471,14 @@ header {
   text-decoration: none;
   padding-left: 40px;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-transition-property: #19b3d3;
   transition-property: #19b3d3;
 }
 
-.sidebar a:hover {
+.sidebar a:hover, a:checked {
   background: #19b3d3;
 }
 
@@ -575,11 +568,11 @@ label #sidebar_btn:hover {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 10px 20px;
   }
   .nav_bar .mobile_profile_image {
@@ -611,11 +604,12 @@ label #sidebar_btn:hover {
     line-height: 60px;
     text-decoration: none;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+            box-sizing: border-box;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     -webkit-transition-property: #19b3d3;
     transition-property: #19b3d3;
+    font-size: 24px;
   }
   .mobile_nav_items a:hover {
     background: #19b3d3;
