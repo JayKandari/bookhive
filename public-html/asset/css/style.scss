@@ -74,7 +74,7 @@ header {
   transition-property: $color;
 }
 
-.sidebar a:hover {
+.sidebar a:hover , a:checked{
   background: $color;
 }
 
@@ -202,6 +202,7 @@ label #sidebar_btn:hover {
     box-sizing: border-box;
     transition: 0.5s;
     transition-property: $color;
+    font-size: 24px;
   }
 
   .mobile_nav_items a:hover {
