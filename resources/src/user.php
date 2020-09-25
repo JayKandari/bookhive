@@ -1,10 +1,10 @@
 <?php
 
-namespace db;
+namespace src;
 
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use PDO_CONN\Connection;
+use src\Connection;
 use PDO;
 
 class user

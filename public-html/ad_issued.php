@@ -11,7 +11,7 @@
   <?php
   require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-  use db\book;
+  use src\book;
 
   ini_set("display_errors", 1);
   error_reporting(E_ALL);

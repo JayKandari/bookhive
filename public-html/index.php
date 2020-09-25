@@ -3,9 +3,9 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL);
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\book;
+use src\book;
 
-use Config\ProjectConfig;
+use src\ProjectConfig;
 
 $config = new ProjectConfig();
 
@@ -20,17 +20,15 @@ $config = new ProjectConfig();
 if (isset($_SESSION["logged_in"])) {
     if ($_SESSION["admin"] == "admin") {
         include 'admindash.php';
-    }
-    else{
+    } else {
         include 'userdash.php';
     }
+} else {
+    include 'homepage.php';
 }
-else{
-    include 'homepage.php'; 
-}
- 
- 
- ?>
+
+
+?>
 
 <body>
     <?php

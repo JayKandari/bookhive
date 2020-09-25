@@ -1,7 +1,7 @@
 <?php session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\book;
+use src\book;
 ?>
 <html>
 <title>New Collection</title>
@@ -10,18 +10,16 @@ use db\book;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 </head>
-<?php 
+<?php
 if (isset($_SESSION["logged_in"])) {
     if ($_SESSION["admin"] == "admin") {
         include 'admindash.php';
-    }
-    else{
+    } else {
         include 'userdash.php';
     }
+} else {
+    include 'homepage.php';
 }
-else{
-    include 'homepage.php'; 
-} 
 ?>
 
 <body>

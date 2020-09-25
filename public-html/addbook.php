@@ -1,8 +1,8 @@
 <?php session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\book;
-use Session\SessionCookie;
+use src\book;
+use src\SessionCookie;
 
 $session = new SessionCookie;
 $session->adminCheck();

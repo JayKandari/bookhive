@@ -11,19 +11,17 @@
 if (isset($_SESSION["logged_in"])) {
     if ($_SESSION["admin"] == "admin") {
         include 'admindash.php';
-    }
-    else{
+    } else {
         include 'userdash.php';
     }
+} else {
+    include 'homepage.php';
 }
-else{
-    include 'homepage.php'; 
-} 
 
 // Load resource files
 require_once($_SERVER["DOCUMENT_ROOT"] . "/../vendor/autoload.php");
 
-use PDO_CONN\Connection;
+use src\Connection;
 ?>
 
 <body>
@@ -52,20 +50,20 @@ use PDO_CONN\Connection;
     </div>
     <?php
 
-        
-        if (isset($_POST["submit_search"])) {
-            // Fetch search result from DB
-            $conn = new Connection();
 
-            $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
-            if ($_POST["author"] != "") {
-                $query = $query . " AND author like '%" . $_POST["author"] . "%'";
-            }
-            if ($_POST["category"] != "") {
-                $query = $query . " AND category like '%" . $_POST["category"] . "%'";
-            }
-            $result = $conn->exeQuery($query);
-            if ($result) {  
+    if (isset($_POST["submit_search"])) {
+        // Fetch search result from DB
+        $conn = new Connection();
+
+        $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
+        if ($_POST["author"] != "") {
+            $query = $query . " AND author like '%" . $_POST["author"] . "%'";
+        }
+        if ($_POST["category"] != "") {
+            $query = $query . " AND category like '%" . $_POST["category"] . "%'";
+        }
+        $result = $conn->exeQuery($query);
+        if ($result) {
 
 
     ?>
