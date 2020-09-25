@@ -18,28 +18,11 @@ class user
     /*LOGIN*/
     function login($email, $upd)
     {
-        $sql = "SELECT uname FROM user WHERE email = :email and pass = :upd ";
+        $sql = "SELECT * FROM user WHERE email = :email and pass = :upd ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array(':email' => $email, ':upd' => sha1($upd)));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
-    }
-    /*userno*/
-    function uno($email)
-    {
-        $sql = "SELECT id FROM user WHERE email='" . $email . "'";
-        $stmt = $this->pdo->query($sql);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["id"];
-    }
-
-    /*Admin check*/
-    function admin($email)
-    {
-        $sql = "SELECT type FROM user WHERE email='" . $email . "'";
-        $stmt = $this->pdo->query($sql);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row["type"];
     }
 
     /*SIGN-UP*/

@@ -65,7 +65,7 @@ class SessionCookie
                 include 'userdash.php';
             }
         } else {
-            include 'homepage.php';
+            include 'index.php';
         }
     }
 }

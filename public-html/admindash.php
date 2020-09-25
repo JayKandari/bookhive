@@ -6,13 +6,14 @@ use src\ProjectConfig;
 
 $conf = new ProjectConfig();
 
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "user") {
+if (isset($_SESSION["logged_in"])) 
+{
+    if ($_SESSION["admin"] == "user")
+     {
         header("LOCATION: userdash.php");
     }
-} else {
-    header("LOCATION: index.php");
-}
+ else 
+ {
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -88,3 +89,7 @@ if (isset($_SESSION["logged_in"])) {
 </body>
 
 </html>
+    <?php 
+    }
+}
+?>
