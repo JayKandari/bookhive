@@ -6,7 +6,7 @@ use src\user;
 use src\SessionCookie;
 
 $session = new SessionCookie;
-$session->login_check();
+$session->loginCheck();
 
 ?>
 <html>

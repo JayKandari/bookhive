@@ -6,17 +6,17 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\ProjectConfig;
 use src\Connection;
-// TODO edit() add()
 use PDO;
 
 class book
 {
    public $pdo;
    public $ob;
+   public $conn;
    public function __construct()
    {
-      $conn = new Connection;
-      $this->pdo = $conn->connObj;
+      $this->conn = new Connection;
+      $this->pdo = $this->conn->connObj;
       $this->ob = new ProjectConfig;
    }
    public function disp_book($recent)
@@ -27,7 +27,7 @@ class book
          $stmt2 = $this->pdo->query('SELECT * FROM Book order by added_on desc limit 4');
       }
       $op = array();
-      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row = $stmt2->fetch()) {
          array_push($op, array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['ipath'], 'author' => $row['author'], 'added_on' => $row['added_on'], 'category' => $row['category'], 'available' => $row['available']));
       }
       return $op;
@@ -37,8 +37,8 @@ class book
       $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%' . $name . '%"');
       $op = array();
       $row = 0;
-      if ($stmt2->fetch(PDO::FETCH_ASSOC)) {
-         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      if ($stmt2->fetch()) {
+         while ($row = $stmt2->fetch()) {
             array_push($op[$row], (array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['path'], 'author' => $row['author'], 'added_on' => $row['added_on'])));
             $row = $row + 1;
          }
@@ -50,7 +50,7 @@ class book
    public function edit()
    {
       $stmt2 = $this->pdo->query('SELECT * FROM Book');
-      while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row = $stmt2->fetch()) {
          echo '<form method="post">';
          echo "<tr>";
          echo '<td><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
@@ -98,7 +98,7 @@ class book
                         <input type="text" placeholder="Book Author" name="author" required>
                   </span><br>
                   <span>
-                        <input type="text" placeholder="Book Year" name="added_on" required>
+                        <input type="date" placeholder="Book Year" name="added_on" required>
                   </span><br>
                   <span>
                         <input type="text" placeholder="Book Quantity" name="qty" required>
@@ -112,27 +112,24 @@ class book
             </div>
           </div>';
       if (isset($_POST["submit"])) {
-         $dest_path = $this->ob->config["paths"]["images"] . "/" . $_FILES['bcover']['name'];
-         $sql = 'INSERT into Book (title,author,category,added_on,qty,available,ipath) values ("' . $_POST["title"] . '","' . $_POST["author"] . '","' . $_POST["category"] . '","' . $_POST["added_on"] . '","' . $_POST["qty"] . '","' . $_POST["qty"] . '","' . $dest_path . '")';
-         if (move_uploaded_file($_FILES['bcover']['tmp_name'], $this->ob->config["paths"]["images"] . "/")) {
-            if ($this->pdo->query($sql) === FALSE) {
-               echo "<br >Error <br>";
-            } else {
+         $filepath = $_SERVER['DOCUMENT_ROOT'].$this->ob->config["paths"]["images"] . "/" . basename($_FILES['bcover']['name']);
+         $valArr = [$_POST["title"], $_POST["author"], $_POST["category"], $_POST["added_on"], $_POST["qty"], $_POST["qty"], $_FILES['bcover']['name']];
+         $this->conn->exeQuery("insert into Book (title, author, category, added_on, qty, available, ipath) values (?,?,?,?,?,?,?)", $valArr);
+         if (move_uploaded_file($_FILES['bcover']['tmp_name'],  $filepath)) {
                echo "<p>New book added successfully.!<p>";
-            }
-         }
+            } else echo "<p>Error!<p>";
       }
    }
    public function issue($bid, $id)
    {
       $stmt2 = $this->pdo->query('SELECT returned FROM book_user where id="' . $id . '" and bid="' . $bid . '"');
-      if ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      if ($row2 = $stmt2->fetch()) {
          if ($row2["returned"] == "0") {
             echo "Book already issued to you!";
          } else {
             $sql1 = "SELECT available FROM Book WHERE Book.id='" . $bid . "'";
             $stmt1 = $this->pdo->query($sql1);
-            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+            $row1 = $stmt1->fetch();
             if ((int)$row1["available"] > 0) {
                $q = ((int)$row1["available"]) - 1;
                $sql = 'UPDATE Book SET available=? where Book.id=?';
@@ -151,7 +148,7 @@ class book
       } else {
          $sql1 = "SELECT available FROM Book WHERE Book.id='" . $bid . "'";
          $stmt1 = $this->pdo->query($sql1);
-         $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+         $row1 = $stmt1->fetch();
          if ((int)$row1["available"] > 0) {
             $q = ((int)$row1["available"]) - 1;
             $sql = 'UPDATE Book SET available=? where Book.id=?';
@@ -176,9 +173,9 @@ class book
          $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
       }
       echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
-      while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row2 = $stmt2->fetch()) {
          $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="' . $row2["bid"] . '"');
-         while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+         while ($row1 = $stmt1->fetch()) {
             echo '<tr>';
             echo '<td>' . $row1["title"] . '</td>';
             echo '<td>' . $row2["issued_on"] . '</td>';
@@ -195,11 +192,11 @@ class book
    public function issue_check($uno)
    {
       $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $uno . '"');
-      while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+      while ($row2 = $stmt2->fetch()) {
          if ((date("d") - (int)substr($row2["issued_on"], 8)) > 7) {
             $sql1 = 'SELECT available FROM Book WHERE Book.id="' . $row2["bid"] . '"';
             $stmt1 = $this->pdo->query($sql1);
-            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+            $row1 = $stmt1->fetch();
             $q = ((int)$row1["available"]) + 1;
             $sql = 'UPDATE Book SET available=? where Book.id=?';
             $stmt = $this->pdo->prepare($sql);

@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\book;

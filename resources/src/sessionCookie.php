@@ -48,17 +48,15 @@ class SessionCookie
     }
     public function adminCheck()
     {
-            if ($_SESSION["admin"] == "user") {
-                $this->redirect->phploc("userdash.php");
-            }
+        if ($_SESSION["admin"] == "user") {
+            $this->redirect->phploc("userdash.php");
         }
-    public function usercheck()
+    }
+    public function userCheck()
     {
-        if ($_SESSION["admin"] == "admin")
-        {
+        if ($_SESSION["admin"] == "admin") {
             $this->redirect->phploc("admindash.php");
         }
-        
     }
     public function headAccess()
     {
@@ -84,13 +82,10 @@ class SessionCookie
             include 'homepage.php';
         }
     }
-    public function login_check()
+    public function loginCheck()
     {
-        if (isset($_SESSION["logged_in"]))
-        {
+        if (isset($_SESSION["logged_in"])) {
             $this->redirect->phploc('admindash.php');
         }
-
     }
-
 }
