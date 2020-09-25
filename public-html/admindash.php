@@ -1,19 +1,12 @@
 <?php
-session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\ProjectConfig;
+use src\SessionCookie;
 
+$session = new SessionCookie;
 $conf = new ProjectConfig();
-
-if (isset($_SESSION["logged_in"])) 
-{
-    if ($_SESSION["admin"] == "user")
-     {
-        header("LOCATION: userdash.php");
-    }
- else 
- {
+$session->admincheck();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -89,7 +82,3 @@ if (isset($_SESSION["logged_in"]))
 </body>
 
 </html>
-    <?php 
-    }
-}
-?>

@@ -1,14 +1,9 @@
 <?php
-session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\user;
 use src\book;
 use src\SessionCookie;
-
-//$session = new SessionCookie;
-//$session->headAccess();
-
 ?>
 <html>
 
@@ -51,6 +46,7 @@ use src\SessionCookie;
 			if (isset($_POST["login_btn"])) {
 				ini_set("display_errors", 1);
 				error_reporting(E_ALL);
+				$session = new SessionCookie;
 				$k = new user();
 				$row = $k->login($_POST['email'], $_POST['upass']);
 				if ($row === false) {
@@ -68,11 +64,7 @@ use src\SessionCookie;
 					if (!empty($_POST['remember'])) {
 						setcookie("email", $_POST['email'], time() + (10 * 365 * 24 * 60 * 60));
 					}
-					if ($_SESSION["admin"] == "admin") {
-						header("LOCATION: admindash.php");
-					} else {
-						header("LOCATION: userdash.php");
-					}
+					$session->headAccess();
 				}
 			}
 			?>

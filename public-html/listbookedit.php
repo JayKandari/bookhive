@@ -1,3 +1,13 @@
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
+use src\ProjectConfig;
+use src\SessionCookie;
+
+$session = new SessionCookie;
+$conf = new ProjectConfig();
+$session->admincheck();
+?>
 <!DOCTYPE html>
 <html>
 <title>Edit Book</title>

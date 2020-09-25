@@ -22,7 +22,7 @@ class SessionCookie
         if (isset($_SESSION['uid'])) {
             $this->dbConn = new Connection;
             $row = $this->dbConn->exeQuery('select type from user where uname = ?', $_SESSION['uid']);
-            if ($row[0]['type'] == 'admin') $_SESSION['admin'] = $_SESSION['uid'];
+            if ($row[0]['type'] == 'admin') $_SESSION['admin'] = "admin";
         }
     }
     public function rememberMe()
@@ -48,15 +48,31 @@ class SessionCookie
     }
     public function adminCheck()
     {
-        if (!isset($_SESSION["logged_in"])) {
-            $this->redirect->phploc("index.php");
-        } else {
             if ($_SESSION["admin"] == "user") {
                 $this->redirect->phploc("userdash.php");
             }
         }
+    public function usercheck()
+    {
+        if ($_SESSION["admin"] == "admin")
+        {
+            $this->redirect->phploc("admindash.php");
+        }
+        
     }
     public function headAccess()
+    {
+        if (isset($_SESSION["logged_in"])) {
+            if ($_SESSION["admin"] == "admin") {
+                $this->redirect->phploc('admindash.php');
+            } else {
+                $this->redirect->phploc('userdash.php');
+            }
+        } else {
+            $this->redirect->phploc('index.php');
+        }
+    }
+    public function includeAccess()
     {
         if (isset($_SESSION["logged_in"])) {
             if ($_SESSION["admin"] == "admin") {
@@ -65,7 +81,16 @@ class SessionCookie
                 include 'userdash.php';
             }
         } else {
-            include 'index.php';
+            include 'homepage.php';
         }
     }
+    public function login_check()
+    {
+        if (isset($_SESSION["logged_in"]))
+        {
+            $this->redirect->phploc('admindash.php');
+        }
+
+    }
+
 }

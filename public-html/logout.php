@@ -7,4 +7,4 @@ use src\Redirect;
 $session = new SessionCookie;
 $redirect = new Redirect;
 $session->sessionClear();
-$redirect->phploc("homepage.php");
+$redirect->phploc("index.php");

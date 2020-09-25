@@ -9,16 +9,8 @@ $conf = new ProjectConfig();
 use src\book;
 use src\SessionCookie;
 
-//$session = new SessionCookie;
-//$session->headAccess();
-
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "admin") {
-        header("LOCATION: admindash.php");
-    }
-} else {
-    header("LOCATION: index.php");
-}
+$session = new SessionCookie;
+$session->usercheck();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
