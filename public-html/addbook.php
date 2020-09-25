@@ -2,12 +2,11 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use db\book;
+use Session\SessionCookie;
 
-if (isset($_SESSION["logged_in"])) {
-	if ($_SESSION["admin"] == "user") {
-		header("LOCATION: userdash.php");
-	}
-}
+$session = new SessionCookie;
+$session->adminCheck();
+
 ?>
 <html>
 

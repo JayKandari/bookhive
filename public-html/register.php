@@ -3,14 +3,11 @@ session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use db\user;
+use Session\SessionCookie;
 
-if (isset($_SESSION["logged_in"])) {
-	if ($_SESSION["admin"] == "admin") {
-		header("LOCATION: admindash.php");
-	} else {
-		header("LOCATION: userdash.php");
-	}
-}
+$session = new SessionCookie;
+$session->headAccess();
+
 ?>
 <html>
 
