@@ -10,7 +10,19 @@ use db\book;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 </head>
-<?php include 'homepage.php'; ?>
+<?php 
+if (isset($_SESSION["logged_in"])) {
+    if ($_SESSION["admin"] == "admin") {
+        include 'admindash.php';
+    }
+    else{
+        include 'userdash.php';
+    }
+}
+else{
+    include 'homepage.php'; 
+} 
+?>
 
 <body>
     <?php
