@@ -25,7 +25,7 @@
     error_reporting(E_ALL);
     require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-    use db\book;
+    use src\book;
 
     $k = new book;
     $k->edit();

@@ -1,7 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use Session\SessionCookie;
+use src\SessionCookie;
 
 $session = new SessionCookie;
 $session->adminCheck();

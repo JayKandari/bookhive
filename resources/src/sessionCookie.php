@@ -1,11 +1,11 @@
 <?php
 
-namespace Session;
+namespace src;
 
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use Redirect\Redirect;
-use PDO_CONN\Connection;
+use src\Redirect;
+use src\Connection;
 
 class SessionCookie
 {
@@ -60,10 +60,12 @@ class SessionCookie
     {
         if (isset($_SESSION["logged_in"])) {
             if ($_SESSION["admin"] == "admin") {
-                $this->redirect->phploc("admindash.php");
+                include 'admindash.php';
             } else {
-                $this->redirect->phploc("userdash.php");
+                include 'userdash.php';
             }
+        } else {
+            include 'homepage.php';
         }
     }
 }

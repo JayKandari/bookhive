@@ -2,8 +2,8 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\user;
-use Session\SessionCookie;
+use src\user;
+use src\SessionCookie;
 
 $session = new SessionCookie;
 $session->headAccess();

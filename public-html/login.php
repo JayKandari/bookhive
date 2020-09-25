@@ -2,9 +2,9 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-use db\user as user;
-use db\book as book;
-use Session\SessionCookie;
+use src\user;
+use src\book;
+use src\SessionCookie;
 
 $session = new SessionCookie;
 $session->headAccess();

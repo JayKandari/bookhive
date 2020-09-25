@@ -1,6 +1,6 @@
 <?php
 
-namespace Redirect;
+namespace src;
 
 class Redirect
 {

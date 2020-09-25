@@ -1,11 +1,11 @@
 <?php
 
-namespace PDO_CONN;
+namespace src;
 
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use PDO;
-use Config\ProjectConfig;
+use src\ProjectConfig;
 
 class Connection
 {

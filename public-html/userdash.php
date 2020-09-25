@@ -1,11 +1,13 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
-use Config\ProjectConfig;
+
+use src\ProjectConfig;
+
 $conf = new ProjectConfig();
 
-use db\book;
-use Session\SessionCookie;
+use src\book;
+use src\SessionCookie;
 
 $session = new SessionCookie;
 $session->headAccess();
@@ -14,8 +16,7 @@ if (isset($_SESSION["logged_in"])) {
     if ($_SESSION["admin"] == "admin") {
         header("LOCATION: admindash.php");
     }
-}
-else{
+} else {
     header("LOCATION: index.php");
 }
 ?>
@@ -61,15 +62,17 @@ else{
     <!--sidebar start-->
     <div class="sidebar">
         <div class="profile_info">
-        <?php echo "<img src='".$conf->config['paths']['images']."/OIP.jpg' class='profile_image' alt=''>"; ?>
-            
-           <a href="userdash.php"> <h4><?php echo $_SESSION["uname"]?></h4></a>
+            <?php echo "<img src='" . $conf->config['paths']['images'] . "/OIP.jpg' class='profile_image' alt=''>"; ?>
+
+            <a href="userdash.php">
+                <h4><?php echo $_SESSION["uname"] ?></h4>
+            </a>
         </div>
         <a href="index.php"><i class="fas fa-home"></i><span>Home</span></a>
         <a href="#"><i class="fas fa-search"></i><span>Search Books</span></a>
         <a href="displaynew.php"><i class="fas fa-book-reader"></i><span>New Colection</span></a>
         <a href="aboutus.php"><i class="fas fa-info-circle"></i><span>About</span></a>
-        <a href="contactus.php"><i class="fas fa-phone-alt"></i><span>Contact</span></a>  
+        <a href="contactus.php"><i class="fas fa-phone-alt"></i><span>Contact</span></a>
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>Sign Out</span></a>
     </div>
     <!--sidebar end-->
