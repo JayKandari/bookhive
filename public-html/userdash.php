@@ -10,7 +10,7 @@ use src\book;
 use src\SessionCookie;
 
 $session = new SessionCookie;
-$session->usercheck();
+$session->userCheck();
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
