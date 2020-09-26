@@ -4,16 +4,25 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use src\user;
 use src\book;
 use src\SessionCookie;
+use template\Menu;
+
+
+$session = new SessionCookie;
+
+$menu = new Menu(basename(__FILE__));
 ?>
 <html>
 
 <head>
 	<title>login</title>
-	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
 
 <body>
-	<?php include 'homepage.php'; ?>
+	<?php $menu->render_header();
+	$menu->render_menu(); ?>
 
 	<div class="container">
 		<div class="header">
@@ -71,5 +80,7 @@ use src\SessionCookie;
 		</div>
 	</div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+<script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
 
 </html>

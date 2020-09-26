@@ -4,21 +4,28 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\user;
 use src\SessionCookie;
+use template\Menu;
 
-$session = new SessionCookie;
-$session->loginCheck();
+$session = new SessionCookie();
+$session->login_check();
+
+$menu = new Menu(basename(__FILE__));
 
 ?>
 <html>
 
 <head>
 	<title>Register</title>
-	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="../asset/css/login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
-<?php include 'homepage.php'; ?>
 
 <body>
+	<?php
+	$menu->render_header();
+	$menu->render_menu();
+	?>
 	<div class="container">
 		<div class="header">
 			<h1>Register Here</h1>
@@ -29,6 +36,7 @@ $session->loginCheck();
 					<i class="fa fa-user"></i>
 					<input type="text" placeholder="Username" name="rname" required>
 				</span><br>
+				<span>
 				<i class="fa fa-at"></i>
 				<input type="email" placeholder="Email Address" name="remail" required>
 				</span><br>
@@ -47,6 +55,9 @@ $session->loginCheck();
 			?>
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+	<script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
+
 </body>
 
 </html>
