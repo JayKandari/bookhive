@@ -7,9 +7,9 @@ use src\book;
 
 use src\ProjectConfig;
 use src\SessionCookie;
-
+use template\Menu;
 $session = new SessionCookie;
-$session->includeAccess();
+
 
 $config = new ProjectConfig();
 
@@ -17,12 +17,26 @@ $config = new ProjectConfig();
 <html>
 <title>Index Page</title>
 
+<?php
+
+
+if (isset($_SESSION["logged_in"])) {
+    $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
+} else {
+    $menu = new Menu(basename(__FILE__));
+}
+?>
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
+
 
 <body>
     <?php
+    $menu->render_header();
+    $menu->render_menu();
     $k = new book;
     $row = $k->disp_book("no");
     $c = count($row);
@@ -46,9 +60,11 @@ $config = new ProjectConfig();
     }
     if (isset($_POST["issue"])) {
         $k->issue($_POST["bid"], $_SESSION["uno"]);
-    }
+        }
 
     ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
 
 </body>
 

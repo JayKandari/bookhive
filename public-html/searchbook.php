@@ -1,30 +1,35 @@
 <html>
 <title>Search book</title>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
-</head>
 <?php
-// Include header and sidebar
-
-if (isset($_SESSION["logged_in"])) {
-    if ($_SESSION["admin"] == "admin") {
-        include 'admindash.php';
-    } else {
-        include 'userdash.php';
-    }
-} else {
-    include 'homepage.php';
-}
 
 // Load resource files
 require_once($_SERVER["DOCUMENT_ROOT"] . "/../vendor/autoload.php");
 
+use src\SessionCookie;
+use template\Menu;
 use src\Connection;
+
+$session = new SessionCookie;
+
+if (isset($_SESSION["logged_in"])) {
+    $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
+} else {
+    $menu = new Menu(basename(__FILE__));
+}
 ?>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+
+
 <body>
+    <?php
+    $menu->render_header();
+    $menu->render_menu();
+    ?>
     <div class="container search-div">
         <form action="searchbook.php" method="post">
 
@@ -33,7 +38,8 @@ use src\Connection;
                 echo "Title:<input type='text' name='search_query' value='" . $_POST['search_query'] . "' ><br>Filter by:<br>";
                 echo "Author:<input type='text' name='author' value='" . $_POST['author'] . "'><br>";
                 echo "Category:<input type='text' name='category' value='" . $_POST['category'] . "'>";
-            } else {
+            }
+            else {
 
             ?>
                 Title:<input type='text' name='search_query' placeholder='Enter title of the book'>
@@ -101,6 +107,9 @@ use src\Connection;
         }
     }
     ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
+
 </body>
 
 </html>

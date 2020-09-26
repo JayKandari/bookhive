@@ -6,7 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\Redirect;
 use src\Connection;
-
+use template\Menu;
 class SessionCookie
 {
     public $redirect;
@@ -70,19 +70,8 @@ class SessionCookie
             $this->redirect->phploc('index.php');
         }
     }
-    public function includeAccess()
-    {
-        if (isset($_SESSION["logged_in"])) {
-            if ($_SESSION["admin"] == "admin") {
-                include 'admindash.php';
-            } else {
-                include 'userdash.php';
-            }
-        } else {
-            include 'homepage.php';
-        }
-    }
-    public function loginCheck()
+    
+    public function login_check()
     {
         if (isset($_SESSION["logged_in"])) {
             $this->redirect->phploc('admindash.php');
