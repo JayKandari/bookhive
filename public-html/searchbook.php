@@ -30,7 +30,13 @@ if (isset($_SESSION["logged_in"])) {
     $menu->render_header();
     $menu->render_menu();
     ?>
-    <div class="container search-div">
+    <div class="container">
+		<div class="main">
+        <div class="header">
+			<h3>Filter by:</h3>
+		</div>
+
+    <!-- <div class="container search-div"> -->
         <form action="searchbook.php" method="post">
 
             <?php
@@ -42,18 +48,17 @@ if (isset($_SESSION["logged_in"])) {
             else {
 
             ?>
-                Title:<input type='text' name='search_query' placeholder='Enter title of the book'>
-                <br>
-                <br>
-                Filter by
-                <br>
-                Author:<input type='text' name='author' placeholder='Author Name'><br>
+                Title:<input type='text' name='search_query' placeholder='Enter title of the book'>          
+                Author:<input type='text' name='author' placeholder='Author Name'>
                 Category:<input type='text' name='category' placeholder='Category/Genre'>
             <?php } ?>
             <input type="submit" value="Search" name="submit_search">
 
         </form>
     </div>
+    </div>
+    <!-- </div> -->
+
     <?php
 
 

@@ -9,30 +9,21 @@ use src\ProjectConfig;
 use src\SessionCookie;
 use template\Menu;
 $session = new SessionCookie;
-
-
 $config = new ProjectConfig();
-
 ?>
 <html>
 <title>Index Page</title>
-
 <?php
-
-
 if (isset($_SESSION["logged_in"])) {
     $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
 } else {
     $menu = new Menu(basename(__FILE__));
 }
 ?>
-
 <head>
     <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
-
-
 <body>
     <?php
     $menu->render_header();
@@ -40,13 +31,15 @@ if (isset($_SESSION["logged_in"])) {
     $k = new book;
     $row = $k->disp_book("no");
     $c = count($row);
+    echo '<div class="row">';
     for ($x = 0; $x < $c; $x++) {
+        //echo '<div class="column">';
         echo '<div class="card">';
-        echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
         echo '<div class="container">';
-        echo '<h4><b>' . $row[$x]["title"] . '</b></h4>';
-        echo '<h4><b>' . $row[$x]["author"] . '</b></h4>';
-        echo '<h4><b>' . $row[$x]["category"] . '</b></h4>';
+        echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
+        echo '<p>Title:' . $row[$x]["title"] . '</p>';
+        echo '<p>Author:' . $row[$x]["author"] . '</p>';
+        echo '<p>Category:' . $row[$x]["category"] . '</p>';
         if (isset($_SESSION["logged_in"])) {
             echo '<form method="post">';
             echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';
@@ -57,7 +50,10 @@ if (isset($_SESSION["logged_in"])) {
         }
         echo '</div>';
         echo '</div>';
+        // echo '</div>';
+
     }
+    echo '</div>';
     if (isset($_POST["issue"])) {
         $k->issue($_POST["bid"], $_SESSION["uno"]);
         }

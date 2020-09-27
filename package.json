@@ -1,0 +1,23 @@
+{
+  "name": "bookhive",
+  "version": "1.0.0",
+  "description": "PHP application to demonstrate OOP concepts.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pragzii3896/bookhive.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pragzii3896/bookhive/issues"
+  },
+  "homepage": "https://github.com/pragzii3896/bookhive#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0"
+  }
+}

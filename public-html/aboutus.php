@@ -23,42 +23,43 @@ $session = new SessionCookie;
     <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
 
 </head>
-
-
 <body>
     <?php
     $menu->render_header();
     $menu->render_menu();
     ?>
+    <div class="row">
+  <div class="column">
     <div class="card">
-        <img src="../asset/images/aastha.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Aastha Shrivastava</b></h4>
-            <p>Drupal Frontend Intern</p>
-        </div>
+    <img src="../asset/images/aastha.jpg" alt="Avatar" style="width:100%">
+      <h3>Aastha Shrivastava</h3>
+      <p>Drupal Frontend Intern</p>
     </div>
+  </div>
+  <div class="column">
     <div class="card">
-        <img src="../asset/images/pragati.jpeg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Pragati Kanade</b></h4>
-            <p>Drupal Frontend Intern</p>
-        </div>
+    <img src="../asset/images/pragati.jpeg" alt="Avatar" style="width:100%">
+      <h3>Pragati Kanade</h3>
+      <p>Drupal Frontend Intern</p>
     </div>
-
+  </div>
+  
+  <div class="column">
     <div class="card">
-        <img src="../asset/images/a.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Anjali Rathod</b></h4>
-            <p>Drupal Frontend Intern</p>
-        </div>
+    <img src="../asset/images/a.jpg" alt="Avatar" style="width:100%">
+      <h3>Anjali Rathod</h3>
+      <p>Drupal Frontend Intern</p>
     </div>
+  </div>
+  
+  <div class="column">
     <div class="card">
-        <img src="../asset/images/alphonse.jpg" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>Alphons Jaimon</b></h4>
-            <p>Drupal Frontend Intern</p>
-        </div>
+    <img src="../asset/images/alphonse.jpg" alt="Avatar" style="width:100%">
+      <h3>Alphons Jaimon<</h3>
+      <p>Drupal Frontend Intern</p>
     </div>
+  </div>
+</div>
 
     <!-- Include scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
