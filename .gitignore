@@ -3,3 +3,10 @@ test.php
 composer.phar
 /vendor/
 dbcreds.json
+node_modules
+**/.sass-cache
+**/.sass-cache/*
+.sass-cache/
+*.css.map   
+*.sass.map  
+ *.scss.map

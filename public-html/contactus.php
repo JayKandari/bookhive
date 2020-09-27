@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
 use src\SessionCookie;
 
 $session = new SessionCookie;
@@ -31,13 +32,18 @@ $session = new SessionCookie;
     $menu->render_menu();
     ?>
 
-    <div class="card">
-        <img src="../asset/images/qed42.png" alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4><b>QED42</b></h4>
-            <i class="fas fa-map-pin"></i> Nyati Tech Park, 203, 2nd Floor, "B" Wing, Kalyani Nagar - Wadgaon Sheri Rd, Pune, 411014
-            <p>Website:<a href="https://www.qed42.com/" target="_blank">www.qed42.com</a></p>
-            <p><i class="fas fa-at"></i>:<a href="https://www.qed42.com/" target="_blank">careers@qed42.com</a><br></p>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="../asset/images/qed42.png" alt="Avatar" style="width:100%">
+
+                <h3>QED42</h3>
+                <p><i class="fas fa-map-pin"></i> Nyati Tech Park, 203, 2nd Floor, </br>"B" Wing, Kalyani Nagar - Wadgaon Sheri Rd, Pune, 411014
+                </p>
+                <p>Website:<a href="https://www.qed42.com/" target="_blank">www.qed42.com</a></p>
+                <p><i class="fas fa-at"></i>:<a href="https://www.qed42.com/" target="_blank">careers@qed42.com</a><br></p>
+
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
