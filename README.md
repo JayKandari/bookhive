@@ -7,10 +7,11 @@ PHP application to demonstrate OOP concepts.
 - Order a book
 ## Structure of repository
 * asset
-  - css: all the `CSS`/`SASS` files
+  - css: all the `CSS`/`SASS` files generated from gulp-scss
   - js: all the `javascript` files
   - images: all the image files (`jpg`,`png`,`gif` etc)
-* public-html: all the publicly visible files like `index.html` etc.
+  - scss: all the `scss` code
+* public-html: all the publicly visible files like `index.php` etc.
 * resources
   - src: all the php files which contains `class definitions`.
   - template: all the template files for layout e.g `header`, `sidebar` etc.
@@ -51,9 +52,17 @@ Place a file named `dbcred.json` in the resources directory, with the following 
 }
 ```
 
-## SCSS to CSS
-whenever you want to change the CSS of Homepage.php you need to do changes in "style.scss" then compile this .scss file into style.css, as we 
-are adding style.css file in php.
+## Use [Gulp](https://gulpjs.com/) and [SCSS](https://sass-lang.com/) to work with css
+### 1. prerequisites
+Follow this [getting started with gulp guide](https://gulpjs.com/docs/en/getting-started/quick-start) to install gulp and understand what it is all about!
+
+### 2. Run Gulp task
+Start the gulp sass 
+```bash
+$ npm install
+$ gulp sass
+```
+
 ## TODO:
 ### Web Pages
 - [X] Home
