@@ -17,8 +17,8 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./public-html/asset/css'));
 });
  
-gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
+gulp.task('watch', function () {
+  gulp.watch('./public-html/asset/scss/**/*.scss', ['sass']);
 });
 
 
