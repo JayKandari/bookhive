@@ -6,6 +6,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\ProjectConfig;
 use src\Connection;
+use src\SessionCookie;
+
 use PDO;
 
 class book
@@ -13,11 +15,13 @@ class book
    public $pdo;
    public $ob;
    public $conn;
+   public $session;
    public function __construct()
    {
       $this->conn = new Connection;
       $this->pdo = $this->conn->connObj;
       $this->ob = new ProjectConfig;
+      $this->session = new SessionCookie;
    }
    public function disp_book($recent)
    {
@@ -43,7 +47,7 @@ class book
             $row = $row + 1;
          }
       } else {
-         echo "Sorry ! No books found!";
+         // echo "Sorry ! No books found!";
       }
       return $op;
    }
@@ -82,14 +86,25 @@ class book
    }
    public function add()
    {
+
       echo '<div class="container">
             <div class="header">
                <h1>Add Book</h1>
             </div>
             <div class="main">
                <form action="" method="POST" enctype="multipart/form-data">
-                  <span>
-                        <input type="text" placeholder="Book Name" name="title" required>
+                  <span>';
+
+      if (isset($_SESSION["error"])) {
+         echo ('<p id="e">' . $_SESSION["error"] . "</p>\n");
+         unset($_SESSION["error"]);
+      }
+      if (isset($_SESSION["success"])) {
+         echo ('<p id="g">' . $_SESSION["success"] . "</p>\n");
+         unset($_SESSION["success"]);
+      }
+
+      echo '<input type="text" placeholder="Book Name" name="title" required>
                   </span><br>
                   <span>
                         <input type="text" placeholder="Book Department" name="category" required>
@@ -101,7 +116,7 @@ class book
                         <input type="date" placeholder="Book Year" name="added_on" required>
                   </span><br>
                   <span>
-                        <input type="text" placeholder="Book Quantity" name="qty" required>
+                        <input type="number" placeholder="Book Quantity" name="qty" required>
                   </span><br>
                   <span>
                         <input type="file" placeholder="Book Coverphoto" name="bcover" required>
@@ -112,12 +127,17 @@ class book
             </div>
           </div>';
       if (isset($_POST["submit"])) {
-         $filepath = $_SERVER['DOCUMENT_ROOT'].$this->ob->config["paths"]["images"] . "/" . basename($_FILES['bcover']['name']);
+         $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->ob->config["paths"]["images"] . "/" . basename($_FILES['bcover']['name']);
          $valArr = [$_POST["title"], $_POST["author"], $_POST["category"], $_POST["added_on"], $_POST["qty"], $_POST["qty"], $_FILES['bcover']['name']];
          $this->conn->exeQuery("insert into Book (title, author, category, added_on, qty, available, ipath) values (?,?,?,?,?,?,?)", $valArr);
+
          if (move_uploaded_file($_FILES['bcover']['tmp_name'],  $filepath)) {
-               echo "<p>New book added successfully.!<p>";
-            } else echo "<p>Error!<p>";
+            $_SESSION["success"] = "New book added successfully.!";
+            header("LOCATION: addbook.php");
+         } else {
+            $_SESSION["error"] = "New book not added successfully.!";
+            header("LOCATION: addbook.php");
+         }
       }
    }
    public function issue($bid, $id)

@@ -33,17 +33,21 @@ if (isset($_SESSION["logged_in"])) {
     <div class="container">
 		<div class="main">
         <div class="header">
-			<h3>Filter by:</h3>
 		</div>
 
     <!-- <div class="container search-div"> -->
         <form action="searchbook.php" method="post">
+        
+            <?php 
 
-            <?php
+            if (isset($_SESSION["searchmsg"])) {
+                echo ('<p id="e">' . $_SESSION["searchmsg"] . "</p>\n");
+                unset($_SESSION["searchmsg"]);
+             }
             if (isset($_POST["submit_search"])) {
-                echo "Title:<input type='text' name='search_query' value='" . $_POST['search_query'] . "' ><br>Filter by:<br>";
-                echo "Author:<input type='text' name='author' value='" . $_POST['author'] . "'><br>";
-                echo "Category:<input type='text' name='category' value='" . $_POST['category'] . "'>";
+                echo "Title:<input type='text' placeholder='Enter title of the book' name='search_query' value='" . $_POST['search_query'] . "' ><br>";
+                echo "Author:<input type='text' placeholder='Author Name' name='author' value='" . $_POST['author'] . "'><br>";
+                echo "Category:<input type='text' placeholder='Category/Genre' name='category' value='" . $_POST['category'] . "'>";
             }
             else {
 
@@ -109,6 +113,11 @@ if (isset($_SESSION["logged_in"])) {
             </table>
     <?php
 
+        }
+        else{
+            $_SESSION["searchmsg"] = "Sorry ! No books found!!";
+            header("LOCATION: searchbook.php");
+            
         }
     }
     ?>

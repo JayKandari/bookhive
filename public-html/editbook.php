@@ -42,7 +42,7 @@ $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
                     <input type="text" placeholder="Book Year" name="ebyear">
                 </span><br>
                 <span>
-                    <input type="text" placeholder="Book Quantity" name="ebquantity">
+                    <input type="number" placeholder="Book Quantity" name="ebquantity">
                 </span><br>
                 <span>
                     <input type="file" placeholder="Book Coverphoto" name="ebcover">
