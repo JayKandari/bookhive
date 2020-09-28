@@ -1,6 +1,5 @@
 <?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
+
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\book;
@@ -21,6 +20,7 @@ if (isset($_SESSION["logged_in"])) {
 }
 ?>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
     <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 </head>
@@ -36,7 +36,7 @@ if (isset($_SESSION["logged_in"])) {
         //echo '<div class="column">';
         echo '<div class="card">';
         echo '<div class="container">';
-        echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
+        echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" class="book-img" alt="Avatar" >';
         echo '<p>Title:' . $row[$x]["title"] . '</p>';
         echo '<p>Author:' . $row[$x]["author"] . '</p>';
         echo '<p>Category:' . $row[$x]["category"] . '</p>';
@@ -50,7 +50,6 @@ if (isset($_SESSION["logged_in"])) {
         }
         echo '</div>';
         echo '</div>';
-        // echo '</div>';
 
     }
     echo '</div>';

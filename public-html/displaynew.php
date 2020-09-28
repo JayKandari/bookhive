@@ -34,20 +34,24 @@ if (isset($_SESSION["logged_in"])) {
     <?php
     $menu->render_header();
     $menu->render_menu();
+    echo "<div class='header'>
+        <h1>New Arrivals</h1>
+        </div>";
     $k = new book;
     $row = $k->disp_book("yes");
     $c = count($row);
+    echo "<div class='row'>";
     for ($x = 0; $x < $c; $x++) {
         echo '<div class="card">';
-        echo '<img src="' . $menu->paths["images"] . "/" . $row[$x]["path"] . '" alt="Avatar" style="width:100%">';
         echo '<div class="container">';
+        echo '<img src="' . $menu->paths["images"] . "/" . $row[$x]["path"] . '" class="book-img" alt="Avatar" >';
         echo '<h4><b>' . $row[$x]["title"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["author"] . '</b></h4>';
         echo '<h4><b>' . $row[$x]["category"] . '</b></h4>';
         if (isset($_SESSION["logged_in"])) {
             echo '<form method="post">';
             echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';
-            echo '<button name="issue">ISSUE BOOK </button>';
+            echo '<button nam"Roboto", sans-serife="issue">ISSUE BOOK </button>';
             echo '</form>';
         } else {
             echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
@@ -55,6 +59,7 @@ if (isset($_SESSION["logged_in"])) {
         echo '</div>';
         echo '</div>';
     }
+    echo "</div>";
     if (isset($_POST["issue"])) {
         $k->issue($_POST["bid"], $_SESSION["uno"]);
     }
