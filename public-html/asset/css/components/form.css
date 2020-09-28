@@ -14,7 +14,8 @@
 .main {
   text-align: center; }
 
-.main input, button {
+.main input,
+button {
   width: 300px;
   height: 40px;
   border: none;

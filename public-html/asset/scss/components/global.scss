@@ -1,4 +1,4 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 body {
   margin: 0;
   padding: 0;
@@ -7,14 +7,14 @@ body {
 header {
   z-index: 1;
   position: fixed;
-  background:$black;
+  background: $black;
   padding: 20px;
   width: calc(100% - 0%);
   top: 0;
   height: 30px;
 }
 .left_area h3 {
-  color:$white;
+  color: $white;
   margin: 0;
   text-transform: uppercase;
   font-size: 22px;
@@ -26,7 +26,7 @@ header {
 .sidebar {
   z-index: 1;
   top: 0;
-  background:$black;
+  background: $black;
   margin-top: 70px;
   padding-top: 30px;
   position: fixed;
@@ -50,12 +50,12 @@ header {
   margin-bottom: 10px;
 }
 .sidebar .profile_info h4 {
-  color:$white;
+  color: $white;
   margin-top: 0;
   margin-bottom: 20px;
 }
 .sidebar a {
-  color:$white;
+  color: $white;
   display: block;
   width: 100%;
   line-height: 60px;
@@ -65,7 +65,8 @@ header {
   transition: 0.5s;
   transition-property: $cyanblue;
 }
-.sidebar a:hover , a:checked{
+.sidebar a:hover,
+a:checked {
   background: $cyanblue;
 }
 .sidebar i {
@@ -73,7 +74,7 @@ header {
 }
 label #sidebar_btn {
   z-index: 1;
-  color:$white;
+  color: $white;
   position: fixed;
   cursor: pointer;
   left: 300px;
@@ -95,6 +96,8 @@ label #sidebar_btn:hover {
   font-size: 20px;
   margin-left: 165px;
   width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 #check:checked ~ .sidebar .profile_info {
   display: none;
@@ -106,7 +109,7 @@ label #sidebar_btn:hover {
   display: none;
 }
 .content .card p {
-  background:$white;
+  background: $white;
   padding: 15px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -117,6 +120,9 @@ label #sidebar_btn:hover {
   max-height: $book-img-height;
   object-fit: cover;
   object-position: top;
+}
+a.active-menu {
+  background-color: $bluelight;
 }
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
@@ -139,8 +145,11 @@ label #sidebar_btn:hover {
     display: block;
     width: calc(100% - 0px);
   }
+  .mobile_nav_items a.active-menu {
+    color: $gold;
+  }
   .nav_bar {
-    background:$black;
+    background: $black;
     width: calc(100% - 0px);
     margin-top: 70px;
     display: flex;
@@ -154,7 +163,7 @@ label #sidebar_btn:hover {
     border-radius: 50%;
   }
   .nav_bar .nav_btn {
-    color:$white;
+    color: $white;
     font-size: 22px;
     cursor: pointer;
     transition: 0.5s;
@@ -164,11 +173,11 @@ label #sidebar_btn:hover {
     color: $cyanblue;
   }
   .mobile_nav_items {
-    background:$black;
+    background: $black;
     display: none;
   }
   .mobile_nav_items a {
-    color:$white;
+    color: $white;
     display: block;
     text-align: center;
     letter-spacing: 1px;

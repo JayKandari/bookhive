@@ -1,46 +1,51 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 table {
-    border-collapse: collapse;
-    width: 70%;
-    margin-left: 20%;
-    line-height: 1.5cm;
-    margin-top: 5%;
-  }
-    th, td {
-    text-align: left;
-    padding: 8px;
-  }
-    tr:nth-child(even){background-color:$white}
-  
-  th {
-    background-color:$green;
-    color:$white;
-  }
-  tr:hover {background-color:$white;}
-  .iconbtnedit {
-    background-color:$doggerblue; 
-    border: none; 
-    color: $white; 
-    padding: 12px 16px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    height: 50px;
-    width: 50px;
-  }
-  .iconbtndelete {
-    background-color:$red; 
-        border: none; 
-    color: $white; 
-    padding: 12px 16px; 
-    font-size: 16px;
-    cursor: pointer; 
-    height: 50px;
-    width: 50px;
-  }
-  /* Darker background on mouse-over */
-  .iconbtnedit:hover {
-    background-color:$blue;
-  }
-  .iconbtndelete:hover {
-    background-color:$red;
-  }
+  border-collapse: collapse;
+  width: 70%;
+  margin-left: 20%;
+  line-height: 1.5cm;
+  margin-top: 5%;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: $white;
+}
+
+th {
+  background-color: $green;
+  color: $white;
+}
+tr:hover {
+  background-color: $white;
+}
+.iconbtnedit {
+  background-color: $doggerblue;
+  border: none;
+  color: $white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+.iconbtndelete {
+  background-color: $red;
+  border: none;
+  color: $white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+/* Darker background on mouse-over */
+.iconbtnedit:hover {
+  background-color: $blue;
+}
+.iconbtndelete:hover {
+  background-color: $red;
+}

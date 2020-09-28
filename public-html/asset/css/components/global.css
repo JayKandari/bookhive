@@ -64,7 +64,8 @@ header {
   transition: 0.5s;
   transition-property: #19b3d3; }
 
-.sidebar a:hover, a:checked {
+.sidebar a:hover,
+a:checked {
   background: #19b3d3; }
 
 .sidebar i {
@@ -93,7 +94,9 @@ label #sidebar_btn:hover {
 #check:checked ~ .sidebar a {
   font-size: 20px;
   margin-left: 165px;
-  width: 100%; }
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 #check:checked ~ .sidebar .profile_info {
   display: none; }
@@ -111,6 +114,15 @@ label #sidebar_btn:hover {
   font-size: 14px;
   opacity: 0.8; }
 
+.book-img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  object-position: top; }
+
+a.active-menu {
+  background-color: #0087ff; }
+
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
   .sidebar {
@@ -127,6 +139,8 @@ label #sidebar_btn:hover {
   .mobile_nav {
     display: block;
     width: calc(100% - 0px); }
+  .mobile_nav_items a.active-menu {
+    color: #f2c14e; }
   .nav_bar {
     background: #22242a;
     width: calc(100% - 0px);
