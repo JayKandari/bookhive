@@ -37,15 +37,16 @@ $menu = new Menu(basename(__FILE__));
 					<input type="text" placeholder="Username" name="rname" required>
 				</span><br>
 				<span>
-				<i class="fa fa-at"></i>
-				<input type="email" placeholder="Email Address" name="remail" required>
+					<i class="fa fa-at"></i>
+					<input type="email" placeholder="Email Address" name="remail" required>
 				</span><br>
 				<span>
 					<i class="fa fa-lock"></i>
-					<input type="password" placeholder="password" name="rpass" required>
+					<input type="password" placeholder="password" name="rpass" 
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
 				</span><br>
+				<span style="color: red;">Your password must contain(uppercase,lowercase,number,8 characters)</span><br><br>
 				<button name="sign_up">Register</button>
-
 			</form>
 			<?php
 			if (isset($_POST["sign_up"])) {
@@ -59,5 +60,4 @@ $menu = new Menu(basename(__FILE__));
 	<script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
 
 </body>
-
 </html>
