@@ -8,7 +8,7 @@ use template\Menu;
 
 
 $session = new SessionCookie;
-
+$session->login_check();
 $menu = new Menu(basename(__FILE__));
 ?>
 <html>
@@ -26,7 +26,7 @@ $menu = new Menu(basename(__FILE__));
 
 	<div class="container">
 		<div class="header">
-			<h1>login Here</h1>
+			<h1>Sign In</h1>
 		</div>
 		<div class="main">
 			<form action="" method="POST">

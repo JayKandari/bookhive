@@ -34,7 +34,7 @@ if (isset($_SESSION["logged_in"])) {
     echo '<div class="row">';
     for ($x = 0; $x < $c; $x++) {
         //echo '<div class="column">';
-        echo '<div class="card">';
+        echo '<div class="card main" >';
         echo '<div class="container">';
         echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" class="book-img" alt="Avatar" >';
         echo '<p>Title:' . $row[$x]["title"] . '</p>';
@@ -46,7 +46,7 @@ if (isset($_SESSION["logged_in"])) {
             echo '<button name="issue">ISSUE BOOK </button>';
             echo '</form>';
         } else {
-            echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
+            echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
         }
         echo '</div>';
         echo '</div>';

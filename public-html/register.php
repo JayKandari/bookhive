@@ -28,7 +28,7 @@ $menu = new Menu(basename(__FILE__));
 	?>
 	<div class="container">
 		<div class="header">
-			<h1>Register Here</h1>
+			<h1>Sign Up</h1>
 		</div>
 		<div class="main">
 			<form action="" method="POST">
