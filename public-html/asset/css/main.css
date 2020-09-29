@@ -64,7 +64,8 @@ header {
   transition: 0.5s;
   transition-property: #19b3d3; }
 
-.sidebar a:hover, a:checked {
+.sidebar a:hover,
+a:checked {
   background: #19b3d3; }
 
 .sidebar i {
@@ -93,7 +94,9 @@ label #sidebar_btn:hover {
 #check:checked ~ .sidebar a {
   font-size: 20px;
   margin-left: 165px;
-  width: 100%; }
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 #check:checked ~ .sidebar .profile_info {
   display: none; }
@@ -117,6 +120,9 @@ label #sidebar_btn:hover {
   object-fit: cover;
   object-position: top; }
 
+a.active-menu {
+  background-color: #0087ff; }
+
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
   .sidebar {
@@ -133,6 +139,8 @@ label #sidebar_btn:hover {
   .mobile_nav {
     display: block;
     width: calc(100% - 0px); }
+  .mobile_nav_items a.active-menu {
+    color: #f2c14e; }
   .nav_bar {
     background: #22242a;
     width: calc(100% - 0px);
@@ -202,6 +210,13 @@ label #sidebar_btn:hover {
     display: block;
     margin-bottom: 20px; } }
 
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #fff; }
+
 table {
   border-collapse: collapse;
   width: 70%;
@@ -209,7 +224,8 @@ table {
   line-height: 1.5cm;
   margin-top: 5%; }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 8px; }
 
@@ -266,7 +282,8 @@ tr:hover {
 .main {
   text-align: center; }
 
-.main input, button {
+.main input,
+button {
   width: 300px;
   height: 40px;
   border: none;

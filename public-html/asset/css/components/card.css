@@ -4,15 +4,23 @@
   padding: 0 10px; }
 
 .row {
-  margin-left: 17%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin: 40px 0 5% 255px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; }
 
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #fff;
+  margin-top: 4vh; }
+
 /* Responsive columns */
 @media screen and (max-width: 600px) {
+  .row {
+    margin-left: auto; }
   .column {
     width: 100%;
     display: block;

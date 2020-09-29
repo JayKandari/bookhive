@@ -1,10 +1,10 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 /* Float four columns side by side */
 .column {
   width: 30%;
   padding: 0 10px;
 }
-.row{
+.row {
   margin: 40px 0 5% 255px;
   display: flex;
   flex-wrap: wrap;
@@ -16,7 +16,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
-  background-color:$white;
+  background-color: $white;
   margin-top: 4vh;
 }
 
@@ -30,5 +30,11 @@
     display: block;
     margin-bottom: 20px;
   }
-
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: $white;
 }
