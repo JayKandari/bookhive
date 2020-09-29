@@ -55,7 +55,7 @@ $session = new SessionCookie;
   <div class="column">
     <div class="card">
     <img src="../asset/images/alphonse.jpg" alt="Avatar" style="width:100%">
-      <h3>Alphons Jaimon<</h3>
+      <h3>Alphons Jaimon</h3>
       <p>Drupal Frontend Intern</p>
     </div>
   </div>
