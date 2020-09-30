@@ -30,97 +30,107 @@ if (isset($_SESSION["logged_in"])) {
     $menu->render_header();
     $menu->render_menu();
     ?>
-    <div class="container">
-		<div class="main">
-        <div class="header">
-		</div>
+    <!-- <div class="container"> -->
+    <div class="main">
+        <div class='header'>
+            <h1>Search Books</h1>
+        </div>
 
-    <!-- <div class="container search-div"> -->
-        <form action="searchbook.php" method="post">
-        
-            <?php 
+        <!-- <div class="container search-div"> -->
+        <form action="searchbook.php" method="post" class="row" style="justify-content: center;">
+
+            <?php
 
             if (isset($_SESSION["searchmsg"])) {
                 echo ('<p id="e">' . $_SESSION["searchmsg"] . "</p>\n");
                 unset($_SESSION["searchmsg"]);
-             }
-            if (isset($_POST["submit_search"])) {
-                echo "Title:<input type='text' placeholder='Enter title of the book' name='search_query' value='" . $_POST['search_query'] . "' ><br>";
-                echo "Author:<input type='text' placeholder='Author Name' name='author' value='" . $_POST['author'] . "'><br>";
-                echo "Category:<input type='text' placeholder='Category/Genre' name='category' value='" . $_POST['category'] . "'>";
             }
-            else {
-
+            if (isset($_POST["submit_search"])) {
+                $title =  $_POST['search_query'];
+                $author = $_POST['author'];
+                $catergory = $_POST['category'];
+            } else {
+                $title =  '';
+                $author = '';
+                $catergory = '';
+            }
             ?>
-                Title:<input type='text' name='search_query' placeholder='Enter title of the book'>          
-                Author:<input type='text' name='author' placeholder='Author Name'>
-                Category:<input type='text' name='category' placeholder='Category/Genre'>
-            <?php } ?>
-            <input type="submit" value="Search" name="submit_search">
+
+            <span>
+                <i class="fa fa-search"></i>
+                <input type='text' name='search_query' placeholder='Enter title of the book' value='<?php echo $title; ?>'>
+            </span><br>
+            <span>
+                <i class="fa fa-pen-nib"></i>
+                <input type='text' name='author' placeholder='Author Name' value='<?php echo $author; ?>'>
+            </span><br>
+            <span>
+                <i class="fa fa-list"></i>
+                <input type='text' name='category' placeholder='Category/Genre' value='<?php echo $catergory; ?>'>
+            </span><br>
+            <button name="submit_search"> Search </button>
 
         </form>
-    </div>
-    </div>
-    <!-- </div> -->
-
-    <?php
 
 
-    if (isset($_POST["submit_search"])) {
-        // Fetch search result from DB
-        $conn = new Connection();
-
-        $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
-        if ($_POST["author"] != "") {
-            $query = $query . " AND author like '%" . $_POST["author"] . "%'";
-        }
-        if ($_POST["category"] != "") {
-            $query = $query . " AND category like '%" . $_POST["category"] . "%'";
-        }
-        $result = $conn->exeQuery($query);
-        if ($result) {
+        <?php
 
 
-    ?>
-            <table legend="2px">
-                <tbody>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                        <th></th>
-                    </tr>
-                    <?php
-                    // Display result as table
-                    foreach ($result as $row) {
-                        echo "<tr>
+        if (isset($_POST["submit_search"])) {
+            // Fetch search result from DB
+            $conn = new Connection();
+
+            $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
+            if ($_POST["author"] != "") {
+                $query = $query . " AND author like '%" . $_POST["author"] . "%'";
+            }
+            if ($_POST["category"] != "") {
+                $query = $query . " AND category like '%" . $_POST["category"] . "%'";
+            }
+            $result = $conn->exeQuery($query);
+            if ($result) {
+
+
+        ?>
+                <table legend="2px">
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th></th>
+                        </tr>
+                        <?php
+                        // Display result as table
+                        foreach ($result as $row) {
+                            echo "<tr>
                      <td>" . $row['title'] . "</td>
                      <td>" . $row['author'] . "</td>
                      <td>" . $row['category'] . "</td><td>";
-                        if (isset($_SESSION["logged_in"])) {
-                            echo '<form method="post">';
-                            echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
-                            echo '<button name="issue">ISSUE BOOK </button>';
-                            echo '</form>';
-                        } else {
-                            echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
+                            if (isset($_SESSION["logged_in"])) {
+                                echo '<form method="post">';
+                                echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
+                                echo '<button name="issue">ISSUE BOOK </button>';
+                                echo '</form>';
+                            } else {
+                                echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
+                            }
+                            echo "</td></tr>";
                         }
-                        echo "</td></tr>";
-                    }
 
-                    ?>
-                </tbody>
-            </table>
-    <?php
+                        ?>
+                    </tbody>
+                </table>
+        <?php
 
+            } else {
+                $_SESSION["searchmsg"] = "Sorry ! No books found!!";
+                header("LOCATION: searchbook.php");
+            }
         }
-        else{
-            $_SESSION["searchmsg"] = "Sorry ! No books found!!";
-            header("LOCATION: searchbook.php");
-            
-        }
-    }
-    ?>
+        ?>
+        <!-- </div> -->
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
 

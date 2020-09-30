@@ -57,7 +57,7 @@ header {
   color: #fff;
   display: block;
   width: 100%;
-  line-height: 60px;
+  line-height: 40px;
   text-decoration: none;
   padding-left: 40px;
   box-sizing: border-box;
@@ -284,21 +284,24 @@ tr:hover {
 
 .main input,
 button {
-  width: 300px;
-  height: 40px;
+  max-width: 300px;
+  min-height: 40px;
   border: none;
   outline: none;
-  padding-left: 40px;
+  margin-left: 40px;
   box-sizing: border-box;
   font-size: 15px;
-  margin-bottom: 40px; }
+  margin-bottom: 40px;
+  background-color: #f5f5f5;
+  position: relative; }
 
 .main button {
   padding-left: 0;
   background-color: #83acf1;
   letter-spacing: 1px;
   font-weight: bold;
-  margin-bottom: 70px; }
+  margin-bottom: 70px;
+  padding: 10px 20px; }
 
 .main button:hover {
   background-color: #7799d4; }
@@ -314,4 +317,58 @@ button {
   left: 15px;
   color: #bb2323;
   font-size: 16px;
-  top: 2px; }
+  background: whitesmoke;
+  height: 40px;
+  width: 30px;
+  padding-top: 10px;
+  padding-right: 10px;
+  box-sizing: border-box; }
+
+.iconbtnedit {
+  background-color: DodgerBlue !important;
+  border: none;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px; }
+  .iconbtnedit .fas {
+    color: #fff !important;
+    margin-top: 10px;
+    font-size: x-large;
+    position: relative;
+    right: 10px;
+    bottom: 20px;
+    left: inherit;
+    background: none; }
+
+.iconbtndelete {
+  background-color: crimson !important;
+  border: none;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px; }
+  .iconbtndelete .fas {
+    color: #fff !important;
+    margin-top: 10px;
+    font-size: x-large;
+    position: relative;
+    right: 10px;
+    bottom: 20px;
+    left: inherit;
+    background: none; }
+
+/* Darker background on mouse-over */
+.iconbtnedit:hover {
+  background-color: RoyalBlue; }
+
+.iconbtndelete:hover {
+  background-color: crimson; }
+
+@media screen and (max-width: 600px) {
+  .main input {
+    margin-right: 40px; } }

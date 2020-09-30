@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+// session_start();
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\book;
@@ -42,7 +43,7 @@ if (isset($_SESSION["logged_in"])) {
     $c = count($row);
     echo "<div class='row'>";
     for ($x = 0; $x < $c; $x++) {
-        echo '<div class="card">';
+        echo '<div class="card main">';
         echo '<div class="container">';
         echo '<img src="' . $menu->paths["images"] . "/" . $row[$x]["path"] . '" class="book-img" alt="Avatar" >';
         echo '<h4><b>' . $row[$x]["title"] . '</b></h4>';
@@ -51,10 +52,10 @@ if (isset($_SESSION["logged_in"])) {
         if (isset($_SESSION["logged_in"])) {
             echo '<form method="post">';
             echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';
-            echo '<button nam"Roboto", sans-serife="issue">ISSUE BOOK </button>';
+            echo '<button name="issue">ISSUE BOOK </button>';
             echo '</form>';
         } else {
-            echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
+            echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
         }
         echo '</div>';
         echo '</div>';

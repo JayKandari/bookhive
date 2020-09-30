@@ -16,7 +16,6 @@ $session = new SessionCookie;
 
     if (isset($_SESSION["logged_in"])) {
         $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
-        var_dump($menu);
     } else {
         $menu = new Menu(basename(__FILE__));
     }
