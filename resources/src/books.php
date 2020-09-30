@@ -57,16 +57,16 @@ class book
       while ($row = $stmt2->fetch()) {
          echo '<form method="post">';
          echo "<tr>";
-         echo '<td><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
-         echo '<td><input type="text" name="title" value="' . $row['title'] . '"></input></td>';
-         echo '<td><input type="text" name="author" value="' . $row['author'] . '"></input></td>';
-         echo '<td><input type="text" name="category" value="' . $row['category'] . '"></input></td>';
-         echo '<td><input type="date" name="added_on" value="' . $row['added_on'] . '"></input></td>';
-         echo '<td><input type="number" name="qty" value="' . $row['qty'] . '"></input></td>';
-         echo '<td><input type="number" name="available" value="' . $row['available'] . '"></input></td>';
-         echo '<td><input type="text" name="ipath" value="' . $row['ipath'] . '"></input></td>';
-         echo '<td><button name="update_button" class="iconbtnedit"><i class="fas fa-edit"></i></button></td>';
-         echo '<td><button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button></td>';
+         echo '<td data-label="Book ID"><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
+         echo '<td data-label="Title"><input type="text" name="title" value="' . $row['title'] . '"></input></td>';
+         echo '<td data-label="Author"><input type="text" name="author" value="' . $row['author'] . '"></input></td>';
+         echo '<td data-label="Category"><input type="text" name="category" value="' . $row['category'] . '"></input></td>';
+         echo '<td data-label="Added on"><input type="date" name="added_on" value="' . $row['added_on'] . '"></input></td>';
+         echo '<td data-label="Quantity"><input type="number" name="qty" value="' . $row['qty'] . '"></input></td>';
+         echo '<td data-label="Available"><input type="number" name="available" value="' . $row['available'] . '"></input></td>';
+         echo '<td data-label="Path"><input type="text" name="ipath" value="' . $row['ipath'] . '"></input></td>';
+         echo '<td data-label="Update"><button name="update_button" class="iconbtnedit"><i class="fas fa-edit"></i></button></td>';
+         echo '<td data-label="Delete"><button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button></td>';
          echo "</tr>";
          echo '</form>';
       }
@@ -192,22 +192,22 @@ class book
       } else {
          $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
       }
-      echo "<table><th>Book Title</th><th>Issued On</th><th>Status</th>";
+      echo "<table><thead><th>Book Title</th><th>Issued On</th><th>Status</th></thead><tbody>";
       while ($row2 = $stmt2->fetch()) {
          $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="' . $row2["bid"] . '"');
          while ($row1 = $stmt1->fetch()) {
             echo '<tr>';
-            echo '<td>' . $row1["title"] . '</td>';
-            echo '<td>' . $row2["issued_on"] . '</td>';
+            echo '<td data-label="Book Title">' . $row1["title"] . '</td>';
+            echo '<td data-label="Issued On">' . $row2["issued_on"] . '</td>';
             if ($row2["returned"] == "1") {
-               echo '<td>Returned</td>';
+               echo '<td data-label="Status">Returned</td>';
             } else {
-               echo '<td>Issued</td>';
+               echo '<td data-label="Status">Issued</td>';
             }
             echo '</tr>';
          }
       }
-      echo "</table>";
+      echo "</tbody></table>";
    }
    public function issue_check($uno)
    {
