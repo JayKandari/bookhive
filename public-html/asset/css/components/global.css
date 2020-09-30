@@ -111,6 +111,12 @@ label #sidebar_btn:hover {
   font-size: 14px;
   opacity: 0.8; }
 
+.book-img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  object-position: top; }
+
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
   .sidebar {

@@ -83,20 +83,22 @@ if (isset($_SESSION["logged_in"])) {
 
     ?>
             <table legend="2px">
-                <tbody>
+                <thead>
                     <tr>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Category</th>
                         <th></th>
                     </tr>
+                </thead>
+                    <tbody>
                     <?php
                     // Display result as table
                     foreach ($result as $row) {
                         echo "<tr>
-                     <td>" . $row['title'] . "</td>
-                     <td>" . $row['author'] . "</td>
-                     <td>" . $row['category'] . "</td><td>";
+                     <td data-label='Title'>" . $row['title'] . "</td>
+                     <td data-label='Author'>" . $row['author'] . "</td>
+                     <td data-label='Category'>" . $row['category'] . "<td>";
                         if (isset($_SESSION["logged_in"])) {
                             echo '<form method="post">';
                             echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
@@ -105,7 +107,7 @@ if (isset($_SESSION["logged_in"])) {
                         } else {
                             echo '<h4><b><a href="login.php">Login to issue book</a></b></h4>';
                         }
-                        echo "</td></tr>";
+                        echo "</tr>";
                     }
 
                     ?>
