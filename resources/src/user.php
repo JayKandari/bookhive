@@ -56,9 +56,9 @@ class user
             echo '<td data-label="Password"><input type="password" name="pass" placeholder="Password"></input></td>';
             echo '<td data-label="Email"><input type="text" name="email" value="' . $row['email'] . '"></input></td>';
             echo '<td data-label="Role"><input type="text" name="type" value="' . $row['type'] . '" readonly></td>';
-            echo '<td ><input type="radio" name="admin" value="admin">YES  </input>';
+            echo '<td data-label="Change Role"><input type="radio" name="admin" value="admin">YES  </input>';
             echo '<input type="radio" name="admin" value="user">  NO</input></td>';
-            echo '<td><button name="update_button"> Update Information</button></td>';
+            echo '<td data-label="Update"><button name="update_button"> Update Information</button></td>';
             echo "</tr>";
             echo '</form>';
         }

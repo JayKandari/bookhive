@@ -55,7 +55,7 @@ class Menu
             ),
             array(
                 'link' => 'displaynew.php',
-                'ico-class' => 'fas fa-book-reader', 'link-class' => '', 'text' => 'Colection'
+                'ico-class' => 'fas fa-book-reader', 'link-class' => '', 'text' => 'Collection'
             )
         );
         // Role based menu items
