@@ -29,6 +29,7 @@ $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
 <div class="main">
 
   <table>
+    <thead>
     <tr>
       <th>User Numner</th>
       <th>User Name</th>
@@ -38,11 +39,14 @@ $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
       <th>Change Type</th>
       <th>Edit Operation</th>
     </tr>
+    </thead>
+    <tbody>
     <?php
 
     $k = new user;
     $k->user_info();
     ?>
+    </tbody>
   </table>
   </div>
   <!-- Include scripts -->
