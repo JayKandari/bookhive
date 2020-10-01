@@ -42,8 +42,10 @@ $session = new SessionCookie;
       <h3>Pragati Kanade</h3>
       <p>Drupal Frontend Intern</p>
     </div>
+  </div> 
   </div>
   
+  <div class="row">
   <div class="column">
     <div class="card">
     <img src="../asset/images/a.jpg" alt="Avatar" style="width:100%">
