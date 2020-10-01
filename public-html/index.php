@@ -28,12 +28,13 @@ if (isset($_SESSION["logged_in"])) {
     <?php
     $menu->render_header();
     $menu->render_menu();
+    echo '<div class="main_content">';
     $k = new book;
     $row = $k->disp_book("no");
     $c = count($row);
     echo '<div class="row">';
     for ($x = 0; $x < $c; $x++) {
-        //echo '<div class="column">';
+        // echo '<div class="column">';
         echo '<div class="card main" >';
         echo '<div class="container">';
         echo '<img src="' . $config->config["paths"]["images"] . '/' . $row[$x]["path"] . '" class="book-img" alt="Avatar" >';
@@ -50,8 +51,10 @@ if (isset($_SESSION["logged_in"])) {
         }
         echo '</div>';
         echo '</div>';
+        // echo '</div>';
 
     }
+    echo '</div>';
     echo '</div>';
     if (isset($_POST["issue"])) {
         $k->issue($_POST["bid"], $_SESSION["uno"]);

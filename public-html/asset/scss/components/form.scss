@@ -1,13 +1,13 @@
 @import '../utils/variables.scss';
 
 .container {
-	width: 380px;
+	max-width: 380px;
 	margin: 7% auto;
 }
 
 .header {
   text-align: center;
-  padding-top: 75px;
+//   padding-top: 75px;
 }
 
 .header h1 {
