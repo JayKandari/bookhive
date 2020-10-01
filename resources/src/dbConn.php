@@ -23,6 +23,11 @@ class Connection
         $dsn = $dbcreds['type'] . ":host=" . $dbcreds['host'] . ";port=" . $dbcreds['port'] . ";dbname=" . $dbcreds['dbname'];
         $this->connObj = new PDO($dsn, $dbcreds['username'], $dbcreds['password'], $options);
     }
+    /*
+    * Function to return output of fetch all from any query
+    * eg. exeQuery("select from db where id = ?",[1])
+    * as shown variables should be passed in an array
+    */
     public function exeQuery($stmt, $params = NULL)
     {
         if ($params == NULL) return $this->connObj->query($stmt)->fetchAll();

@@ -9,7 +9,9 @@ use src\Connection;
 use src\SessionCookie;
 
 use PDO;
-
+/*
+ * All the function related to book management reside here.
+ */
 class book
 {
    public $pdo;
@@ -23,6 +25,9 @@ class book
       $this->ob = new ProjectConfig;
       $this->session = new SessionCookie;
    }
+   /*
+    * Function to display recent books
+    */
    public function disp_book($recent)
    {
       if ($recent == 'no') {
@@ -36,6 +41,9 @@ class book
       }
       return $op;
    }
+   /*
+    * Function to search books
+    */
    public function search($name)
    {
       $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%' . $name . '%"');
@@ -51,6 +59,9 @@ class book
       }
       return $op;
    }
+   /*
+    * Function to edit books
+    */
    public function edit()
    {
       $stmt2 = $this->pdo->query('SELECT * FROM Book');
@@ -84,6 +95,9 @@ class book
          header("LOCATION: admindash.php");
       }
    }
+   /*
+    * Function to add books
+    */
    public function add()
    {
 
@@ -140,6 +154,9 @@ class book
          }
       }
    }
+   /*
+    * Function to issue books
+    */
    public function issue($bid, $id)
    {
       $stmt2 = $this->pdo->query('SELECT returned FROM book_user where id="' . $id . '" and bid="' . $bid . '"');
@@ -185,6 +202,9 @@ class book
          }
       }
    }
+   /*
+    * Function to display book info
+    */
    public function book_info($id, $c)
    {
       if ($c == "ad") {
@@ -209,6 +229,9 @@ class book
       }
       echo "</tbody></table>";
    }
+   /*
+    * Function to check if a book is issued or not
+    */
    public function issue_check($uno)
    {
       $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $uno . '"');
