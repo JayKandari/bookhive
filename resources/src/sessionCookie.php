@@ -7,6 +7,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use src\Redirect;
 use src\Connection;
 use template\Menu;
+
 class SessionCookie
 {
     public $redirect;
@@ -46,6 +47,12 @@ class SessionCookie
     {
         if (!isset($_SESSION['uid'])) $this->redirect->phploc('index.php');
     }
+    public function loginAccess()
+    {
+        if (isset($_SESSION["logged_in"])) return true;
+        else return false;
+    }
+    // Functions not being used as of now
     public function adminCheck()
     {
         if ($_SESSION["admin"] == "user") {
@@ -70,7 +77,7 @@ class SessionCookie
             $this->redirect->phploc('index.php');
         }
     }
-    
+
     public function login_check()
     {
         if (isset($_SESSION["logged_in"])) {
