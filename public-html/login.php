@@ -24,10 +24,12 @@ $menu = new Menu(basename(__FILE__));
 	<?php $menu->render_header();
 	$menu->render_menu(); ?>
 
+<div class="main_content">
 	<div class="container">
 		<div class="header">
 			<h1>Sign In</h1>
 		</div>
+
 		<div class="main">
 			<form action="" method="POST">
 				<?php
@@ -79,6 +81,7 @@ $menu = new Menu(basename(__FILE__));
 			?>
 		</div>
 	</div>
+</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 <script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>

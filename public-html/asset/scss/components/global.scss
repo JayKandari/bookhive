@@ -1,18 +1,28 @@
-@import "../utils/variables.scss";
+@import '../utils/variables.scss';
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas:'header header header header header header'
+                      'sidebar main main main main main' ;
+  grid-template-columns: 250px auto
 }
+
 header {
   z-index: 1;
-  position: fixed;
+  position: sticky;
   background: $black;
   padding: 20px;
   width: calc(100% - 0%);
   top: 0;
-  height: 30px;
+  grid-area: header;
+  box-sizing: border-box;
+  // height: 70px;
 }
+
 .left_area h3 {
   color: $white;
   margin: 0;
@@ -20,40 +30,48 @@ header {
   font-size: 22px;
   font-weight: 900;
 }
+
 .left_area span {
   color: $cyanblue;
 }
+
 .sidebar {
-  z-index: 1;
+  // z-index: 1;
   top: 0;
   background: $black;
-  margin-top: 70px;
-  padding-top: 30px;
-  position: fixed;
+  // margin-top: 60px;
+  top: 65px;
+  position: sticky;
   left: 0;
   width: 250px;
-  height: calc(100% - 9%);
+  height: calc(100vh - 60px);
   transition: 0.5s;
   transition-property: left;
   overflow-y: auto;
+  grid-area: sidebar;
+
 }
+
 .profile_info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .sidebar .profile_info .profile_image {
   width: 100px;
   height: 100px;
   border-radius: 100px;
   margin-bottom: 10px;
 }
+
 .sidebar .profile_info h4 {
   color: $white;
   margin-top: 0;
   margin-bottom: 20px;
 }
+
 .sidebar a {
   color: $white;
   display: block;
@@ -65,13 +83,16 @@ header {
   transition: 0.5s;
   transition-property: $cyanblue;
 }
+
 .sidebar a:hover,
 a:checked {
   background: $cyanblue;
 }
+
 .sidebar i {
   padding-right: 10px;
 }
+
 label #sidebar_btn {
   z-index: 1;
   color: $white;
@@ -83,85 +104,113 @@ label #sidebar_btn {
   transition: 0.5s;
   transition-property: $cyanblue;
 }
+
 label #sidebar_btn:hover {
   color: $cyanblue;
 }
-#check:checked ~ .sidebar {
+
+#check:checked~.sidebar {
   left: -185px;
 }
-#check:checked ~ .sidebar a span {
+
+#check:checked~.sidebar a span {
   display: none;
 }
-#check:checked ~ .sidebar a {
+
+#check:checked~.sidebar a {
   font-size: 20px;
   margin-left: 165px;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
-#check:checked ~ .sidebar .profile_info {
+
+#check:checked~.sidebar .profile_info {
   display: none;
 }
+
 #check {
   display: none;
 }
+
+.main_content {
+  grid-area: main;
+}
+
 .mobile_nav {
   display: none;
+  grid-area: nav;
+
 }
-.content .card p {
+
+
+.card p {
   background: $white;
   padding: 15px;
   margin-bottom: 10px;
   font-size: 14px;
   opacity: 0.8;
 }
+
 .book-img {
   width: 100%;
   max-height: $book-img-height;
   object-fit: cover;
   object-position: top;
 }
-a.active-menu {
-  background-color: $bluelight;
-}
+
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
+  body{
+    grid-template-areas:'header'
+                        'nav'
+                        'main' ;
+  grid-template-columns:  auto;
+  }
   .sidebar {
     display: none;
   }
+
   #sidebar_btn {
     display: none;
   }
+
   .content {
     margin-left: 0;
     margin-top: 0;
     padding: 10px 20px;
     transition: 0s;
   }
-  #check:checked ~ .content {
+
+  #check:checked~.content {
     margin-left: 0;
   }
+
   .mobile_nav {
     display: block;
     width: calc(100% - 0px);
+    position: sticky;
+    z-index: 1;
+    top: 60px
   }
-  .mobile_nav_items a.active-menu {
-    color: $gold;
-  }
+
   .nav_bar {
     background: $black;
     width: calc(100% - 0px);
-    margin-top: 70px;
+    // margin-top: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    // position: fixed;
+    box-sizing: border-box;
+    // z-index: 1;
   }
+
   .nav_bar .mobile_profile_image {
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
+
   .nav_bar .nav_btn {
     color: $white;
     font-size: 22px;
@@ -169,13 +218,20 @@ a.active-menu {
     transition: 0.5s;
     transition-property: color;
   }
+
   .nav_bar .nav_btn:hover {
     color: $cyanblue;
   }
+
   .mobile_nav_items {
     background: $black;
     display: none;
+    // position: fixed;
+    width: 100%;
+    // top: 110px;
+    // z-index: 1
   }
+
   .mobile_nav_items a {
     color: $white;
     display: block;
@@ -187,13 +243,17 @@ a.active-menu {
     transition: 0.5s;
     transition-property: $cyanblue;
     font-size: 24px;
+
   }
+
   .mobile_nav_items a:hover {
     background: $cyanblue;
   }
+
   .mobile_nav_items i {
     padding-right: 10px;
   }
+
   .active {
     display: block;
   }

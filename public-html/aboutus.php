@@ -28,6 +28,8 @@ $session = new SessionCookie;
     $menu->render_header();
     $menu->render_menu();
     ?>
+    <div class="main_content">
+
     <div class="row">
   <div class="column">
     <div class="card">
@@ -61,6 +63,7 @@ $session = new SessionCookie;
       <p>Drupal Frontend Intern</p>
     </div>
   </div>
+</div>
 </div>
 
     <!-- Include scripts -->
