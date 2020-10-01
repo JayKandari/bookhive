@@ -30,6 +30,8 @@ if (isset($_SESSION["logged_in"])) {
     $menu->render_header();
     $menu->render_menu();
     ?>
+<div class="main_content">
+
     <!-- <div class="container"> -->
     <div class="main">
         <div class='header'>
@@ -131,6 +133,7 @@ if (isset($_SESSION["logged_in"])) {
             }
         }
         ?>
+    </div>
         <!-- </div> -->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
