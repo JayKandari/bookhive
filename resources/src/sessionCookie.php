@@ -25,6 +25,9 @@ class SessionCookie
             if ($row[0]['type'] == 'admin') $_SESSION['admin'] = "admin";
         }
     }
+    /*
+    * Function to enable remember me functionality
+    */
     public function rememberMe()
     {
         $keygen = bin2hex(random_bytes(mt_rand(5, 10))) . $_SESSION['uid'] . bin2hex(random_bytes(mt_rand(1, 5)));
@@ -33,6 +36,9 @@ class SessionCookie
         $this->dbConn->exeQuery('update user set remember=? where uname=?', $keygen, $_SESSION['uid']);
         unset($keygen);
     }
+    /*
+    * Function to clear session
+    */
     public function sessionClear()
     {
         session_unset();
@@ -42,6 +48,9 @@ class SessionCookie
         unset($_COOKIE['remembering']);
         session_start();
     }
+    /*
+    * All the function from here are for checking sessions
+    */
     public function sessionCheck()
     {
         if (!isset($_SESSION['uid'])) $this->redirect->phploc('index.php');

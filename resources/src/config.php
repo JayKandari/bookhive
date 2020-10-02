@@ -31,14 +31,23 @@ class ProjectConfig
             )
         );
     }
+    /*
+    * A debugging function.
+    */
     public function dispConfig()
     {
         var_dump($this->config);
     }
+    /*
+    * Function to disable display of errors
+    */
     public function disableError()
     {
         error_reporting(0);
     }
+    /*
+    * Function to enable display of errors
+    */
     public function enableError()
     {
         ini_set('display_errors', 1);
