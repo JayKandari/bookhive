@@ -6,9 +6,9 @@ body {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   display: grid;
-  grid-template-areas:'header header header header header header'
-                      'sidebar main main main main main' ;
-  grid-template-columns: 250px auto
+  grid-template-areas:'header header'
+                      'sidebar main ' ;
+  grid-template-columns: max-content;
 }
 
 header {
@@ -20,7 +20,6 @@ header {
   top: 0;
   grid-area: header;
   box-sizing: border-box;
-  // height: 70px;
 }
 
 .left_area h3 {
@@ -36,14 +35,10 @@ header {
 }
 
 .sidebar {
-  // z-index: 1;
-  top: 0;
   background: $black;
-  // margin-top: 60px;
   top: 65px;
   position: sticky;
-  left: 0;
-  width: 250px;
+  width: fit-content;
   height: calc(100vh - 60px);
   transition: 0.5s;
   transition-property: left;
@@ -78,7 +73,7 @@ header {
   width: 100%;
   line-height: 40px;
   text-decoration: none;
-  padding-left: 40px;
+  padding: 5px 40px 5px 30px;
   box-sizing: border-box;
   transition: 0.5s;
   transition-property: $cyanblue;
@@ -119,8 +114,8 @@ label #sidebar_btn:hover {
 
 #check:checked~.sidebar a {
   font-size: 20px;
-  margin-left: 165px;
   width: 100%;
+  padding: 10px 40px 10px 30px;
 }
 
 #check:checked~.sidebar .profile_info {
@@ -149,7 +144,9 @@ label #sidebar_btn:hover {
   font-size: 14px;
   opacity: 0.8;
 }
-
+.active-menu{
+  background-color: $doggerblue;
+}
 .book-img {
   width: 100%;
   max-height: $book-img-height;
@@ -195,14 +192,11 @@ label #sidebar_btn:hover {
   .nav_bar {
     background: $black;
     width: calc(100% - 0px);
-    // margin-top: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    // position: fixed;
     box-sizing: border-box;
-    // z-index: 1;
   }
 
   .nav_bar .mobile_profile_image {
@@ -226,10 +220,7 @@ label #sidebar_btn:hover {
   .mobile_nav_items {
     background: $black;
     display: none;
-    // position: fixed;
     width: 100%;
-    // top: 110px;
-    // z-index: 1
   }
 
   .mobile_nav_items a {
