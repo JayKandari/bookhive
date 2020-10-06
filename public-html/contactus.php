@@ -33,7 +33,6 @@ $session = new SessionCookie;
     <div class="main_content">
 
     <div class="row">
-        <!-- <div class="column"> -->
             <div class="card">
                 <img src="../asset/images/qed42.png" alt="Avatar" style="width:100%">
 
@@ -44,7 +43,6 @@ $session = new SessionCookie;
                 <p><i class="fas fa-at"></i>:<a href="https://www.qed42.com/" target="_blank">careers@qed42.com</a><br></p>
 
             </div>
-        <!-- </div> -->
     </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
