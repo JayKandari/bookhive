@@ -134,4 +134,11 @@ class Menu
         $this->mobile_nav();
         $this->sidebar();
     }
+    public function render_headNav()
+    {
+        $this->render_header();
+        $this->mobile_nav();
+        $this->sidebar();
+    }
+
 }

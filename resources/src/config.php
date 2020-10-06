@@ -5,6 +5,7 @@ namespace src;
 class ProjectConfig
 {
     public $config;
+    public $pageDict;
     public function __construct()
     {
         $creds = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../resources/dbcreds.json"), true);
@@ -29,6 +30,25 @@ class ProjectConfig
                 "css" =>  "/asset/css",
                 "js" => "/asset/js"
             )
+        );
+        // a Dictonary of pages to make code/mentioning them more easy!
+        $this->pageDict = array(
+            "aboutus" => "About Us",
+            "ad_issued" => "Edit Book",
+            "addbook" => "Add Book",
+            "admindash" => "Dashboard",
+            "contactus" => "Contact Us",
+            "displaynew" => "New Collection",
+            "editbook" => "Edit Book",
+            "edituserlist" => "Edit User",
+            "index" => "Home",
+            "listbookedit" => "Edit Book",
+            "login" => "Login",
+            "logout" => "Logout",
+            "register" => "Sign Up",
+            "searchbook" => "Search Book",
+            "userdash" => "Dashboard",
+            "test" => "LAB"
         );
     }
     /*
