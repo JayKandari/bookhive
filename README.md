@@ -63,18 +63,6 @@ $ npm install
 $ gulp sass
 ```
 
-## TODO:
-### Web Pages
-- [X] Home
-- [X] Book display
-- [X] Register
-- [X] User home
-- [X] Profile settings
-- [X] Admin controls
-### Core packages
-- [X] DBMS Management
-- [X] Session-Cookie Management
-
 ## Contributors:
 - [Aastha](https://github.com/shriaas2898) (@shriaas2898)
 - [Alphons](https://github.com/AJV009) (@AJV009)
