@@ -27,7 +27,7 @@ $ git clone https://github.com/JayKandari/bookhive
 
 ### 3. Create a database
 - Create a database in phpmyadmin named `bookhive` to store all the book details.
-- Open the newly created database and import the `bookhive.sql` file provided with the repo. (this file contains all the table structures and soo on)
+- Open the newly created database and import the `bookhive.sql` file provided with the repo. (this file contains all the table structures and so on)
 
 ### 4. Install composer. 
 You can refer [this](https://www.digitalocean.com/community/tutorials/how-to-install-composer-on-ubuntu-20-04-quickstart) to setup composer.
@@ -53,7 +53,7 @@ Place a file named `dbcred.json` in the resources directory, with the following 
 ```
 
 ## Use [Gulp](https://gulpjs.com/) and [SCSS](https://sass-lang.com/) to work with css
-### 1. prerequisites
+### 1. Prerequisites
 Follow this [getting started with gulp guide](https://gulpjs.com/docs/en/getting-started/quick-start) to install gulp and understand what it is all about!
 
 ### 2. Run Gulp task
