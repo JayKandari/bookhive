@@ -47,6 +47,11 @@ header {
 
 }
 
+.page-not-found {
+  text-align:center; 
+  color: $red;
+}
+
 .profile_info {
   display: flex;
   flex-direction: column;

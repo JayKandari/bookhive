@@ -15,6 +15,7 @@ use template\Menu;
  * head, menu, content and foot.
  * echo/print $foot to print the jquery and javascript part of the page
  */
+
 class Page
 {
     public $config;
@@ -23,12 +24,24 @@ class Page
     public $menu;
     public $content;
     public $foot;
+    // the construct method fetches page title from config and also build a footer
     public function __construct()
     {
         $this->config = new ProjectConfig;
         $this->session = new SessionCookie;
         $title = $this->config->pageDict[basename($_SERVER['PHP_SELF'], '.php')];
-
+        $this->constructHead($title);
+        $this->constructMenu();
+        $this->foot = "
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' charset='utf-8'></script>
+        <script src='" . $this->config->config["paths"]["js"] . "/main.js'></script>
+        </body>
+        </html>
+        ";
+    }
+    // method to construct a head with sutom title (only if required, as in 404 Page Not Found)
+    public function constructHead($title)
+    {
         $this->head = "
         <!DOCTYPE html>
         <html lang='en'>
@@ -40,14 +53,8 @@ class Page
         </head>
         <body>
         ";
-        $this->constructMenu();
-        $this->foot = "
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js' charset='utf-8'></script>
-        <script src='" . $this->config->config["paths"]["js"] . "/main.js'></script>
-        </body>
-        </html>
-        ";
     }
+    // Method to construct the menu
     public function constructMenu()
     {
         if ($this->session->loginAccess()) {
@@ -56,11 +63,28 @@ class Page
             $this->menu = new Menu(basename(__FILE__));
         }
     }
+    // A method to construct the whole page
     public function constructPage($content)
     {
         echo $this->head;
         $this->menu->render_headNav();
         echo $content;
         echo $this->foot;
+    }
+    // Call this method to emulate a 404 error in any page!
+    public function pageNotFound()
+    {
+        http_response_code(404);
+        $title = "404 Page Not Found";
+        $this->constructHead($title);
+        $content = <<<EOT
+        <div class="main_content">
+            <h1 class="page-not-found"> 
+            404 Page Not Found! 
+            </h1>
+        </div>
+EOT;
+        $this->constructPage($content);
+        exit();
     }
 }
