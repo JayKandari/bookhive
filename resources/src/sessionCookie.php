@@ -6,7 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\Redirect;
 use src\Connection;
-use template\Menu;
+use src\ProjectConfig;
 
 class SessionCookie
 {
@@ -15,7 +15,9 @@ class SessionCookie
     public function __construct()
     {
         $this->redirect = new Redirect;
-        session_start();
+        $conf = new ProjectConfig;
+        $conf->enableError();
+        if (session_status() == PHP_SESSION_NONE) session_start();
         if (isset($_SESSION['lastact']) and time() - $_SESSION['lastact'] > 9000) {
             $this->sessionClear();
             $this->redirect->phploc('index.php');
