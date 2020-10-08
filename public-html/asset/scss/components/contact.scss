@@ -1,0 +1,134 @@
+@import '../utils/variables.scss';
+
+.contactus {
+    background-image:url("../images/drupal2 (copy).png");
+    background-repeat: no-repeat;
+    height: 100%;
+    position: relative;
+    padding: 0px 150px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+ }
+.contactus .contactcontent {
+    text-align: center;
+}
+.contactus .contactcontent h2 {
+    font-size: 36px;
+    font-weight: bolder;
+    color: $contactblack;
+}
+.contactus .contactcontent p {
+    font-size: 18px;
+    font-weight: bold;
+    color: $contactred;
+}
+.contactcontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.contactcontainer .contactinfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    background-color: $contactbg;
+    padding: 30px 0px;
+    margin-right: 30px;
+}
+.contactcontainer .contactinfo .contactbox{
+    position: relative;
+    padding: 5px 0px;
+    display: flex;
+}
+.contactcontainer .contactinfo .contactbox .contacttext{
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    flex-direction: column;
+    color: $contactblack;
+    font-weight: 300;
+}
+.contactcontainer .contactinfo .contactbox .contacttext h3{
+    font-weight: bold;
+    color:$contactred;
+}
+.contactcontainer .contactform {
+    width: 40%;
+    padding: 30px 30px;
+    background-color:$contactbg;
+}
+.contactcontainer .contactform h2 {
+    font-size: 30px;
+    color: $contactred;
+    font-weight: 500;
+}
+.contactcontainer .contactform .contactinputbox {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.contactcontainer .contactform .contactinputbox input,textarea{
+    width: 100%;
+    padding: 5px 0px;
+    font-size: 16px;
+    margin:10px 0px;
+    border: none;
+    border-bottom: 2px solid $contactgrey;
+    outline: none;
+}
+.contactcontainer .contactform .contactinputbox span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0px;
+    font-size: 16px;
+    margin:10px 0px;
+    pointer-events: none;
+    transition: 0.5s;
+    color:$contactblack;
+}
+.contactcontainer .contactform .contactinputbox input:focus ~ span,textarea:focus ~ span {
+    color: $contactred;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.contactcontainer .contactform .contactinputbox textarea:focus ~ span {
+    color: $contactred;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.contactcontainer .contactform .contactinputbox button {
+    width: 100px;
+    background: $blue;
+    color:$white;
+    border:none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+.contactcontainer .contactform .contactinputbox button:hover {
+
+    background: $contactblack;
+    color:$white;
+}
+
+@media  (max-device-width: 1024px) {
+    .contactus{
+        padding:20px;
+    }
+    .contactcontainer{
+        flex-direction: column;
+    }
+    .contactcontainer .contactinfo {
+        margin-bottom: 40px;
+        margin-right: 0px;
+    }
+    .contactcontainer .contactinfo {
+        width: 100%;
+    }
+    .contactcontainer .contactform {
+        width: 80%
+    }
+}
