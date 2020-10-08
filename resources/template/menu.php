@@ -71,10 +71,8 @@ class Menu
             case 'admin': {
                     array_push(
                         $main_menu,
-                        array('link' => 'addbook.php', 'ico-class' => 'fas fa-plus', 'link-class' => '', 'text' => 'Add Book'),
-                        array('link' => 'listbookedit.php', 'ico-class' => 'fas fa-edit', 'link-class' => '', 'text' => 'Edit Book info'),
-                        array('link' => 'edituserlist.php', 'ico-class' => 'fas fa-user-edit', 'link-class' => '', 'text' => 'Edit User'),
-                        array('link' => 'ad_issued.php', 'ico-class' => 'fas fa-shopping-cart', 'link-class' => '', 'text' => 'Book Issued')
+                        array('link' => 'addbook.php', 'ico-class' => 'fas fa-plus', 'link-class' => '', 'text' => 'Add/Edit Book'),
+                        array('link' => 'edituserlist.php', 'ico-class' => 'fas fa-user-edit', 'link-class' => '', 'text' => 'Edit User')
                     );
                 }
                 break;
@@ -118,8 +116,8 @@ class Menu
             <div class='profile_info'>";
         $image = $this->role == 'anon' ? '/booklogo.png' : '/OIP.jpg';
         echo "<img src='" . $this->paths['images'] . $image . "' class='profile_image' alt=''>";
-        echo "<h4>" . $this->uname . "</h4>
-              </div>";
+        $hlink=$this->role == 'admin' ? 'admindash.php' : 'userdash.php';
+        echo "<h4><a href='".$hlink."'>" . $this->uname . "</a></h4></div>";
         foreach ($this->construct_menu() as $menu) {
             if ($menu['link'] == $this->current_file) {
                 $menu['link-class'] = $menu['link-class'] . ' active-menu ';

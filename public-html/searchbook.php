@@ -7,7 +7,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/../vendor/autoload.php");
 
 use src\SessionCookie;
 use template\Menu;
-use src\Connection;
+use src\book;
 
 $session = new SessionCookie;
 
@@ -68,29 +68,21 @@ if (isset($_SESSION["logged_in"])) {
                     <i class="fa fa-list"></i>
                     <input type='text' name='category' placeholder='Category/Genre' value='<?php echo $catergory; ?>'>
                 </span><br>
-                <button name="submit_search"> Search </button>
+                <button name="submit_search" class="bmarg"> Search </button>
 
             </form>
 
 
             <?php
-
-
             if (isset($_POST["submit_search"])) {
-                // Fetch search result from DB
-                $conn = new Connection();
-
-                $query = "SELECT * from Book WHERE title like '%" . $_POST["search_query"] . "%' ";
-                if ($_POST["author"] != "") {
-                    $query = $query . " AND author like '%" . $_POST["author"] . "%'";
-                }
-                if ($_POST["category"] != "") {
-                    $query = $query . " AND category like '%" . $_POST["category"] . "%'";
-                }
-                $result = $conn->exeQuery($query);
+                $book = new book();
+                $values = array(
+                    'title' => $_POST["search_query"],
+                    'author' => $_POST["author"],
+                    'category' => $_POST["category"]
+                );
+                $result = $book->search($values);
                 if ($result) {
-
-
             ?>
                     <table legend="2px">
                         <thead>
@@ -98,6 +90,7 @@ if (isset($_SESSION["logged_in"])) {
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>Category</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -109,17 +102,20 @@ if (isset($_SESSION["logged_in"])) {
                      <td data-label='Title'>" . $row['title'] . "</td>
                      <td data-label='Author'>" . $row['author'] . "</td>
                      <td data-label='Category'>" . $row['category'] . "</td><td>";
-                                if (isset($_SESSION["logged_in"])) {
+                                if ($session->loginAccess()) {
                                     echo '<form method="post">';
                                     echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
                                     echo '<button name="issue">ISSUE BOOK </button>';
                                     echo '</form>';
+                                    if ($_SESSION['admin'] == 'admin') {
+                                        echo "</td><td data-label='Edit_book'>
+                                           <a href='addbook.php?idb=" . $row['id'] . "'><button name='edit-book'> Edit </button></a> 
+                                    ";
+                                    }
                                 } else {
                                     echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
                                 }
-                                echo "</td></tr>";
                             }
-
                             ?>
                         </tbody>
                     </table>
