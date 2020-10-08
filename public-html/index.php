@@ -37,7 +37,6 @@ for ($x = 0; $x < $c; $x++) {
     }
     echo '</div>';
     echo '</div>';
-
 }
 echo '</div>';
 echo '</div>';

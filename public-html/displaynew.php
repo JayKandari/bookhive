@@ -1,4 +1,4 @@
-<?php 
+<?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\book;
@@ -65,7 +65,7 @@ if (isset($_SESSION["logged_in"])) {
     if (isset($_POST["issue"])) {
         $k->issue($_POST["bid"], $_SESSION["uno"]);
     }
-      echo '</div">';
+    echo '</div">';
 
     ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>

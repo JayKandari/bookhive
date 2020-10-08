@@ -15,6 +15,7 @@ use template\Menu;
  * head, menu, content and foot.
  * echo/print $foot to print the jquery and javascript part of the page
  */
+
 class Page
 {
     public $config;

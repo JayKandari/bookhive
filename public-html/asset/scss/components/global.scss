@@ -1,4 +1,4 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 
 body {
   margin: 0;
@@ -6,8 +6,9 @@ body {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   display: grid;
-  grid-template-areas:'header header'
-                      'sidebar main ' ;
+  grid-template-areas:
+    "header header"
+    "sidebar main ";
   grid-template-columns: max-content;
 }
 
@@ -44,7 +45,6 @@ header {
   transition-property: left;
   overflow-y: auto;
   grid-area: sidebar;
-
 }
 
 .profile_info {
@@ -104,21 +104,21 @@ label #sidebar_btn:hover {
   color: $cyanblue;
 }
 
-#check:checked~.sidebar {
+#check:checked ~ .sidebar {
   left: -185px;
 }
 
-#check:checked~.sidebar a span {
+#check:checked ~ .sidebar a span {
   display: none;
 }
 
-#check:checked~.sidebar a {
+#check:checked ~ .sidebar a {
   font-size: 20px;
   width: 100%;
   padding: 10px 40px 10px 30px;
 }
 
-#check:checked~.sidebar .profile_info {
+#check:checked ~ .sidebar .profile_info {
   display: none;
 }
 
@@ -133,9 +133,7 @@ label #sidebar_btn:hover {
 .mobile_nav {
   display: none;
   grid-area: nav;
-
 }
-
 
 .card p {
   background: $white;
@@ -144,7 +142,7 @@ label #sidebar_btn:hover {
   font-size: 14px;
   opacity: 0.8;
 }
-.active-menu{
+.active-menu {
   background-color: $doggerblue;
 }
 .book-img {
@@ -158,11 +156,12 @@ label #sidebar_btn:hover {
 }
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
-  body{
-    grid-template-areas:'header'
-                        'nav'
-                        'main' ;
-  grid-template-columns:  auto;
+  body {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main";
+    grid-template-columns: auto;
   }
   .sidebar {
     display: none;
@@ -179,7 +178,7 @@ label #sidebar_btn:hover {
     transition: 0s;
   }
 
-  #check:checked~.content {
+  #check:checked ~ .content {
     margin-left: 0;
   }
 
@@ -188,7 +187,7 @@ label #sidebar_btn:hover {
     width: calc(100% - 0px);
     position: sticky;
     z-index: 1;
-    top: 60px
+    top: 60px;
   }
 
   .nav_bar {
@@ -236,7 +235,6 @@ label #sidebar_btn:hover {
     transition: 0.5s;
     transition-property: $cyanblue;
     font-size: 24px;
-
   }
 
   .mobile_nav_items a:hover {

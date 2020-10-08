@@ -139,5 +139,4 @@ class Menu
         $this->mobile_nav();
         $this->sidebar();
     }
-
 }
