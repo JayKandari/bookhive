@@ -71,8 +71,7 @@ class Menu
             case 'admin': {
                     array_push(
                         $main_menu,
-                        array('link' => 'addbook.php', 'ico-class' => 'fas fa-plus', 'link-class' => '', 'text' => 'Add Book'),
-                        array('link' => 'listbookedit.php', 'ico-class' => 'fas fa-edit', 'link-class' => '', 'text' => 'Edit Book info'),
+                        array('link' => 'addbook.php', 'ico-class' => 'fas fa-plus', 'link-class' => '', 'text' => 'Add/Edit Book'),
                         array('link' => 'edituserlist.php', 'ico-class' => 'fas fa-user-edit', 'link-class' => '', 'text' => 'Edit User'),
                         array('link' => 'ad_issued.php', 'ico-class' => 'fas fa-shopping-cart', 'link-class' => '', 'text' => 'Book Issued')
                     );

@@ -12,6 +12,7 @@ use PDO;
 /*
  * All the function related to book management reside here.
  */
+
 class book
 {
    public $pdo;
@@ -41,119 +42,138 @@ class book
       }
       return $op;
    }
-   /*
-    * Function to search books
+
+   /**
+    * Search book using id
+    * @param int `$bid`
+    * The `id` of book to be searched
+    * @return array `$book` 
+    * which contains details of book.
+    * OR @return bool false
+    * In case of failure.
     */
-   public function search($name)
+   public function searchById(int $bid)
    {
-      $stmt2 = $this->pdo->query('SELECT * FROM Book where title LIKE "%' . $name . '%"');
-      $op = array();
-      $row = 0;
-      if ($stmt2->fetch()) {
-         while ($row = $stmt2->fetch()) {
-            array_push($op[$row], (array('id' => $row['id'], 'title' => $row['title'], 'path' => $row['path'], 'author' => $row['author'], 'added_on' => $row['added_on'])));
-            $row = $row + 1;
-         }
+      $stmt = $this->pdo->query('SELECT * FROM Book where id = ' . $bid . ' LIMIT 1');
+      $book = $stmt->fetch();
+      return $book;
+   }
+   /**
+    * Search book using its `title`,`author` or `category`.
+    * @param array $values
+    * Associative array containing values for `title`,`author` and `category`
+    * @return `$book` 
+    * which contains details of book.
+    * OR @return bool false
+    * In case of failure.
+    */
+   public function search($values)
+   {
+      $query = "SELECT * from Book WHERE title like ?";
+
+      $paramArr = array('%' . $values["title"] . '%'); // Parameters for prepare statement      
+      if ($values["author"] != "") {
+         $query = $query . " AND author like ?";
+         array_push($paramArr, "%" . $values["author"] . "%");
+      }
+      if ($values["category"] != "") {
+         $query = $query . " AND category like ?";
+         array_push($paramArr, "%" . $values["category"] . "%");
+      }
+
+      $book = $this->conn->exeQuery($query, $paramArr);
+      if ($book) {
+         return $book;
+      }
+      return false;
+   }
+
+   /** 
+    * Updates book details in `book` table, and sets `$_SESSION["success"]` on successful execution 
+    * else sets `$_SESSION["error"]` if some error is encountered.
+    * @param array $book_details  
+    * Associative array which contains details of book to be added in this order:
+    *  ["title", "author","category","added_on", "qty","available","bcover"]
+    * @return void 
+    */
+   public function edit($book_details)
+   {
+
+      $filename = $book_details['cover_name'];
+      // If book cover image is updated
+      if (isset($book_details['bcover'])) {
+         $filepath = $_SERVER['DOCUMENT_logo.pngROOT'] . $this->ob->config["paths"]["images"] . "/";
+         move_uploaded_file($book_details['bcover']['tmp_name'],  $filepath . basename($book_details['bcover']['name']));
+         unlink($filepath . basename($book_details['cover_name'])); //Remove old file
+         $filename = $book_details['bcover']['name'];
+      }
+
+      // Prepare query to update
+      $sql = 'UPDATE Book SET title=?,author=?,category=?,added_on=?,qty=?,available=?,ipath=? where id=?';
+      $stmt = $this->pdo->prepare($sql);
+      $valArr = [$book_details["title"], $book_details["author"], $book_details["category"], $book_details["added_on"], $book_details["qty"], $book_details["available"], $filename, $book_details["id"]];
+
+      // Set status message for success/failure
+      if ($stmt->execute($valArr) === TRUE) {
+         $_SESSION["success"] = "Details updated successfully!";
       } else {
-         // echo "Sorry ! No books found!";
+         $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
       }
-      return $op;
+      header("LOCATION: addbook.php");
    }
-   /*
-    * Function to edit books
+
+   /**
+    * Deletes record of book from table and corresponding image in files.
+    * Sets `$_SESSION["success"]`/`$_SESSION["error"]` for successful deletion /failure respectively.
+    * @param int `$bid`
+    * ID of the book to be deleted
+    * @return void
     */
-   public function edit()
+   public function delete($bid)
    {
-      $stmt2 = $this->pdo->query('SELECT * FROM Book');
-      while ($row = $stmt2->fetch()) {
-         echo '<form method="post">';
-         echo "<tr>";
-         echo '<td data-label="Book ID"><input type="number" name="id" value="' . $row['id'] . '" readonly></input></td>';
-         echo '<td data-label="Title"><input type="text" name="title" value="' . $row['title'] . '"></input></td>';
-         echo '<td data-label="Author"><input type="text" name="author" value="' . $row['author'] . '"></input></td>';
-         echo '<td data-label="Category"><input type="text" name="category" value="' . $row['category'] . '"></input></td>';
-         echo '<td data-label="Added On"><input type="date" name="added_on" value="' . $row['added_on'] . '"></input></td>';
-         echo '<td data-label="Quantity"><input type="number" name="qty" value="' . $row['qty'] . '"></input></td>';
-         echo '<td data-label="Available"><input type="number" name="available" value="' . $row['available'] . '"></input></td>';
-         echo '<td data-label="Path"><input type="text" name="ipath" value="' . $row['ipath'] . '"></input></td>';
-         echo '<td data-label="Update"><button name="update_button" class="iconbtnedit"><i class="fas fa-edit"></i></button></td>';
-         echo '<td data-label="Delete"><button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button></td>';
-         echo "</tr>";
-         echo '</form>';
-      }
-      if (isset($_POST["update_button"])) {
-         $sql = 'UPDATE Book SET title=?,author=?,category=?,added_on=?,qty=?,available=?,ipath=? where id=?';
-         $stmt = $this->pdo->prepare($sql);
-         if ($stmt->execute([$_POST["title"], $_POST["author"], $_POST["category"], $_POST["added_on"], $_POST["qty"], $_POST["available"], $_POST["ipath"], $_POST["id"]]) === TRUE) {
-            header("LOCATION: listbookedit.php");
+      $book_details = $this->searchById($bid);
+      if ($book_details == false) {
+         $_SESSION["error"] = "No matching books found";
+      } else {
+         // Delete cover image from files
+         $filepath = $_SERVER['DOCUMENT_logo.pngROOT'] . $this->ob->config["paths"]["images"] . "/";
+         unlink($filepath . basename($book_details['ipath']));
+         // Delete record of book from the table.
+         if ($this->pdo->query('DELETE FROM Book where id=' . $bid)) {
+            $_SESSION["success"] = "Deleted successfully!";
          } else {
-            echo "<p id='e'>Information edit unsuccessful. Try Again !<p>";
+            $_SESSION["error"] = "Deletion unsuccessful. Try Again!";
          }
-      }
-      if (isset($_POST["delete_button"])) {
-         $stmt2 = $this->pdo->query('DELETE FROM Book where id=' . $_POST["id"]);
-         header("LOCATION: admindash.php");
+         header("LOCATION: addbook.php");
       }
    }
-   /*
-    * Function to add books
+
+
+   /** 
+    * Inserts book details in `book` table, and sets `$_SESSION["success"]` on successful execution 
+    * else sets `$_SESSION["error"]` if some error is encountered.
+    * @param array $book_details  
+    * Associative array which contains details of book to be added in this order:
+    *  ["title", "author","category","added_on", "qty","available","bcover"]
+    * @return void 
     */
-   public function add()
+   public function add($book_details)
    {
+      $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->ob->config["paths"]["images"] . "/" . basename($book_details['bcover']['name']);
+      $valArr = [$book_details["title"], $book_details["author"], $book_details["category"], $book_details["added_on"], $book_details["qty"], $book_details["available"], $book_details['bcover']['name']];
+      $this->conn->exeQuery("insert into Book (title, author, category, added_on, qty, available, ipath) values (?,?,?,?,?,?,?)", $valArr);
 
-      echo '<div class="container">
-            <div class="header">
-               <h1>Add Book</h1>
-            </div>
-            <div class="main">
-               <form action="" method="POST" enctype="multipart/form-data">
-                  <span>';
-
-      if (isset($_SESSION["error"])) {
-         echo ('<p id="e">' . $_SESSION["error"] . "</p>\n");
-         unset($_SESSION["error"]);
+      if (move_uploaded_file($book_details['bcover']['tmp_name'],  $filepath)) {
+         $_SESSION["success"] = "New book added successfully.!";
+      } else {
+         $_SESSION["error"] = "New book not added successfully.!";
       }
-      if (isset($_SESSION["success"])) {
-         echo ('<p id="g">' . $_SESSION["success"] . "</p>\n");
-         unset($_SESSION["success"]);
-      }
-
-      echo '<input type="text" placeholder="Book Name" name="title" required>
-                  </span><br>
-                  <span>
-                        <input type="text" placeholder="Book Department" name="category" required>
-                  </span><br>
-                  <span>
-                        <input type="text" placeholder="Book Author" name="author" required>
-                  </span><br>
-                  <span>
-                        <input type="date" placeholder="Book Year" name="added_on" required>
-                  </span><br>
-                  <span>
-                        <input type="number" placeholder="Book Quantity" name="qty" required>
-                  </span><br>
-                  <span>
-                        <input type="file" placeholder="Book Coverphoto" name="bcover" required>
-                  </span><br>
-                  <button name="submit">Add Book</button>
-   
-               </form>
-            </div>
-          </div>';
-      if (isset($_POST["submit"])) {
-         $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->ob->config["paths"]["images"] . "/" . basename($_FILES['bcover']['name']);
-         $valArr = [$_POST["title"], $_POST["author"], $_POST["category"], $_POST["added_on"], $_POST["qty"], $_POST["qty"], $_FILES['bcover']['name']];
-         $this->conn->exeQuery("insert into Book (title, author, category, added_on, qty, available, ipath) values (?,?,?,?,?,?,?)", $valArr);
-
-         if (move_uploaded_file($_FILES['bcover']['tmp_name'],  $filepath)) {
-            $_SESSION["success"] = "New book added successfully.!";
-            header("LOCATION: addbook.php");
-         } else {
-            $_SESSION["error"] = "New book not added successfully.!";
-            header("LOCATION: addbook.php");
-         }
-      }
+      header("LOCATION: addbook.php");
    }
+
+
+
+
    /*
     * Function to issue books
     */
