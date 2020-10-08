@@ -7,6 +7,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use src\ProjectConfig;
 use src\Connection;
 use src\SessionCookie;
+use src\Redirect;
 
 use PDO;
 /*
@@ -25,6 +26,7 @@ class book
       $this->pdo = $this->conn->connObj;
       $this->ob = new ProjectConfig;
       $this->session = new SessionCookie;
+      $this->redr = new Redirect;
    }
    /*
     * Function to display recent books
@@ -119,7 +121,7 @@ class book
       } else {
          $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
       }
-      header("LOCATION: addbook.php");
+      $this->redr->jsloc("addbook.php");
    }
 
    /**
@@ -144,7 +146,7 @@ class book
          } else {
             $_SESSION["error"] = "Deletion unsuccessful. Try Again!";
          }
-         header("LOCATION: addbook.php");
+         $this->redr->jsloc("addbook.php");
       }
    }
 
@@ -168,7 +170,7 @@ class book
       } else {
          $_SESSION["error"] = "New book not added successfully.!";
       }
-      header("LOCATION: addbook.php");
+      $this->redr->jsloc("addbook.php");
    }
 
 
@@ -194,12 +196,11 @@ class book
                if ($stmt->execute([$q, $bid]) === TRUE) {
                   $sql2 = 'INSERT into book_user (bid,id,issued_on) values ("' . $bid . '","' . $id . '","' . date('y-m-d') . '")';
                   if ($this->pdo->query($sql2) === TRUE) {
-                     // header("LOCATION: userdash.php");
-                     echo "Issued";
+                     $_SESSION["success"] = "Issued";
                   }
                }
             } else {
-               echo "Sorry the book isn't available";
+               $_SESSION["error"] = "Sorry the book isn't available";
             }
          }
       } else {
@@ -213,12 +214,11 @@ class book
             if ($stmt->execute([$q, $bid]) === TRUE) {
                $sql2 = 'INSERT into book_user (bid,id,issued_on) values ("' . $bid . '","' . $id . '","' . date('y-m-d') . '")';
                if ($this->pdo->query($sql2) === TRUE) {
-                  // header("LOCATION: userdash.php");
-                  echo "Issued";
+                  $_SESSION["success"] = "Issued";
                }
             }
          } else {
-            echo "Sorry the book isn't available";
+            $_SESSION["error"] = "Sorry the book isn't available";
          }
       }
    }

@@ -87,7 +87,7 @@ if (isset($_GET["idb"])) {
                                           echo '<input type="file" placeholder="Book Coverphoto"  name="bcover">';
                                           echo '<img src="' . $menu->paths['images'] . '/' . $bcover . '" alt="bookcover" width="50px"></span><br>';
                                           echo '<button name="submit">Update Book</button>';
-                                          echo '<button name="delete_button" class="iconbtndelete"><i class="fas fa-trash"></i></button>';
+                                          echo '<button name="delete_button" class="icon-btn-delete"><i class="fas fa-trash"></i></button>';
                                     } else {
                                     ?>
                                           <input type="file" placeholder="Book Coverphoto" name="bcover" required>
