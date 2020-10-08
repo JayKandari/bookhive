@@ -153,7 +153,9 @@ label #sidebar_btn:hover {
   object-fit: cover;
   object-position: top;
 }
-
+.hidden {
+  display: none;
+}
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
   body{

@@ -6,6 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
 use src\Connection;
 use PDO;
+use src\Redirect;
 
 class user
 {
@@ -14,6 +15,7 @@ class user
     {
         $conn = new Connection;
         $this->pdo = $conn->connObj;
+        $this->redr = new Redirect;
     }
     /*LOGIN*/
     function login($email, $upd)
@@ -24,7 +26,6 @@ class user
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
-
     /*SIGN-UP*/
     function sign_up($name, $email, $upd, $type)
     {
@@ -33,54 +34,91 @@ class user
         $hashedpassword = sha1($upd);
         $type = "user";
         if ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            echo "<p id='e'><br>Email Id Already Exists!<br><p>";
+            $_SESSION["error"] = "Email Id Already Exists!";
         } else {
             $sql = 'INSERT INTO user (uname,email,pass,type) VALUES ("' . $name . '", "' . $email . '","' . $hashedpassword . '","' . $type . '")';
             if ($this->pdo->query($sql) === FALSE) {
-                echo "<br >Error <br>";
+                $_SESSION["error"] = "error";
             } else {
-                echo "<p id='g'>New account created successfully. Please login !<p>";
+                $_SESSION["sucess"] = "New account created successfully. Please login !";
             }
         }
     }
 
-    /* edit user info*/
-    function user_info()
-    {
-        $stmt2 = $this->pdo->query('SELECT * FROM user');
-        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-            echo '<form method="post">';
-            echo '<tr>';
-            echo '<td data-label="User ID"><input type="text" name="uno" value="' . $row['id'] . '" readonly></input></td>';
-            echo '<td data-label="Name"><input type="text" name="uname" value="' . $row['uname'] . '"></input></td>';
-            echo '<td data-label="Password"><input type="password" name="pass" placeholder="Password"></input></td>';
-            echo '<td data-label="Email"><input type="text" name="email" value="' . $row['email'] . '"></input></td>';
-            echo '<td data-label="Role"><input type="text" name="type" value="' . $row['type'] . '" readonly></td>';
-            echo '<td data-label="Change Role"><input type="radio" name="admin" value="admin">YES  </input>';
-            echo '<input type="radio" name="admin" value="user">  NO</input></td>';
-            echo '<td data-label="Update"><button name="update_button"> Update Information</button></td>';
-            echo "</tr>";
-            echo '</form>';
-        }
-        if (isset($_POST["update_button"])) {
-            if (!isset($_POST["admin"])) {
-                $_POST["admin"] = $_POST["type"];
-            }
-            if (empty($_POST["pass"])) {
-                $sql = 'UPDATE user SET uname=?,email=?,type=? where id=?';
-                $stmt = $this->pdo->prepare($sql);
-                if ($stmt->execute([$_POST["uname"], $_POST["email"], $_POST["admin"], $_POST["uno"]]) === TRUE) {
-                    echo "Please refresh!";
-                    //header("LOCATION: edituserlist.php");
-                }
+    /** 
+     * Updates user details in `user` table, and sets `$_SESSION["success"]` on successful execution 
+     * else sets `$_SESSION["error"]` if some error is encountered.
+     * @param array $values
+     * Associative array which contains details of user to be added.
+     * @return void 
+     */
+    public function edit($values)
+    {   
+    
+        if (empty($values["pass"])) {
+            $sql = 'UPDATE user SET uname=?,email=?,type=? where id=?';
+            $stmt = $this->pdo->prepare($sql);
+            if ($stmt->execute([$values["uname"], $values["email"], $values["admin"], $values["uno"]]) === TRUE) {
+                $_SESSION["success"] = "Details updated successfully!";
             } else {
-                $sql = 'UPDATE user SET uname=?,email=?,pass=?,type=? where id=?';
-                $stmt = $this->pdo->prepare($sql);
-                if ($stmt->execute([$_POST["uname"], $_POST["email"], sha1($_POST["pass"]), $_POST["admin"], $_POST["uno"]]) === TRUE) {
-                    echo "Please refresh!";
-                    //header("LOCATION: edituserlist.php");
-                }
+                $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
+            }
+        } else {
+            $sql = 'UPDATE user SET uname=?,email=?,pass=?,type=? where id=?';
+            $stmt = $this->pdo->prepare($sql);
+            if ($stmt->execute([$values["uname"], $values["email"], sha1($values["pass"]), $values["admin"], $values["uno"]]) === TRUE) {
+                $_SESSION["success"] = "Details updated successfully!";
+            } else {
+                $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
             }
         }
+        $this->redr->jsloc("edituserlist.php");
+    }
+    /**
+     * Searches for user by ID
+     * @param int $uid
+     * ID of the user to search
+     * @return array/bool $user
+     * If search is successful returns an associative array of user details.
+     * Returns false in case of any failure.
+     */
+    public function searchById($uid)
+    {
+        $stmt2 = $this->pdo->query('SELECT * FROM user where id=' . $uid . ' LIMIT 1');
+        $user = $stmt2->fetch();
+        return $user;
+    }
+
+    /**
+     * Returns an associative array having all the records of user table.
+     */
+    public function getAllUsers()
+    {
+        $users = array();
+        $stmt2 = $this->pdo->query('SELECT * FROM user');
+        if ($stmt2) {
+            while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                array_push($users, $row);
+            }
+            return $users;
+        }
+        return false;
+    }
+    /**
+     * Deletes record of use from table.
+     * Sets `$_SESSION["success"]`/`$_SESSION["error"]` for successful deletion /failure respectively.
+     * @param int `$Uid`
+     * ID of the User to be deleted
+     * @return void
+     */
+    public function delete($uid)
+    {
+        // Delete record of user from the table.
+        if ($this->pdo->query('DELETE FROM user where id=' . $uid)) {
+            $_SESSION["success"] = "Deleted successfully!";
+        } else {
+            $_SESSION["error"] = "Deletion unsuccessful. Try Again!";
+        }
+        $this->redr->jsloc("edituserlist.php");
     }
 }

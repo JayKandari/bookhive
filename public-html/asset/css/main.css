@@ -127,6 +127,9 @@ label #sidebar_btn:hover {
   object-fit: cover;
   object-position: top; }
 
+.hidden {
+  display: none; }
+
 /* Responsive CSS */
 @media screen and (max-width: 780px) {
   body {
@@ -307,7 +310,7 @@ button {
   background-color: #f5f5f5;
   position: relative; }
 
-.main button {
+button {
   padding-left: 0;
   background-color: #83acf1;
   letter-spacing: 1px;
@@ -315,7 +318,7 @@ button {
   margin-bottom: 70px;
   padding: 10px 20px; }
 
-.main button:hover {
+button:hover {
   background-color: #7799d4; }
 
 .main input:hover {
@@ -336,8 +339,8 @@ button {
   padding-right: 10px;
   box-sizing: border-box; }
 
-.iconbtnedit {
-  background-color: DodgerBlue !important;
+.icon-btn-delete {
+  background-color: crimson;
   border: none;
   color: #fff;
   padding: 12px 16px;
@@ -345,41 +348,20 @@ button {
   cursor: pointer;
   height: 50px;
   width: 50px; }
-  .iconbtnedit .fas {
-    color: #fff !important;
+  .icon-btn-delete .fas {
+    color: #fff;
     margin-top: 10px;
     font-size: x-large;
     position: relative;
-    right: 10px;
-    bottom: 20px;
-    left: inherit;
-    background: none; }
-
-.iconbtndelete {
-  background-color: crimson !important;
-  border: none;
-  color: #fff;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  height: 50px;
-  width: 50px; }
-  .iconbtndelete .fas {
-    color: #fff !important;
-    margin-top: 10px;
-    font-size: x-large;
-    position: relative;
-    right: 10px;
     bottom: 20px;
     left: inherit;
     background: none; }
 
 /* Darker background on mouse-over */
-.iconbtnedit:hover {
-  background-color: RoyalBlue; }
-
-.iconbtndelete:hover {
-  background-color: crimson; }
+.icon-btn-delete:hover {
+  background-color: #fff; }
+  .icon-btn-delete:hover .fas {
+    color: crimson; }
 
 @media screen and (max-width: 600px) {
   .main input {
