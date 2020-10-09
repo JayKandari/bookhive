@@ -17,15 +17,25 @@ header {
   grid-area: header;
   box-sizing: border-box; }
 
-.left_area h3 {
-  color: #fff;
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 22px;
-  font-weight: 900; }
-
-.left_area span {
-  color: #19b3d3; }
+.left-area {
+  width: fit-content;
+  display: flex; }
+  .left-area h3 {
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 900; }
+  .left-area #sidebar_btn {
+    z-index: 1;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 30px;
+    transition: 0.5s;
+    transition-property: #19b3d3; }
+    .left-area #sidebar_btn:hover {
+      color: #19b3d3; }
 
 .sidebar {
   background: #22242a;
@@ -77,20 +87,7 @@ a:checked {
 .sidebar i {
   padding-right: 10px; }
 
-label #sidebar_btn {
-  z-index: 1;
-  color: #fff;
-  position: fixed;
-  cursor: pointer;
-  left: 300px;
-  font-size: 20px;
-  margin: 5px 0;
-  transition: 0.5s;
-  transition-property: #19b3d3; }
-
-label #sidebar_btn:hover {
-  color: #19b3d3; }
-
+label #sidebar_btn
 #check:checked ~ .sidebar {
   left: -185px; }
 
@@ -135,7 +132,7 @@ label #sidebar_btn:hover {
   display: none; }
 
 /* Responsive CSS */
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 800px) {
   body {
     grid-template-areas: 'header' 'nav' 'main';
     grid-template-columns: auto; }
@@ -218,7 +215,7 @@ label #sidebar_btn:hover {
   margin-top: 4vh; }
 
 /* Responsive columns */
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 800px) {
   .row {
     margin-left: auto; }
   .column {
@@ -373,6 +370,12 @@ button:hover {
   .icon-btn-delete:hover .fas {
     color: crimson; }
 
-@media screen and (max-width: 600px) {
+.search-inputs {
+  display: flex;
+  justify-content: center; }
+
+@media screen and (max-width: 800px) {
   .main input {
-    margin-right: 40px; } }
+    margin-right: 40px; }
+  .search-inputs {
+    display: block; } }
