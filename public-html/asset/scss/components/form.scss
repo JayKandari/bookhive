@@ -15,34 +15,42 @@
 
 .main {
 	text-align: center;
+	input {
+		margin-left: 40px;
+		margin-bottom: 40px;
+	}
 }
-
+.bmarg{
+	margin-bottom: 40px;
+}
 .main input,
 button {
 	max-width: 300px;
 	min-height: 40px;
 	border: none;
 	outline: none;
-	margin-left: 40px;
+	
 	box-sizing: border-box;
 	font-size: 15px;
-	margin-bottom: 40px;
+	
 	background-color: $inputcolor;
 	position: relative;
 }
 
 button {
 	padding-left: 0;
-	background-color: $buttoncolor;
+	background-color: $bluebutton;
 	letter-spacing: 1px;
 	font-weight: bold;
-	margin-bottom: 70px;
 	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 5px;
 }
 
 button {
 	&:hover {
-		background-color: $buttonhover;
+		background-color: $black;
+		color: $white;
 	}
 }
 

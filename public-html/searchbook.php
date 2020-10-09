@@ -68,7 +68,7 @@ if (isset($_SESSION["logged_in"])) {
                     <i class="fa fa-list"></i>
                     <input type='text' name='category' placeholder='Category/Genre' value='<?php echo $catergory; ?>'>
                 </span><br>
-                <button name="submit_search"> Search </button>
+                <button name="submit_search" class="bmarg"> Search </button>
 
             </form>
 
