@@ -296,6 +296,12 @@ tr:hover {
 
 .main {
   text-align: center; }
+  .main input {
+    margin-left: 40px;
+    margin-bottom: 40px; }
+
+.bmarg {
+  margin-bottom: 40px; }
 
 .main input,
 button {
@@ -303,23 +309,23 @@ button {
   min-height: 40px;
   border: none;
   outline: none;
-  margin-left: 40px;
   box-sizing: border-box;
   font-size: 15px;
-  margin-bottom: 40px;
   background-color: #f5f5f5;
   position: relative; }
 
 button {
   padding-left: 0;
-  background-color: #83acf1;
+  background-color: #b7cee8;
   letter-spacing: 1px;
   font-weight: bold;
-  margin-bottom: 70px;
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px; }
 
 button:hover {
-  background-color: #7799d4; }
+  background-color: #22242a;
+  color: #fff; }
 
 .main input:hover {
   background-color: #fff; }
