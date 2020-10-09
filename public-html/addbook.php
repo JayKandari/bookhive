@@ -90,7 +90,10 @@ if (isset($_GET["idb"])) {
                                           echo '<button name="delete_button" class="icon-btn-delete"><i class="fas fa-trash"></i></button>';
                                     } else {
                                     ?>
-                                          <input type="file" placeholder="Book Coverphoto" name="bcover" required>
+                                          <label class="custom-file-upload">
+                                                <input type="file" name="bcover" required>
+                                                Upload Book Coverphoto
+                                          </label>
                               </span><br>
                               <button name="submit">Add Book</button>
                         <?php    }

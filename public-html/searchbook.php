@@ -1,7 +1,7 @@
 <html>
 <title>Search book</title>
 <?php
-
+// Table to list
 // Load resource files
 require_once($_SERVER["DOCUMENT_ROOT"] . "/../vendor/autoload.php");
 
