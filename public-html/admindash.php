@@ -4,6 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 use template\Menu;
 use src\ProjectConfig;
 use src\SessionCookie;
+use src\book;
 
 $session = new SessionCookie;
 $conf = new ProjectConfig();
@@ -30,9 +31,12 @@ $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
     <?php
     $menu->render_header();
     $menu->render_menu();
-    ?>
-  <div class="main_content">
-  </div>
+    echo '  <div class="main_content">';
+    $k = new book;
+    $row = $k->book_info($_SESSION["uno"], "ad");
+    echo '</div>';
+  ?>
+  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
     <script src='<?php echo $menu->paths['js'] . "/main.js" ?>'></script>
