@@ -8,8 +8,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/../vendor/autoload.php");
 use src\SessionCookie;
 use template\Menu;
 use src\book;
+use src\ProjectConfig;
 
 $session = new SessionCookie;
+$config = new ProjectConfig;
 
 if (isset($_SESSION["logged_in"])) {
     $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
@@ -83,44 +85,34 @@ if (isset($_SESSION["logged_in"])) {
                 );
                 $result = $book->search($values);
                 if ($result) {
-            ?>
-                    <table legend="2px">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Category</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Display result as table
-                            foreach ($result as $row) {
-                                echo "<tr>
-                     <td data-label='Title'>" . $row['title'] . "</td>
-                     <td data-label='Author'>" . $row['author'] . "</td>
-                     <td data-label='Category'>" . $row['category'] . "</td><td>";
-                                if ($session->loginAccess()) {
-                                    echo '<form method="post">';
-                                    echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
-                                    echo '<button name="issue">ISSUE BOOK </button>';
-                                    echo '</form>';
-                                    if ($_SESSION['admin'] == 'admin') {
-                                        echo "</td><td data-label='Edit_book'>
-                                           <a href='addbook.php?idb=" . $row['id'] . "'><button name='edit-book'> Edit </button></a> 
-                                    ";
-                                    }
-                                } else {
-                                    echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
-                                }
+                    echo '<div class="row">';
+                    foreach ($result as $row) {
+                        echo '
+                    <div class="card main" >
+                    <div class="container">
+                    <img src="' . $config->config["paths"]["images"] . '/' . $row['ipath'] . '" class="book-img" alt="Avatar" >
+                    <p><b>Title:</b>  ' . $row['title'] . '</p>
+                    <p><b>Author:</b>  ' . $row['author'] . '</p>
+                    <p><b>Category:</b>  ' . $row['category'] . '</p>';
+                        if ($session->loginAccess()) {
+                            echo '<form method="post">';
+                            echo '<input type="hidden" name="bid" value="' . $row["id"] . '"/>';
+                            echo '<button name="issue">ISSUE BOOK </button>';
+                            echo '</form>';
+                            if ($_SESSION['admin'] == 'admin') {
+                                echo "</td><td data-label='Edit_book'>
+                               <a href='addbook.php?idb=" . $row['id'] . "'><button name='edit-book'> Edit </button></a> 
+                        ";
                             }
-                            ?>
-                        </tbody>
-                    </table>
-            <?php
-
+                        } else {
+                            echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';
+                        }
+                        echo '</div>
+                    </div>
+                    ';
+                    }
+                    echo '</div>';
+                    echo '</div>';
                 } else {
                     $_SESSION["searchmsg"] = "Sorry ! No books found!!";
                     header("LOCATION: searchbook.php");

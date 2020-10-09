@@ -232,22 +232,26 @@ class book
       } else {
          $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $id . '"');
       }
-      echo "<table><thead><th>Book Title</th><th>Issued On</th><th>Status</th></thead><tbody>";
+      echo '<div class="row">';
       while ($row2 = $stmt2->fetch()) {
          $stmt1 = $this->pdo->query('SELECT title FROM Book where Book.id="' . $row2["bid"] . '"');
          while ($row1 = $stmt1->fetch()) {
-            echo '<tr>';
-            echo '<td data-label="Title">' . $row1["title"] . '</td>';
-            echo '<td data-label="Issued On">' . $row2["issued_on"] . '</td>';
+            echo '
+         <div class="card main" >
+                    <div class="container">';
+            echo '
+                    <p><b>Title:</b>  ' . $row1['title'] . '</p>
+                    <p><b>Issued On:</b>  ' . $row2["issued_on"] . '</p>
+                    ';
             if ($row2["returned"] == "1") {
-               echo '<td data-label="Status">Returned</td>';
+               echo '<p><b>Status:</b>  Returned</p>';
             } else {
-               echo '<td data-label="Status">Issued</td>';
+               echo '<p><b>Status:</b>  Issued</p>';
             }
-            echo '</tr>';
+            echo '</div>';
+            echo '</div>';
          }
       }
-      echo "</tbody></table>";
    }
    /*
     * Function to check if a book is issued or not
