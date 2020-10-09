@@ -38,6 +38,10 @@ header {
   overflow-y: auto;
   grid-area: sidebar; }
 
+.page-not-found {
+  text-align: center;
+  color: crimson; }
+
 .profile_info {
   display: flex;
   flex-direction: column;
