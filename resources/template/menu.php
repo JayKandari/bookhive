@@ -31,10 +31,11 @@ class Menu
         echo " <input type='checkbox' id='check'>
             <!--header area start-->
             <header>
-                <label for='check'>
-                    <i class='fas fa-bars' id='sidebar_btn'></i>
-                </label>
-                <div class='left_area'>
+                
+                <div class='left-area'>
+                    <label for='check'>
+                        <i class='fas fa-bars' id='sidebar_btn'></i>
+                    </label>
                     <h3>Bookhive</h3>
                 </div>
             </header>

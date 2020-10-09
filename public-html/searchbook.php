@@ -37,7 +37,7 @@ if (isset($_SESSION["logged_in"])) {
                 <h1>Search Books</h1>
             </div>
 
-            <form action="searchbook.php" method="post" class="row" style="justify-content: center;">
+            <form action="searchbook.php" method="post">
 
                 <?php
 
@@ -55,7 +55,7 @@ if (isset($_SESSION["logged_in"])) {
                     $catergory = '';
                 }
                 ?>
-
+                <div class="search-inputs">
                 <span>
                     <i class="fa fa-search"></i>
                     <input type='text' name='search_query' placeholder='Enter title of the book' value='<?php echo $title; ?>'>

@@ -113,8 +113,16 @@ button {
 	}
 }
 
-@media screen and (max-width: 600px) {
+.search-inputs {
+	display: flex;
+	justify-content: center;
+}
+
+@media screen and (max-width: $tab-max) {
 	.main input {
 		margin-right: 40px;
+	}
+	.search-inputs{
+		display: block;
 	}
 }

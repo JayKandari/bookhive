@@ -22,17 +22,33 @@ header {
   box-sizing: border-box;
 }
 
-.left_area h3 {
-  color: $white;
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 22px;
-  font-weight: 900;
+.left-area {
+  width: fit-content;
+  display: flex;
+
+  h3
+  {
+    color: $white;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: 900;
+  }
+  #sidebar_btn {
+    z-index: 1;
+    color: $white;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 30px;
+    transition: 0.5s;
+    transition-property: $cyanblue;
+    &:hover {
+      color: $cyanblue;
+    }
+  }
 }
 
-.left_area span {
-  color: $cyanblue;
-}
+
 
 .sidebar {
   background: $black;
@@ -93,21 +109,11 @@ a:checked {
   padding-right: 10px;
 }
 
-label #sidebar_btn {
-  z-index: 1;
-  color: $white;
-  position: fixed;
-  cursor: pointer;
-  left: 300px;
-  font-size: 20px;
-  margin: 5px 0;
-  transition: 0.5s;
-  transition-property: $cyanblue;
+label { 
+  
 }
 
-label #sidebar_btn:hover {
-  color: $cyanblue;
-}
+label #sidebar_btn
 
 #check:checked~.sidebar {
   left: -185px;
@@ -162,7 +168,7 @@ label #sidebar_btn:hover {
   display: none;
 }
 /* Responsive CSS */
-@media screen and (max-width: 780px) {
+@media screen and (max-width: $tab-max) {
   body{
     grid-template-areas:'header'
                         'nav'
