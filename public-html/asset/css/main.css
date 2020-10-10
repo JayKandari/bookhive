@@ -102,6 +102,20 @@ label #sidebar_btn #check:checked ~ .sidebar {
 
 .main_content {
   grid-area: main; }
+  .main_content .editbook input {
+    margin-left: 0px;
+    padding-left: 10px; }
+    .main_content .editbook input[type="date"] {
+      padding-right: 105px; }
+    .main_content .editbook input[type="file"] {
+      display: none; }
+
+.file-upload {
+  border: 3px solid #b7cee8;
+  display: inline-block;
+  padding: 6px 25px;
+  cursor: pointer;
+  margin-bottom: 30px; }
 
 .mobile_nav {
   display: none;

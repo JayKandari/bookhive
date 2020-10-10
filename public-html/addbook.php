@@ -47,7 +47,7 @@ if (isset($_GET["idb"])) {
 
       ?>
       <div class="main_content">
-            <div class="container">
+            <div class="container editbook">
                   <div class="header">
                         <h1><?php echo $mode == 'edit' ? 'Edit Book' : 'Add Book' ?></h1>
                   </div>
@@ -90,7 +90,10 @@ if (isset($_GET["idb"])) {
                                           echo '<button name="delete_button" class="icon-btn-delete"><i class="fas fa-trash"></i></button>';
                                     } else {
                                     ?>
-                                          <input type="file" placeholder="Book Coverphoto" name="bcover" required>
+                                          <label class="file-upload">
+                                                <input type="file" name="bcover" required>
+                                                Upload Book Coverphoto
+                                          </label>
                               </span><br>
                               <button name="submit">Add Book</button>
                         <?php    }
