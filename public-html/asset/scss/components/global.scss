@@ -1,4 +1,4 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 
 body {
   margin: 0;
@@ -6,8 +6,9 @@ body {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   display: grid;
-  grid-template-areas:'header header'
-                      'sidebar main ' ;
+  grid-template-areas:
+    "header header"
+    "sidebar main ";
   grid-template-columns: max-content;
 }
 
@@ -26,8 +27,7 @@ header {
   width: fit-content;
   display: flex;
 
-  h3
-  {
+  h3 {
     color: $white;
     margin: 0;
     text-transform: uppercase;
@@ -48,7 +48,12 @@ header {
   }
 }
 
-
+.profile_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .sidebar {
   background: $black;
@@ -61,75 +66,61 @@ header {
   overflow-y: auto;
   grid-area: sidebar;
 
+  .profile_info {
+    .profile_image {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .profile_info h4 {
+    color: $white;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: $white;
+    display: block;
+    width: 100%;
+    line-height: 40px;
+    text-decoration: none;
+    padding: 5px 40px 5px 30px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: $cyanblue;
+    &:hover,
+    &:checked {
+      background: $cyanblue;
+    }
+  }
+  i {
+    padding-right: 10px;
+  }
 }
 
 .page-not-found {
-  text-align:center; 
+  text-align: center;
   color: $red;
 }
 
-.profile_info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidebar .profile_info .profile_image {
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-  margin-bottom: 10px;
-}
-
-.sidebar .profile_info h4 {
-  color: $white;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.sidebar a {
-  color: $white;
-  display: block;
-  width: 100%;
-  line-height: 40px;
-  text-decoration: none;
-  padding: 5px 40px 5px 30px;
-  box-sizing: border-box;
-  transition: 0.5s;
-  transition-property: $cyanblue;
-}
-
-.sidebar a:hover,
-a:checked {
-  background: $cyanblue;
-}
-
-.sidebar i {
-  padding-right: 10px;
-}
-
-label { 
-  
-}
-
-label #sidebar_btn
-
-#check:checked~.sidebar {
+label #sidebar_btn #check:checked ~ .sidebar {
   left: -185px;
 }
 
-#check:checked~.sidebar a span {
+#check:checked ~ .sidebar a span {
   display: none;
 }
 
-#check:checked~.sidebar a {
+#check:checked ~ .sidebar a {
   font-size: 20px;
   width: 100%;
   padding: 10px 40px 10px 30px;
 }
 
-#check:checked~.sidebar .profile_info {
+#check:checked ~ .sidebar .profile_info {
   display: none;
 }
 
@@ -144,9 +135,7 @@ label #sidebar_btn
 .mobile_nav {
   display: none;
   grid-area: nav;
-
 }
-
 
 .card p {
   background: $white;
@@ -155,7 +144,7 @@ label #sidebar_btn
   font-size: 14px;
   opacity: 0.8;
 }
-.active-menu{
+.active-menu {
   background-color: $doggerblue;
 }
 .book-img {
@@ -169,11 +158,12 @@ label #sidebar_btn
 }
 /* Responsive CSS */
 @media screen and (max-width: $tab-max) {
-  body{
-    grid-template-areas:'header'
-                        'nav'
-                        'main' ;
-  grid-template-columns:  auto;
+  body {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main";
+    grid-template-columns: auto;
   }
   .sidebar {
     display: none;
@@ -190,7 +180,7 @@ label #sidebar_btn
     transition: 0s;
   }
 
-  #check:checked~.content {
+  #check:checked ~ .content {
     margin-left: 0;
   }
 
@@ -199,7 +189,7 @@ label #sidebar_btn
     width: calc(100% - 0px);
     position: sticky;
     z-index: 1;
-    top: 60px
+    top: 60px;
   }
 
   .nav_bar {
@@ -210,52 +200,46 @@ label #sidebar_btn
     align-items: center;
     padding: 10px 20px;
     box-sizing: border-box;
-  }
-
-  .nav_bar .mobile_profile_image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-  .nav_bar .nav_btn {
-    color: $white;
-    font-size: 22px;
-    cursor: pointer;
-    transition: 0.5s;
-    transition-property: color;
-  }
-
-  .nav_bar .nav_btn:hover {
-    color: $cyanblue;
+    .mobile_profile_image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .nav_btn {
+      color: $white;
+      font-size: 22px;
+      cursor: pointer;
+      transition: 0.5s;
+      transition-property: color;
+      &:hover {
+        color: $cyanblue;
+      }
+    }
   }
 
   .mobile_nav_items {
     background: $black;
     display: none;
     width: 100%;
-  }
+    a {
+      color: $white;
+      display: block;
+      text-align: center;
+      letter-spacing: 1px;
+      line-height: 60px;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: 0.5s;
+      transition-property: $cyanblue;
+      font-size: 24px;
+      &:hover {
+        background: $cyanblue;
+      }
+    }
 
-  .mobile_nav_items a {
-    color: $white;
-    display: block;
-    text-align: center;
-    letter-spacing: 1px;
-    line-height: 60px;
-    text-decoration: none;
-    box-sizing: border-box;
-    transition: 0.5s;
-    transition-property: $cyanblue;
-    font-size: 24px;
-
-  }
-
-  .mobile_nav_items a:hover {
-    background: $cyanblue;
-  }
-
-  .mobile_nav_items i {
-    padding-right: 10px;
+    i {
+      padding-right: 10px;
+    }
   }
 
   .active {
