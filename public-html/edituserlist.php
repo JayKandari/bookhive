@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
+
 use src\user;
 use src\SessionCookie;
 use template\Menu;
@@ -31,6 +32,8 @@ if (isset($_GET["idu"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -45,13 +48,19 @@ if (isset($_GET["idu"])) {
         <div class="main">
 
             <?php
-            if (isset($_SESSION["error"])) {
-                echo ('<p id="e">' . $_SESSION["error"] . "</p>\n");
-                unset($_SESSION["error"]);
+            if (isset($_SESSION["error"])) { ?>
+                <div class="alert alert-<?= $_SESSION['errormesgtype'] ?>">
+                    <?php echo $_SESSION['error'];
+                    unset($_SESSION["error"]); ?>
+                </div>
+            <?php
             }
-            if (isset($_SESSION["success"])) {
-                echo ('<p id="g">' . $_SESSION["success"] . "</p>\n");
-                unset($_SESSION["success"]);
+            if (isset($_SESSION["success"])) { ?>
+                <div class="alert alert-<?= $_SESSION['successmesgtype'] ?>">
+                    <?php echo $_SESSION['success'];
+                    unset($_SESSION["success"]); ?>
+                </div>
+            <?php
             }
             $k = new user;
             $users = $k->getAllUsers();

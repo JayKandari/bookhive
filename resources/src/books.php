@@ -167,8 +167,13 @@ class book
 
       if (move_uploaded_file($book_details['bcover']['tmp_name'],  $filepath)) {
          $_SESSION["success"] = "New book added successfully.!";
+         $_SESSION["successmesgtype"] = "success";
+
+
       } else {
          $_SESSION["error"] = "New book not added successfully.!";
+         $_SESSION["errormesgtype"] = "danger";
+
       }
       $this->redr->jsloc("addbook.php");
    }

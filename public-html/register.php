@@ -18,6 +18,8 @@ $menu = new Menu(basename(__FILE__));
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -32,6 +34,20 @@ $menu = new Menu(basename(__FILE__));
 		</div>
 		<div class="main">
 			<form action="" method="POST">
+			<?php if (isset($_SESSION["success"])) { ?>
+					<div class="alert alert-<?= $_SESSION['success_mesgtype'] ?>">
+					<?php echo $_SESSION['success'];
+					unset($_SESSION["success"]); ?>
+					</div>
+					<?php
+				 } 
+				  if (isset($_SESSION["error"])) { ?>
+					<div class="alert alert-<?= $_SESSION['error_mesgtype'] ?>">
+					<?php echo $_SESSION['error'];
+					unset($_SESSION["error"]); ?>
+					</div>
+					<?php
+				 } ?>
 				<span>
 					<i class="fa fa-user"></i>
 					<input type="text" placeholder="Username" name="rname" required>
@@ -45,7 +61,7 @@ $menu = new Menu(basename(__FILE__));
 					<input type="password" placeholder="password" name="rpass" 
 					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
 				</span><br>
-				<span style="color: red;">Your password must contain(uppercase,lowercase,number,8 characters)</span><br><br>
+				<span>Your password must contain(uppercase,lowercase,number,8 characters)</span><br><br>
 				<button name="sign_up">Register</button>
 			</form>
 			<?php

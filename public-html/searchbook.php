@@ -24,6 +24,8 @@ if (isset($_SESSION["logged_in"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 
 
@@ -43,10 +45,14 @@ if (isset($_SESSION["logged_in"])) {
 
                 <?php
 
-                if (isset($_SESSION["searchmsg"])) {
-                    echo ('<p id="e">' . $_SESSION["searchmsg"] . "</p>\n");
-                    unset($_SESSION["searchmsg"]);
-                }
+                if (isset($_SESSION["searchmsg"])) { ?>
+                    <div class="alert alert-<?= $_SESSION['searchmsgtype'] ?>">
+					<?php echo $_SESSION['searchmsg'];
+					unset($_SESSION["searchmsg"]); ?>
+					</div>
+					<?php
+				 }
+
                 if (isset($_POST["submit_search"])) {
                     $title =  $_POST['search_query'];
                     $author = $_POST['author'];
@@ -115,6 +121,7 @@ if (isset($_SESSION["logged_in"])) {
                     echo '</div>';
                 } else {
                     $_SESSION["searchmsg"] = "Sorry ! No books found!!";
+                    $_SESSION["searchmsgtype"] = "danger";
                     header("LOCATION: searchbook.php");
                 }
             }
