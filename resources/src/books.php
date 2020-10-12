@@ -256,11 +256,11 @@ class book
    /*
     * Function to check if a book is issued or not
     */
-   public function issue_check($uno)
+   public function issue_check()
    {
-      $stmt2 = $this->pdo->query('SELECT * FROM book_user where id="' . $uno . '"');
+      $stmt2 = $this->pdo->query('SELECT * FROM book_user');
       while ($row2 = $stmt2->fetch()) {
-         if ((date("d") - (int)substr($row2["issued_on"], 8)) > 7) {
+         if (date('Y-m-d')>$row2["issued_on"]) {
             $sql1 = 'SELECT available FROM Book WHERE Book.id="' . $row2["bid"] . '"';
             $stmt1 = $this->pdo->query($sql1);
             $row1 = $stmt1->fetch();
@@ -270,7 +270,7 @@ class book
             if ($stmt->execute([$q, $row2["bid"]]) === TRUE) {
                $sql3 = 'UPDATE book_user SET returned=? where bid=? and id=?';
                $stmt3 = $this->pdo->prepare($sql3);
-               $stmt3->execute(["1", $row2["bid"], $uno]);
+               $stmt3->execute(["1", $row2["bid"], $row2["id"]]);
             }
          }
       }

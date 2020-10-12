@@ -32,6 +32,11 @@ $menu = new Menu(basename(__FILE__), $_SESSION["admin"], $_SESSION["uname"]);
     $menu->render_header();
     $menu->render_menu();
     echo '<div class="main_content">';
+    echo ' <div class="container">  
+             <div class="header">  
+              <h1> All Books Issued</h1> 
+              </div>
+              </div> ';
     $k = new book;
     $row = $k->book_info($_SESSION["uno"], "nope");
     echo '</div">';

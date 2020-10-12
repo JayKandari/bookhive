@@ -69,7 +69,7 @@ $menu = new Menu(basename(__FILE__));
 					$_SESSION["admin"] = $row["type"];
 					$_SESSION["uno"] = $row["id"];
 					$ob = new book;
-					$ob->issue_check($_SESSION["uno"]);
+					$ob->issue_check();
 					$_SESSION["success"] = "Login success";
 					$_SESSION["logged_in"] = "pass";
 					if (!empty($_POST['remember'])) {

@@ -30,7 +30,13 @@ for ($x = 0; $x < $c; $x++) {
     if (isset($_SESSION["logged_in"])) {
         echo '<form method="post">';
         echo '<input type="hidden" name="bid" value="' . $row[$x]["id"] . '"/>';
-        echo '<button name="issue">ISSUE BOOK </button>';
+        if  ($row[$x]["available"]>0)
+        {
+            echo '<button name="issue">ISSUE BOOK </button>';
+        }
+        else{
+            echo 'Not available';
+        }
         echo '</form>';
     } else {
         echo '<h4><a href="login.php"><button>Login to issue book</button></a></h4>';

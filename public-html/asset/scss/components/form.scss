@@ -19,7 +19,7 @@
   input {
     margin-left: 40px;
     margin-bottom: 40px;
-
+    background-color: $inputcolor;
     &:hover {
       background-color: $white;
     }
@@ -34,8 +34,6 @@
 
     box-sizing: border-box;
     font-size: 15px;
-
-    background-color: $inputcolor;
     position: relative;
   }
 
