@@ -31,21 +31,25 @@ $page->menu->render_headNav();
 
             <?php
 
-            if (isset($_SESSION["searchmsg"])) {
-                echo ('<p id="e">' . $_SESSION["searchmsg"] . "</p>\n");
-                unset($_SESSION["searchmsg"]);
-            }
-            if (isset($_POST["submit_search"])) {
-                $title =  $_POST['search_query'];
-                $author = $_POST['author'];
-                $catergory = $_POST['category'];
-            } else {
-                $title =  '';
-                $author = '';
-                $catergory = '';
-            }
-            ?>
-            <div class="search-inputs">
+                if (isset($_SESSION["searchmsg"])) { ?>
+                    <div class="alert alert-<?= $_SESSION['searchmsgtype'] ?>">
+					<?php echo $_SESSION['searchmsg'];
+					unset($_SESSION["searchmsg"]); ?>
+					</div>
+					<?php
+				 }
+
+                if (isset($_POST["submit_search"])) {
+                    $title =  $_POST['search_query'];
+                    $author = $_POST['author'];
+                    $catergory = $_POST['category'];
+                } else {
+                    $title =  '';
+                    $author = '';
+                    $catergory = '';
+                }
+                ?>
+                <div class="search-inputs">
                 <span>
                     <i class="fa fa-search"></i>
                     <input type='text' name='search_query' placeholder='Enter title of the book' value='<?php echo $title; ?>'>
@@ -98,14 +102,18 @@ $page->menu->render_headNav();
                     echo '</div>
                     </div>
                     ';
+                    }
+                    echo '</div>';
+                    echo '</div>';
+                } else {
+                    $_SESSION["searchmsg"] = "Sorry ! No books found!!";
+                    $_SESSION["searchmsgtype"] = "danger";
+                    header("LOCATION: searchbook.php");
                 }
                 echo '</div>';
                 echo '</div>';
-            } else {
-                $_SESSION["searchmsg"] = "Sorry ! No books found!!";
-                header("LOCATION: searchbook.php");
-            }
-        }
+            } 
+        
         ?>
     </div>
 </div>

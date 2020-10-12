@@ -26,6 +26,7 @@ if (isset($_GET["idu"])) {
 }
 $page = new Page;
 
+
 echo $page->head;
 $page->menu->render_headNav();
 ?>
@@ -35,22 +36,34 @@ $page->menu->render_headNav();
     </div>
     <div class="main">
         <?php
-        if (isset($_SESSION["error"])) {
-            echo ('<p id="e">' . $_SESSION["error"] . "</p>\n");
-            unset($_SESSION["error"]);
-        }
-        if (isset($_SESSION["success"])) {
-            echo ('<p id="g">' . $_SESSION["success"] . "</p>\n");
-            unset($_SESSION["success"]);
-        }
+        
         $k = new user;
         $users = $k->getAllUsers();
         ?>
         <div <?php echo $mode == "edit" ? ("class='hidden'") : " "; ?>>
             <?php
-            echo '<div class="row">';
-            foreach ($users as $row) {
-                echo '
+            if (isset($_SESSION["error"])) { ?>
+                <div class="alert alert-<?= $_SESSION['errormesgtype'] ?>">
+                    <?php echo $_SESSION['error'];
+                    unset($_SESSION["error"]); ?>
+                </div>
+            <?php
+            }
+            if (isset($_SESSION["success"])) { ?>
+                <div class="alert alert-<?= $_SESSION['successmesgtype'] ?>">
+                    <?php echo $_SESSION['success'];
+                    unset($_SESSION["success"]); ?>
+                </div>
+            <?php
+            }
+            $k = new user;
+            $users = $k->getAllUsers();
+            ?>
+            <div <?php echo $mode == "edit" ? ("class='hidden'") : " "; ?>>
+                <?php
+                echo '<div class="row">';
+                foreach ($users as $row) {
+                    echo '
                     <div class="card main" >
                     <div class="container">
                     <p><b>ID:</b>  ' . $row['id'] . '</p>
