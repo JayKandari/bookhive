@@ -18,6 +18,8 @@ $menu = new Menu(basename(__FILE__));
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href='<?php echo $menu->paths['css'] . "/main.css"; ?>'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -33,14 +35,20 @@ $menu = new Menu(basename(__FILE__));
 		<div class="main">
 			<form action="" method="POST">
 				<?php
-				if (isset($_SESSION["error"])) {
-					echo ('<p id="e">' . $_SESSION["error"] . "</p>\n");
-					unset($_SESSION["error"]);
-				}
-				if (isset($_SESSION["success"])) {
-					echo ('<p id="g">' . $_SESSION["success"] . "</p>\n");
-					unset($_SESSION["success"]);
-				}
+				if (isset($_SESSION["error"])) { ?>
+					<div class="alert alert-<?= $_SESSION['error_msg'] ?>">
+					<?php echo $_SESSION['error'];
+					unset($_SESSION["error"]); ?>
+					</div>
+					<?php
+				 }
+				if (isset($_SESSION["success"])) { ?>
+					<div class="alert alert-<?= $_SESSION['success_msg'] ?>">
+					<?php echo $_SESSION['success'];
+					unset($_SESSION["success"]); ?>
+					</div>
+					<?php
+				 }
 				?>
 				<span>
 					<i class="fa fa-user"></i>
@@ -62,6 +70,8 @@ $menu = new Menu(basename(__FILE__));
 				$row = $k->login($_POST['email'], $_POST['upass']);
 				if ($row === false) {
 					$_SESSION["error"] = "Incorrect password.";
+					$_SESSION["error_msg"] = "danger";
+
 					header("LOCATION: login.php");
 				} else {
 					$_SESSION["uname"] = $row['uname'];
@@ -69,8 +79,9 @@ $menu = new Menu(basename(__FILE__));
 					$_SESSION["admin"] = $row["type"];
 					$_SESSION["uno"] = $row["id"];
 					$ob = new book;
-					$ob->issue_check();
+					$ob->issue_check($_SESSION["uno"]);
 					$_SESSION["success"] = "Login success";
+					$_SESSION["success_msg"] = "success";
 					$_SESSION["logged_in"] = "pass";
 					if (!empty($_POST['remember'])) {
 						setcookie("email", $_POST['email'], time() + (10 * 365 * 24 * 60 * 60));

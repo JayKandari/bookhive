@@ -31,10 +31,14 @@ $page->menu->render_headNav();
 
             <?php
 
-            if (isset($_SESSION["searchmsg"])) {
-                echo ('<p id="e">' . $_SESSION["searchmsg"] . "</p>\n");
-                unset($_SESSION["searchmsg"]);
+            if (isset($_SESSION["searchmsg"])) { ?>
+                <div class="alert alert-<?= $_SESSION['searchmsgtype'] ?>">
+                    <?php echo $_SESSION['searchmsg'];
+                    unset($_SESSION["searchmsg"]); ?>
+                </div>
+            <?php
             }
+
             if (isset($_POST["submit_search"])) {
                 $title =  $_POST['search_query'];
                 $author = $_POST['author'];
