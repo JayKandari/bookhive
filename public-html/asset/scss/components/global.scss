@@ -130,6 +130,27 @@ label #sidebar_btn #check:checked ~ .sidebar {
 
 .main_content {
   grid-area: main;
+
+  .editbook {
+    input {
+      margin-left: 0px;
+      padding-left: 10px;
+      &[type="date"] {
+        padding-right: 105px;
+      }
+      &[type="file"] {
+        display: none;
+      }
+    }
+  }
+}
+
+.file-upload {
+  border: 3px solid $bluebutton;
+  display: inline-block;
+  padding: 6px 25px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .mobile_nav {
