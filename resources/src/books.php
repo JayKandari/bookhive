@@ -167,8 +167,13 @@ class book
 
       if (move_uploaded_file($book_details['bcover']['tmp_name'],  $filepath)) {
          $_SESSION["success"] = "New book added successfully.!";
+         $_SESSION["successmesgtype"] = "success";
+
+
       } else {
          $_SESSION["error"] = "New book not added successfully.!";
+         $_SESSION["errormesgtype"] = "danger";
+
       }
       $this->redr->jsloc("addbook.php");
    }
@@ -256,23 +261,24 @@ class book
    /*
     * Function to check if a book is issued or not
     */
-   public function issue_check()
-   {
-      $stmt2 = $this->pdo->query('SELECT * FROM book_user');
-      while ($row2 = $stmt2->fetch()) {
-         if (date('Y-m-d')>$row2["issued_on"]) {
-            $sql1 = 'SELECT available FROM Book WHERE Book.id="' . $row2["bid"] . '"';
-            $stmt1 = $this->pdo->query($sql1);
-            $row1 = $stmt1->fetch();
-            $q = ((int)$row1["available"]) + 1;
-            $sql = 'UPDATE Book SET available=? where Book.id=?';
-            $stmt = $this->pdo->prepare($sql);
-            if ($stmt->execute([$q, $row2["bid"]]) === TRUE) {
-               $sql3 = 'UPDATE book_user SET returned=? where bid=? and id=?';
-               $stmt3 = $this->pdo->prepare($sql3);
-               $stmt3->execute(["1", $row2["bid"], $row2["id"]]);
-            }
-         }
-      }
-   }
-}
+    public function issue_check()
+    {
+       $stmt2 = $this->pdo->query('SELECT * FROM book_user');
+       while ($row2 = $stmt2->fetch()) {
+          if (date('Y-m-d')>$row2["issued_on"]) {
+             $sql1 = 'SELECT available FROM Book WHERE Book.id="' . $row2["bid"] . '"';
+             $stmt1 = $this->pdo->query($sql1);
+             $row1 = $stmt1->fetch();
+             $q = ((int)$row1["available"]) + 1;
+             $sql = 'UPDATE Book SET available=? where Book.id=?';
+             $stmt = $this->pdo->prepare($sql);
+             if ($stmt->execute([$q, $row2["bid"]]) === TRUE) {
+                $sql3 = 'UPDATE book_user SET returned=? where bid=? and id=?';
+                $stmt3 = $this->pdo->prepare($sql3);
+                $stmt3->execute(["1", $row2["bid"], $row2["id"]]);
+             }
+          }
+       }
+    }
+ }
+ 

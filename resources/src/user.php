@@ -35,14 +35,21 @@ class user
         $type = "user";
         if ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION["error"] = "Email Id Already Exists!";
+            $_SESSION["error_mesgtype"] = "danger";
+
         } else {
             $sql = 'INSERT INTO user (uname,email,pass,type) VALUES ("' . $name . '", "' . $email . '","' . $hashedpassword . '","' . $type . '")';
             if ($this->pdo->query($sql) === FALSE) {
                 $_SESSION["error"] = "error";
+                $_SESSION["error_mesgtype"] = "danger";
+
             } else {
-                $_SESSION["sucess"] = "New account created successfully. Please login !";
+                $_SESSION["success"] = "New account created successfully. Please login !";
+                $_SESSION["success_mesgtype"] = "success";
+
             }
         }
+        header("Refresh:0");
     }
 
     /** 
@@ -60,16 +67,25 @@ class user
             $stmt = $this->pdo->prepare($sql);
             if ($stmt->execute([$values["uname"], $values["email"], $values["admin"], $values["uno"]]) === TRUE) {
                 $_SESSION["success"] = "Details updated successfully!";
+                $_SESSION["successmesgtype"] = "success";
+
             } else {
                 $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
+                $_SESSION["errormesgtype"] = "danger";
+
+
             }
         } else {
             $sql = 'UPDATE user SET uname=?,email=?,pass=?,type=? where id=?';
             $stmt = $this->pdo->prepare($sql);
             if ($stmt->execute([$values["uname"], $values["email"], sha1($values["pass"]), $values["admin"], $values["uno"]]) === TRUE) {
                 $_SESSION["success"] = "Details updated successfully!";
+                $_SESSION["successmesgtype"] = "success";
+
             } else {
                 $_SESSION["error"] = "Information edit unsuccessful. Try Again!";
+                $_SESSION["errormesgtype"] = "danger";
+
             }
         }
         $this->redr->jsloc("edituserlist.php");
@@ -116,8 +132,12 @@ class user
         // Delete record of user from the table.
         if ($this->pdo->query('DELETE FROM user where id=' . $uid)) {
             $_SESSION["success"] = "Deleted successfully!";
+            $_SESSION["successmesgtype"] = "success";
+
         } else {
             $_SESSION["error"] = "Deletion unsuccessful. Try Again!";
+            $_SESSION["errormesgtype"] = "danger";
+
         }
         $this->redr->jsloc("edituserlist.php");
     }
